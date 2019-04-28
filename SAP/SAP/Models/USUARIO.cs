@@ -26,5 +26,6 @@ namespace SAP.Models
         public string PASSWORD { get; set; }
 
         public bool? HABILITADO { get; set; }
+
     }
 }

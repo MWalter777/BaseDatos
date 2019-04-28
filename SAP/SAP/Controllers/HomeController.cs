@@ -8,12 +8,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
 using SAP.Models;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
     public class HomeController : Controller
     {
-        
         public ActionResult Index()
         {
             return View();
