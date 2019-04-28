@@ -1,5 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using System.Web;
+using System.Web.SessionState;
 
 [assembly: OwinStartupAttribute(typeof(SAP.Startup))]
 namespace SAP
@@ -8,7 +10,7 @@ namespace SAP
     {
         public void Configuration(IAppBuilder app)
         {
-//            ConfigureAuth(app);
+
         }
     }
 }
