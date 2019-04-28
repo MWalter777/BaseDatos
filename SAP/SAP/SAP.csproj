@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -165,12 +167,27 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MyAutorize.cs" />
+    <Compile Include="Models\DIRECCION.cs" />
+    <Compile Include="Models\EMPLEADO.cs" />
+    <Compile Include="Models\EMPRESA.cs" />
+    <Compile Include="Models\ESTADO_CIVIL.cs" />
+    <Compile Include="Models\GENERO.cs" />
+    <Compile Include="Models\IDENTIFICACION.cs" />
+    <Compile Include="Models\Model1.cs" />
+    <Compile Include="Models\PAIS.cs" />
+    <Compile Include="Models\PERMISO.cs" />
+    <Compile Include="Models\PERMITE.cs" />
+    <Compile Include="Models\PROFESION.cs" />
+    <Compile Include="Models\PUESTO.cs" />
+    <Compile Include="Models\REGION.cs" />
+    <Compile Include="Models\ROL.cs" />
+    <Compile Include="Models\SUB_REGION.cs" />
+    <Compile Include="Models\USUARIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -212,10 +229,15 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\NotAuthorized.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\Delete.cshtml" />
+    <Content Include="Views\Usuario\Details.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Seguridad\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

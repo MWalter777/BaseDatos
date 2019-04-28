@@ -11,7 +11,6 @@ using SAP.Models;
 
 namespace SAP.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         
@@ -20,7 +19,6 @@ namespace SAP.Controllers
             return View();
         }
 
-        [MyAutorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
