@@ -37,12 +37,28 @@ namespace SAP.Controllers
                 USUARIO usuario = db.USUARIO.Where(u => u.EMAIL == email).Single();
                 if (usuario != null)
                 {
-                    if(usuario.EMAIL.Equals(email) && usuario.PASSWORD.Equals(Encode.EncodePassword(password)))
+                    if(usuario.HABILITADO==true)
                     {
-                        SessionPersister.username = usuario.EMAIL;
-                        SessionPersister.rol = usuario.ID_ROL.ToString();
-                        SessionPersister.id_usuario = usuario.ID_USUARIO.ToString();
-                        return RedirectToAction("Index");
+                        if(usuario.EMAIL.Equals(email) && usuario.PASSWORD.Equals(Encode.EncodePassword(password)))
+                        {
+                            SessionPersister.username = usuario.EMAIL;
+                            SessionPersister.rol = usuario.ID_ROL.ToString();
+                            SessionPersister.id_usuario = usuario.ID_USUARIO.ToString();
+                            return RedirectToRoute(new {
+                                Controller = "Home",
+                                Action = "Index"
+                            });
+                        }
+                        else
+                        {
+                            ViewBag.Error = "Credenciales no coinciden";
+                            return View("login");
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Error = "El usuario aun no esta habilitado";
+                        return View("login");
                     }
                 }
                 ViewBag.Error = "Usuario no existe";
@@ -50,6 +66,14 @@ namespace SAP.Controllers
             }
             ViewBag.Error = "Error Datos no validos";
             return View("login");
+        }
+
+        public ActionResult logout()
+        {
+            SessionPersister.username = null;
+            SessionPersister.rol = null;
+            SessionPersister.id_usuario = null;
+            return RedirectToAction("login");
         }
 
         // GET: Usuario/Details/5
@@ -91,6 +115,8 @@ namespace SAP.Controllers
                     db.USUARIO.Add(uSUARIO);
                     db.SaveChanges();
                     ViewBag.Success = "Usuario solicitado con exito, espere el mensaje de confirmacion en su correo";
+                    string mensaje = "El usuario "+uSUARIO.EMAIL+ " solicita su ingreso al Sistema de Administracion de Planilla (SAP)\n\nIngrese a: http://localhost:52228/Usuario/Edit/"+uSUARIO.ID_USUARIO+"  \n\nSolicitamos cordialemente que NO acepte usuarios desconocidos ni le otorgue permisos que no deberian tener, feliz dia";
+                    enviar_sms.enviar_correo("","Solicitud de nuevo usuario",enviar_sms.correo);
                 }
                 catch (Exception e)
                 {

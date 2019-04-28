@@ -17,7 +17,7 @@ namespace SAP.Security
         {            
             if (string.IsNullOrEmpty(SessionPersister.username) || string.IsNullOrEmpty(SessionPersister.rol) || string.IsNullOrEmpty(SessionPersister.id_usuario))
             {
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { Controller = "Usuario", Action = "create" }));
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { Controller = "Usuario", Action = "login" }));
             }
             else
             {

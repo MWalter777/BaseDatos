@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @Styles.Render("~/Content/css/main.css")
     @Styles.Render("~/Content/css/font-awesome.min.css")
-    <title>Registrarse</title>
+    <title>Login</title>
 </head>
 <body>
     <section class="material-half-bg">
@@ -18,9 +18,9 @@
         <div class="logo">
             <h1>Registrese en SAP</h1>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="tile">
-                <h3 class="tile-title text-center">Login</h3>
+                <h3 class="tile-title text-center">Login <i class="fa fa-user"></i> </h3>
                 <div class="tile-body">
                     <h3 class="alert-success">@ViewBag.Success </h3>
                     <h3 class="alert-danger">@ViewBag.Error </h3>
@@ -32,33 +32,29 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Email</label>
                                 <div class="col-md-8">
-                                    <input class="form-control col-md-8" name="email" type="email" placeholder="Enter email address">
+                                    <input class="form-control col-md-9" name="email" type="email" placeholder="Enter email address">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Password</label>
                                 <div class="col-md-8">
-                                    <input class="form-control col-md-8" name="password" type="password" placeholder="Password">
+                                    <input class="form-control col-md-9" name="password" type="password" placeholder="Password">
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <div class="col-md-8 col-md-offset-3">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">Acepto las condiciones :v
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Create" class="btn btn-default" />
-                                </div>
+                                <div class="col-md-offset-2 col-md-8">
+                                    <label class="control-label col-md-4">&nbsp;</label>
+                                    <label class="control-label col-md-3">&nbsp;</label>
+                                    <input type="submit" value="Iniciar sesion" class="btn btn-primary" />
+                                </div>                            
                             </div>
                         </form>
                     }
                     <div>
-                        @Html.ActionLink("Regresar", "Index")
+                        <a href="/Usuario/Create">Crear cuenta</a>
+                        <label class="control-label col-md-4">&nbsp;</label>
+                        <a href="/Usuario/Forget" class="text-right">Olvido su contraseña ?</a>
                     </div>
                 </div>
             </div>

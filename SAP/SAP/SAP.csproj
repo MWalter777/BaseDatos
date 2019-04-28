@@ -192,6 +192,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
     <Compile Include="Security\Encode.cs" />
+    <Compile Include="Security\enviar_sms.cs" />
     <Compile Include="Security\MyAuthorizeAttribute.cs" />
     <Compile Include="Security\SessionPersister.cs" />
     <Compile Include="Startup.cs" />
