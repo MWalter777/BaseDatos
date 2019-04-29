@@ -9,7 +9,6 @@ namespace SAP.Models
     public partial class ESTADO_CIVIL
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_ESTADO_CIVIL { get; set; }
 
         [Required]

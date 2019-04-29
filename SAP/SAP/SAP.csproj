@@ -167,6 +167,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ESTADO_CIVILController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NoValidoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -242,6 +243,11 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\login.cshtml" />
     <Content Include="Views\NoValido\Index.cshtml" />
+    <Content Include="Views\ESTADO_CIVIL\Create.cshtml" />
+    <Content Include="Views\ESTADO_CIVIL\Delete.cshtml" />
+    <Content Include="Views\ESTADO_CIVIL\Details.cshtml" />
+    <Content Include="Views\ESTADO_CIVIL\Edit.cshtml" />
+    <Content Include="Views\ESTADO_CIVIL\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

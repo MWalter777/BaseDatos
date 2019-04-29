@@ -1,0 +1,148 @@
+﻿@model IEnumerable<SAP.Models.ESTADO_CIVIL>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crear">
+        Nuevo estado
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE_ESTADO_CIVIL)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOMBRE_ESTADO_CIVIL)
+            </td>
+            <td>
+                <a href="#" onclick="mostrar(@item.ID_ESTADO_CIVIL,'@item.NOMBRE_ESTADO_CIVIL')">Editar</a>
+                <a href="#" onclick="eliminar(@item.ID_ESTADO_CIVIL,'@item.NOMBRE_ESTADO_CIVIL')">Eliminar</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo estado civil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("Save", "ESTADO_CIVIL", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                    <form>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="Estado">Estado civil</label>
+                                <input type="text" class="form-control" id="estado" name="estado" aria-describedby="Estado_civil" placeholder="Estado civil">
+                                <small id="Estado_civil" class="form-text text-muted">Escriba el nombre del nuevo estado civil.</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary" value="Save">Guardar</button>
+                        </div>
+                    </form>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar estado civil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("Update", "ESTADO_CIVIL", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Estado">Estado civil</label>
+                            <input type="text" class="form-control" id="id_estado1" name="id_estado1" aria-describedby="Estado_civil" placeholder="Estado civil" hidden="true">
+                            <input type="text" class="form-control" id="estado1" name="estado1" aria-describedby="Estado_civil" placeholder="Estado civil">
+                            <small id="Estado_civil" class="form-text text-muted">Escriba el nombre del nuevo estado civil.</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" value="Save">Guardar</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar estado civil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("Delete", "ESTADO_CIVIL", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Estado">Seguro quieres eliminarlo?</label>
+                            <label for="Estado" id="estado2"></label>
+                            <input type="text" class="form-control" id="id_estado" name="id_estado" aria-describedby="Estado_civil" placeholder="Estado civil" hidden="true">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" value="Save">Guardar</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function mostrar(id_estado, valor){
+        var est = document.getElementById('estado1');
+        est.value=valor;
+        var id_est = document.getElementById('id_estado1');
+        id_est.value=id_estado;
+        $("#actualizar").modal();
+    }
+
+
+    function eliminar(id_estado,valor){
+        var id_est = document.getElementById('id_estado');
+        id_est.value=id_estado;
+        $("#estado2").text(""+valor);
+        $("#eliminar").modal();
+    }
+
+</script>
