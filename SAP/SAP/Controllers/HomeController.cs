@@ -36,7 +36,7 @@ namespace SAP.Controllers
             return View();
 
         }
-
+        [MyAuthorize(Roles = "permiso_no_existe")]
         public ActionResult NotAuthorized()
         {
             ViewBag.Message = "Pagina no autorizada";
