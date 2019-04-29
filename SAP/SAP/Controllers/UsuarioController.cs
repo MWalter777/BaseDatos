@@ -34,32 +34,38 @@ namespace SAP.Controllers
         {
             if (!string.IsNullOrEmpty(email) || !string.IsNullOrEmpty(password))
             {
-                USUARIO usuario = db.USUARIO.Where(u => u.EMAIL == email).Single();
-                if (usuario != null)
+                try
                 {
-                    if(usuario.HABILITADO==true)
+                    USUARIO usuario = db.USUARIO.Where(u => u.EMAIL == email).Single();
+                    if (usuario != null)
                     {
-                        if(usuario.EMAIL.Equals(email) && usuario.PASSWORD.Equals(Encode.EncodePassword(password)))
+                        if (usuario.HABILITADO == true)
                         {
-                            SessionPersister.username = usuario.EMAIL;
-                            SessionPersister.rol = usuario.ID_ROL.ToString();
-                            SessionPersister.id_usuario = usuario.ID_USUARIO.ToString();
-                            return RedirectToRoute(new {
-                                Controller = "Home",
-                                Action = "Index"
-                            });
+                            if (usuario.EMAIL.Equals(email) && usuario.PASSWORD.Equals(Encode.EncodePassword(password)))
+                            {
+                                SessionPersister.username = usuario.EMAIL;
+                                SessionPersister.rol = usuario.ID_ROL.ToString();
+                                SessionPersister.id_usuario = usuario.ID_USUARIO.ToString();
+                                return RedirectToRoute(new
+                                {
+                                    Controller = "Home",
+                                    Action = "Index"
+                                });
+                            }
+                            else
+                            {
+                                ViewBag.Error = "Credenciales no coinciden";
+                                return View("login");
+                            }
                         }
                         else
                         {
-                            ViewBag.Error = "Credenciales no coinciden";
+                            ViewBag.Error = "El usuario aun no esta habilitado";
                             return View("login");
                         }
                     }
-                    else
-                    {
-                        ViewBag.Error = "El usuario aun no esta habilitado";
-                        return View("login");
-                    }
+                }catch(Exception e)
+                {
                 }
                 ViewBag.Error = "Usuario no existe";
                 return View("login");
@@ -116,7 +122,7 @@ namespace SAP.Controllers
                     db.SaveChanges();
                     ViewBag.Success = "Usuario solicitado con exito, espere el mensaje de confirmacion en su correo";
                     string mensaje = "El usuario "+uSUARIO.EMAIL+ " solicita su ingreso al Sistema de Administracion de Planilla (SAP)\n\nIngrese a: http://localhost:52228/Usuario/Edit/"+uSUARIO.ID_USUARIO+"  \n\nSolicitamos cordialemente que NO acepte usuarios desconocidos ni le otorgue permisos que no deberian tener, feliz dia";
-                    enviar_sms.enviar_correo("","Solicitud de nuevo usuario",enviar_sms.correo);
+                    enviar_sms.enviar_correo(mensaje,"Solicitud de nuevo usuario",enviar_sms.correo);
                 }
                 catch (Exception e)
                 {

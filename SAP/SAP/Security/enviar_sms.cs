@@ -17,9 +17,11 @@ namespace SAP.Security
         public static int enviar_correo(string mensaje, string asunto, string destinatario)
         {
             int valor = 0;
-            MailMessage correo = new MailMessage(usuario, destinatario, asunto, mensaje);
-            SmtpClient servidor = new SmtpClient("smtp.live.com"); //solo para gmail, es el unico que conozco :v
+            MailMessage correo = new MailMessage(usuario,destinatario,asunto,mensaje);
+
+            SmtpClient servidor = new SmtpClient("smtp.gmail.com", 587); //solo para gmail, es el unico que conozco :v
             NetworkCredential credenciales = new NetworkCredential(usuario, password);
+            servidor.UseDefaultCredentials = false;
             servidor.Credentials = credenciales;
             servidor.EnableSsl = true;
             try
