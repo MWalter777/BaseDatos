@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SAP.Models;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
@@ -15,11 +16,13 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: ESTADO_CIVIL
+        [MyAuthorize(Roles = "index_estado")]
         public ActionResult Index()
         {
             return View(db.ESTADO_CIVIL.ToList());
         }
 
+        [MyAuthorize(Roles = "crear_estado")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(string estado)
@@ -34,6 +37,7 @@ namespace SAP.Controllers
             return View("Create");
         }
 
+        [MyAuthorize(Roles = "editar_estado")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update(string estado1, string id_estado1)
@@ -48,6 +52,7 @@ namespace SAP.Controllers
             return View("Create");
         }
 
+        [MyAuthorize(Roles = "eliminar_estado")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(string id_estado)
