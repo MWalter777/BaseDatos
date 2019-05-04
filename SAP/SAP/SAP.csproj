@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MENUsController.cs" />
     <Compile Include="Controllers\NoValidoController.cs" />
+    <Compile Include="Controllers\PERMISOesController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -256,6 +257,11 @@
     <Content Include="Views\MENUs\Details.cshtml" />
     <Content Include="Views\MENUs\Edit.cshtml" />
     <Content Include="Views\MENUs\Index.cshtml" />
+    <Content Include="Views\PERMISOes\Create.cshtml" />
+    <Content Include="Views\PERMISOes\Delete.cshtml" />
+    <Content Include="Views\PERMISOes\Details.cshtml" />
+    <Content Include="Views\PERMISOes\Edit.cshtml" />
+    <Content Include="Views\PERMISOes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
