@@ -10,7 +10,6 @@ namespace SAP.Models
     public partial class ROL
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_ROL { get; set; }
 
         [Required]

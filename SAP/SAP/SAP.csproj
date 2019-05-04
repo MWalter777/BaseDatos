@@ -169,17 +169,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ESTADO_CIVILController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MENUsController.cs" />
     <Compile Include="Controllers\NoValidoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ACCEDE.cs" />
+    <Compile Include="Models\DEPARTAMENTO.cs" />
     <Compile Include="Models\DIRECCION.cs" />
     <Compile Include="Models\EMPLEADO.cs" />
     <Compile Include="Models\EMPRESA.cs" />
     <Compile Include="Models\ESTADO_CIVIL.cs" />
     <Compile Include="Models\GENERO.cs" />
-    <Compile Include="Models\IDENTIFICACION.cs" />
+    <Compile Include="Models\MENU.cs" />
     <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\PAIS.cs" />
     <Compile Include="Models\PERMISO.cs" />
@@ -248,6 +251,11 @@
     <Content Include="Views\ESTADO_CIVIL\Details.cshtml" />
     <Content Include="Views\ESTADO_CIVIL\Edit.cshtml" />
     <Content Include="Views\ESTADO_CIVIL\Index.cshtml" />
+    <Content Include="Views\MENUs\Create.cshtml" />
+    <Content Include="Views\MENUs\Delete.cshtml" />
+    <Content Include="Views\MENUs\Details.cshtml" />
+    <Content Include="Views\MENUs\Edit.cshtml" />
+    <Content Include="Views\MENUs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -85,4 +85,3 @@ C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\bin\es\Microsoft.Owin
 C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\obj\Debug\SAP.dll
 C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\obj\Debug\SAP.pdb
-C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\obj\Debug\SAP.csprojResolveAssemblyReference.cache

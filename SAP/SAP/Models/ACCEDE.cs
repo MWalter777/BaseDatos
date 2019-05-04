@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SAP.Models
+﻿namespace SAP.Models
 {
     using System;
     using System.Collections.Generic;
@@ -11,8 +6,8 @@ namespace SAP.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("PERMITE")]
-    public partial class PERMITE
+    [Table("ACCEDE")]
+    public partial class ACCEDE
     {
         [Key]
         [Column(Order = 0)]
@@ -22,6 +17,6 @@ namespace SAP.Models
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID_PERMISO { get; set; }
+        public int ID_MENU { get; set; }
     }
 }

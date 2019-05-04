@@ -12,7 +12,7 @@ namespace SAP.Models
         [Key]
         public int ID_USUARIO { get; set; }
 
-        public int ID_EMPLEADO { get; set; }
+        public int? ID_EMPLEADO { get; set; }
 
         public int ID_ROL { get; set; }
 
@@ -26,6 +26,5 @@ namespace SAP.Models
         public string PASSWORD { get; set; }
 
         public bool? HABILITADO { get; set; }
-
     }
 }

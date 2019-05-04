@@ -8,8 +8,13 @@ namespace SAP.Models
 
     public partial class SUB_REGION
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SUB_REGION()
+        {
+            DIRECCION = new HashSet<DIRECCION>();
+        }
+
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_SUB_REGION { get; set; }
 
         public int ID_REGION { get; set; }
@@ -21,5 +26,10 @@ namespace SAP.Models
         [Required]
         [StringLength(60)]
         public string NOMBRE_SUB_REGION { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIRECCION> DIRECCION { get; set; }
+
+        public virtual REGION REGION { get; set; }
     }
 }

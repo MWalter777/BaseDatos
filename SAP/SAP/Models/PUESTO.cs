@@ -9,13 +9,16 @@ namespace SAP.Models
     [Table("PUESTO")]
     public partial class PUESTO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PUESTO()
+        {
+            EMPLEADO = new HashSet<EMPLEADO>();
+        }
+
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_PUESTO { get; set; }
 
-        public int ID_EMPRESA { get; set; }
-
-        public int? PUE_ID_PUESTO { get; set; }
+        public int ID_DEPARTAMENTO { get; set; }
 
         [Required]
         [StringLength(10)]
@@ -25,10 +28,13 @@ namespace SAP.Models
         [StringLength(60)]
         public string NOMBRE_PUESTO { get; set; }
 
-        [Column(TypeName = "numeric")]
         public decimal SALARIO_MINIMO { get; set; }
 
-        [Column(TypeName = "numeric")]
         public decimal SALARIO_MAXIMO { get; set; }
+
+        public virtual DEPARTAMENTO DEPARTAMENTO { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EMPLEADO> EMPLEADO { get; set; }
     }
 }

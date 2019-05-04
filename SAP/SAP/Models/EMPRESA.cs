@@ -9,8 +9,13 @@ namespace SAP.Models
     [Table("EMPRESA")]
     public partial class EMPRESA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EMPRESA()
+        {
+            DEPARTAMENTO = new HashSet<DEPARTAMENTO>();
+        }
+
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_EMPRESA { get; set; }
 
         [Required]
@@ -26,7 +31,7 @@ namespace SAP.Models
         public string REPRESENTANTE { get; set; }
 
         [Required]
-        [StringLength(15)]
+        [StringLength(17)]
         public string NIT_EMPRESA { get; set; }
 
         [Required]
@@ -34,16 +39,20 @@ namespace SAP.Models
         public string NIC { get; set; }
 
         [Required]
-        [StringLength(15)]
+        [StringLength(9)]
         public string TELEFONO_EMPRESA { get; set; }
 
         [StringLength(100)]
         public string PAGINA_WEB { get; set; }
 
-        [StringLength(15)]
+        [Required]
+        [StringLength(60)]
         public string CORREO_EMPRESA { get; set; }
 
-        [StringLength(20)]
+        [StringLength(60)]
         public string PAGE { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DEPARTAMENTO> DEPARTAMENTO { get; set; }
     }
 }
