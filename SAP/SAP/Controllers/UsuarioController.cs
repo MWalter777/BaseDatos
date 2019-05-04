@@ -117,12 +117,19 @@ namespace SAP.Controllers
             {
                 try
                 {
-                    USUARIO uSUARIO = new USUARIO { EMAIL = email, PASSWORD = Encode.EncodePassword(password) };
+                    USUARIO uSUARIO = new USUARIO { EMAIL = email, PASSWORD = Encode.EncodePassword(password), HABILITADO = false };
                     db.USUARIO.Add(uSUARIO);
                     db.SaveChanges();
-                    ViewBag.Success = "Usuario solicitado con exito, espere el mensaje de confirmacion en su correo";
-                    string mensaje = "El usuario "+uSUARIO.EMAIL+ " solicita su ingreso al Sistema de Administracion de Planilla (SAP)\n\nIngrese a: http://localhost:52228/Usuario/Edit/"+uSUARIO.ID_USUARIO+"  \n\nSolicitamos cordialemente que NO acepte usuarios desconocidos ni le otorgue permisos que no deberian tener, feliz dia";
-                    enviar_sms.enviar_correo(mensaje,"Solicitud de nuevo usuario",enviar_sms.correo);
+                    string mensaje = "El usuario "+email+ " solicita su ingreso al Sistema de Administracion de Planilla (SAP)\n\nIngrese a: http://localhost:52228/Usuario/Edit/"+uSUARIO.ID_USUARIO+"  \n\nSolicitamos cordialemente que NO acepte usuarios desconocidos ni le otorgue permisos que no deberian tener, feliz dia";
+                    int val = enviar_sms.enviar_correo(mensaje,"Solicitud de nuevo usuario",enviar_sms.correo);
+                    if (val == 1)
+                    {
+                        ViewBag.Success = "Usuario solicitado con exito, espere el mensaje de confirmacion en su correo";
+                    }
+                    else
+                    {
+                        ViewBag.Success = "El internet era demasiado lento, espere la confirmacion algun dia";
+                    }
                 }
                 catch (Exception e)
                 {

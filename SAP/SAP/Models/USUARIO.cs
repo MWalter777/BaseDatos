@@ -14,7 +14,7 @@ namespace SAP.Models
 
         public int? ID_EMPLEADO { get; set; }
 
-        public int ID_ROL { get; set; }
+        public int? ID_ROL { get; set; }
 
         [Required]
         [StringLength(60)]

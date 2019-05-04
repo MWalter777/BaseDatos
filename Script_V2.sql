@@ -975,7 +975,7 @@ go
 create table USUARIO (
    ID_USUARIO           int                  identity(1,1),
    ID_EMPLEADO          int                  null,
-   ID_ROL               int					not null,
+   ID_ROL               int					null,
    EMAIL                varchar(60)          not null,
    PASSWORD             varchar(60)          not null,
    HABILITADO           bit                  not null,

@@ -10,3 +10,4 @@ SET IDENTITY_INSERT permiso off
 insert into permite (id_rol,id_permiso) values(1,4);
 insert into permite (id_rol,id_permiso) values(1,5);
 insert into permite (id_rol,id_permiso) values(1,6);
+insert into permite (id_rol,id_permiso) values(1,7);
