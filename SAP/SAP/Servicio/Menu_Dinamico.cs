@@ -9,8 +9,8 @@ namespace SAP.Servicio
 {
     public class Menu_Dinamico
     {
-        private static Model1 db = new Model1();
-        public static IEnumerable<MENU> get_menu_padres()
+        private Model1 db = new Model1();
+        public IEnumerable<MENU> get_menu_padres()
         {
             IEnumerable<MENU> menu = null;
             string id_rol = SessionPersister.rol;

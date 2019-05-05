@@ -296,6 +296,8 @@
     <Content Include="Views\GENEROs\Details.cshtml" />
     <Content Include="Views\GENEROs\Edit.cshtml" />
     <Content Include="Views\GENEROs\Delete.cshtml" />
+    <Content Include="Views\Home\Servicio.cshtml" />
+    <Content Include="Views\Home\Redireccion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

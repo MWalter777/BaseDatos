@@ -47,7 +47,6 @@ namespace SAP.Controllers
                                 SessionPersister.email = usuario.EMAIL;
                                 SessionPersister.rol = usuario.ID_ROL.ToString();
                                 SessionPersister.id_usuario = usuario.ID_USUARIO.ToString();
-                                SessionPersister.menu_raiz = db.MENU.ToList();
                                 return RedirectToRoute(new
                                 {
                                     Controller = "Home",
