@@ -6,6 +6,10 @@
 
 <div class="tile">
     <h2 class="text-center">Estados civiles</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
 
     <p>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crear">

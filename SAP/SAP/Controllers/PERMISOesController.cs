@@ -67,7 +67,7 @@ namespace SAP.Controllers
                     return RedirectToAction("Index");
                 }catch(Exception){
                     ViewBag.error = "No se puede eliminar, hacer referencia a otra clase";
-                    return RedirectToAction("Index");
+                    return View("Index", db.PERMISO.ToList());
                 }
             }
             return RedirectToAction("Index");
