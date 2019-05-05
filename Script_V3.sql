@@ -794,6 +794,7 @@ create table MENU (
    ID_MENU              int                  identity(1,1),
    MEN_ID_MENU          int              null,
    NOMBRE_MENU          varchar(50)          not null,
+   URL          varchar(70)          null,
    constraint PK_MENU primary key nonclustered (ID_MENU)
 )
 go

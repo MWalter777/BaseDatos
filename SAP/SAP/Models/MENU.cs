@@ -18,6 +18,10 @@ namespace SAP.Models
         [StringLength(50)]
         public string NOMBRE_MENU { get; set; }
 
+        [Required]
+        [StringLength(70)]
+        public string URL { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MENU> MENU1 { get; set; }
 

@@ -214,6 +214,10 @@ namespace SAP.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<MENU>()
+                .Property(e => e.URL)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MENU>()
                 .HasMany(e => e.MENU1)
                 .WithOptional(e => e.MENU2)
                 .HasForeignKey(e => e.MEN_ID_MENU);

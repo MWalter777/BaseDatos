@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Agregar";
+}
+
+<div class="tile">
+    <h2 class="text-center">Seleccione los menus que tendra el rol: @ViewBag.rol.NOMBRE_ROL</h2>
+    <table class="table">
+        <tr>
+            <th>
+                Nombre del menu
+            </th>
+            <th>
+                URL
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.menus)
+        {
+            <tr>
+                <td>
+                    @item.NOMBRE_MENU
+                </td>
+                <td>
+                    @item.URL
+                </td>
+                <td>
+                    <a href="/MENUROL/Agregar/@item.ID_MENU">agregar menu</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

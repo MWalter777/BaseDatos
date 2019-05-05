@@ -169,6 +169,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ESTADO_CIVILController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MENUROLController.cs" />
     <Compile Include="Controllers\MENUsController.cs" />
     <Compile Include="Controllers\NoValidoController.cs" />
     <Compile Include="Controllers\PERMISOesController.cs" />
@@ -252,16 +253,18 @@
     <Content Include="Views\ESTADO_CIVIL\Details.cshtml" />
     <Content Include="Views\ESTADO_CIVIL\Edit.cshtml" />
     <Content Include="Views\ESTADO_CIVIL\Index.cshtml" />
-    <Content Include="Views\MENUs\Create.cshtml" />
-    <Content Include="Views\MENUs\Delete.cshtml" />
-    <Content Include="Views\MENUs\Details.cshtml" />
-    <Content Include="Views\MENUs\Edit.cshtml" />
-    <Content Include="Views\MENUs\Index.cshtml" />
     <Content Include="Views\PERMISOes\Create.cshtml" />
     <Content Include="Views\PERMISOes\Delete.cshtml" />
     <Content Include="Views\PERMISOes\Details.cshtml" />
     <Content Include="Views\PERMISOes\Edit.cshtml" />
     <Content Include="Views\PERMISOes\Index.cshtml" />
+    <Content Include="Views\MENUROL\Index.cshtml" />
+    <Content Include="Views\MENUROL\Agregar.cshtml" />
+    <Content Include="Views\MENUs\Create.cshtml" />
+    <Content Include="Views\MENUs\Delete.cshtml" />
+    <Content Include="Views\MENUs\Details.cshtml" />
+    <Content Include="Views\MENUs\Edit.cshtml" />
+    <Content Include="Views\MENUs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

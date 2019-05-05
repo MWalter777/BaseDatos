@@ -48,7 +48,7 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_MENU,MEN_ID_MENU,NOMBRE_MENU")] MENU mENU)
+        public ActionResult Create([Bind(Include = "ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL")] MENU mENU)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_MENU,MEN_ID_MENU,NOMBRE_MENU")] MENU mENU)
+        public ActionResult Edit([Bind(Include = "ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL")] MENU mENU)
         {
             if (ModelState.IsValid)
             {

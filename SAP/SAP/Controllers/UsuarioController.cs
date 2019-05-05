@@ -165,7 +165,7 @@ namespace SAP.Controllers
         [MyAuthorize(Roles = "editar_usuario")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_USUARIO,ID_EMPLEADO,ID_ROL,EMAIL,PASSWORD,HABILITADO")] USUARIO uSUARIO)
+        public ActionResult Edit([Bind(Include = "ID_USUARIO,ID_EMPLEADO,ID_ROL,EMAIL,PASSWORD,HABILITADO,USERNAME")] USUARIO uSUARIO)
         {
             if (ModelState.IsValid)
             {
