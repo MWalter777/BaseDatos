@@ -290,6 +290,7 @@
     <Content Include="Views\GENEROs\Delete.cshtml" />
     <Content Include="Views\Home\Servicio.cshtml" />
     <Content Include="Views\Home\Redireccion.cshtml" />
+    <Content Include="Views\Usuario\perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

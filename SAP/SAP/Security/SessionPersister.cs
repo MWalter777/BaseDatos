@@ -14,6 +14,7 @@ namespace SAP.Security
         public static string idsessionvar = "id";
         public static string emailsessionvar = "email";
         public static string menu_raizsessionvar = "menu_raiz";
+        public static string inhabilitar_sessionvar = "inhabilitar";
 
 
         public static string username
@@ -34,6 +35,28 @@ namespace SAP.Security
             set
             {
                 HttpContext.Current.Session[usernamesessionvar] = value;
+            }
+        }
+
+
+        public static string inhabilitar
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    return string.Empty;
+                }
+                var sessionvar = HttpContext.Current.Session[inhabilitar_sessionvar];
+                if (sessionvar != null)
+                {
+                    return sessionvar as string;
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[inhabilitar_sessionvar] = value;
             }
         }
 

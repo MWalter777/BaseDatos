@@ -23,6 +23,63 @@ namespace SAP.Controllers
         }
 
 
+        public ActionResult perfil()
+        {
+            String id = SessionPersister.id_usuario;
+            if (!string.IsNullOrEmpty(id))
+            {
+                ViewBag.usuario = db.USUARIO.Find(int.Parse(id));
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult perfil(String username, String password, String email, String password2)
+        {
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(username))
+            {
+                try
+                {
+                    USUARIO user = db.USUARIO.Find(int.Parse(SessionPersister.id_usuario));
+                    if (user.PASSWORD.Equals(Encode.EncodePassword(password)))
+                    {
+                        if (!string.IsNullOrEmpty(password2) && password2.Length >= 8 && Encode.validar(password2))
+                        {
+                            user.PASSWORD = Encode.EncodePassword(password2);
+                            user.USERNAME = username;
+                            user.EMAIL = email;
+                            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            user.USERNAME = username;
+                            user.EMAIL = email;
+                            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.error = "La contraseña antigua no concuerda con la nueva";
+                    }
+                }
+                catch (Exception)
+                {
+                    ViewBag.error = "El username no es valido, cambielo!";
+                }
+            }
+            String id = SessionPersister.id_usuario;
+            if (!string.IsNullOrEmpty(id))
+            {
+                ViewBag.usuario = db.USUARIO.Find(int.Parse(id));
+            }
+            return View("perfil");
+
+        }
+
+
         public ActionResult login()
         {
             return View();
@@ -32,7 +89,7 @@ namespace SAP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult login(string username, string password)
         {
-            if (!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password) )
             {
                 try
                 {
@@ -47,6 +104,7 @@ namespace SAP.Controllers
                                 SessionPersister.email = usuario.EMAIL;
                                 SessionPersister.rol = usuario.ID_ROL.ToString();
                                 SessionPersister.id_usuario = usuario.ID_USUARIO.ToString();
+                                SessionPersister.inhabilitar = "0";
                                 return RedirectToRoute(new
                                 {
                                     Controller = "Home",
@@ -55,6 +113,22 @@ namespace SAP.Controllers
                             }
                             else
                             {
+                                if (string.IsNullOrEmpty(SessionPersister.inhabilitar))
+                                {
+                                    SessionPersister.inhabilitar = "0";
+                                }
+                                SessionPersister.inhabilitar = ""+(int.Parse(SessionPersister.inhabilitar) + 1);
+                                if (int.Parse(SessionPersister.inhabilitar) >= 3) 
+                                {
+                                    string mensaje = "El usuario: " + usuario.USERNAME + " intento iniciar erroneamente sesion muchas veces, se procedio a inhabilitarlo, debe verificar lo ocurrido";
+                                    int val = enviar_sms.enviar_correo(mensaje, "Inicio de sesion erroneo", enviar_sms.correo);
+                                    SessionPersister.inhabilitar = "0";
+                                    usuario.HABILITADO = false;
+                                    db.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
+                                    db.SaveChanges();
+                                    ViewBag.Error = "Usuario deshabilitado, muchos intentos de session, el administrador se comunicara con usted";
+                                    return View("login");
+                                }
                                 ViewBag.Error = "Credenciales no coinciden";
                                 return View("login");
                             }
@@ -67,13 +141,14 @@ namespace SAP.Controllers
                     }
                 }catch(Exception e)
                 {
+                    ViewBag.Error = "Usuario no existe";
                 }
-                ViewBag.Error = "Usuario no existe";
                 return View("login");
             }
             ViewBag.Error = "Error Datos no validos";
             return View("login");
         }
+
 
         public ActionResult logout()
         {
@@ -81,6 +156,7 @@ namespace SAP.Controllers
             SessionPersister.rol = null;
             SessionPersister.id_usuario = null;
             SessionPersister.email = null;
+            SessionPersister.inhabilitar = "0";
             return RedirectToAction("login");
         }
 
@@ -115,7 +191,7 @@ namespace SAP.Controllers
         public ActionResult Create(String email, String password, String username)
         {
 
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(username))
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(username) && Encode.validar(password))
             {
                 try
                 {
@@ -138,6 +214,10 @@ namespace SAP.Controllers
                     ViewBag.Error = "Error al guardar, el Usuario ya existe";
                 }
                 return View("Create");
+            }
+            else
+            {
+                ViewBag.Error = "Error al guardar, la contraseña debe tener al menos 8 caracteres y caracteres especiales asi como numeros";
             }
 
             return View("Create");
