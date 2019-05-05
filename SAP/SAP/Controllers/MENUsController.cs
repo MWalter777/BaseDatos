@@ -39,7 +39,9 @@ namespace SAP.Controllers
         // GET: MENUs/Create
         public ActionResult Create()
         {
-            ViewBag.MEN_ID_MENU = new SelectList(db.MENU, "ID_MENU", "NOMBRE_MENU");
+
+            //ViewBag.MEN_ID_MENU = new SelectList(db.MENU.Where(menu => menu.MEN_ID_MENU == null), "ID_MENU", "NOMBRE_MENU"); //por si solo se muestran menus padres
+            ViewBag.MEN_ID_MENU = new SelectList(db.MENU.Where(menu => string.IsNullOrEmpty(menu.URL)), "ID_MENU", "NOMBRE_MENU");
             return View();
         }
 
@@ -57,7 +59,7 @@ namespace SAP.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MEN_ID_MENU = new SelectList(db.MENU, "ID_MENU", "NOMBRE_MENU", mENU.MEN_ID_MENU);
+            ViewBag.MEN_ID_MENU = new SelectList(db.MENU.Where(menu => string.IsNullOrEmpty(menu.URL)), "ID_MENU", "NOMBRE_MENU", mENU.MEN_ID_MENU);
             return View(mENU);
         }
 
@@ -73,7 +75,8 @@ namespace SAP.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MEN_ID_MENU = new SelectList(db.MENU, "ID_MENU", "NOMBRE_MENU", mENU.MEN_ID_MENU);
+            //ViewBag.MEN_ID_MENU = new SelectList(db.MENU.Where(menu => menu.MEN_ID_MENU == null), "ID_MENU", "NOMBRE_MENU"); //por si solo se muestran menus padres
+            ViewBag.MEN_ID_MENU = new SelectList(db.MENU.Where(menu => string.IsNullOrEmpty(menu.URL)), "ID_MENU", "NOMBRE_MENU");
             return View(mENU);
         }
 
@@ -114,9 +117,16 @@ namespace SAP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MENU mENU = db.MENU.Find(id);
-            db.MENU.Remove(mENU);
-            db.SaveChanges();
+            try
+            {
+                MENU mENU = db.MENU.Find(id);
+                db.MENU.Remove(mENU);
+                db.SaveChanges();
+            }catch(Exception e)
+            {
+                ViewBag.error = "No se pudo eliminar pues hay un objeto dependiente de este menu";
+                return View();
+            }
             return RedirectToAction("Index");
         }
 

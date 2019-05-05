@@ -1,45 +1,53 @@
 ﻿@model IEnumerable<SAP.Models.MENU>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Menus";
 }
 
-<h2>Index</h2>
+<div class="tile">
+    <h2 class="text-center">Menus disponibles</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MENU2.NOMBRE_MENU)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NOMBRE_MENU)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.URL)
-        </th>
-        <th></th>
-    </tr>
+    @if (ViewBag.error !=null)
+    {
+        <h2 class="text-center alert-danger">ViewBag.error</h2>
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MENU2.NOMBRE_MENU)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NOMBRE_MENU)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.URL)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_MENU }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_MENU }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_MENU })
-        </td>
-    </tr>
-}
+    <p>
+        @Html.ActionLink("Nuevo menu", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Menu padre
+            </th>
+            <th>
+                Menu
+            </th>
+            <th>
+                URL
+            </th>
+            <th>Acciones</th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MENU2.NOMBRE_MENU)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE_MENU)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.URL)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.ID_MENU }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_MENU })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

@@ -18,7 +18,7 @@ namespace SAP.Models
         [StringLength(50)]
         public string NOMBRE_MENU { get; set; }
 
-        [Required]
+
         [StringLength(70)]
         public string URL { get; set; }
 

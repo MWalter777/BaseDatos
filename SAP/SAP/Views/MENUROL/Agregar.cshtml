@@ -26,7 +26,55 @@
                     @item.URL
                 </td>
                 <td>
-                    <a href="/MENUROL/Agregar/@item.ID_MENU">agregar menu</a>
+                    @using (Html.BeginForm("Save", "MENUROL", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form>
+                            <input type="text" class="form-control" id="id_menu" name="id_menu" aria-describedby="id_menu" placeholder="" value="@item.ID_MENU" hidden="true">
+                            <input type="text" class="form-control" id="id_rol" name="id_rol" aria-describedby="id_rol" placeholder="" value="@ViewBag.rol.ID_ROL" hidden="true">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>Agregar</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+<div class="tile">
+    <h2 class="text-center">Elimine los menus del rol: @ViewBag.rol.NOMBRE_ROL</h2>
+    <table class="table">
+        <tr>
+            <th>
+                Nombre del menu
+            </th>
+            <th>
+                URL
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.menus_propio)
+        {
+            <tr>
+                <td>
+                    @item.NOMBRE_MENU
+                </td>
+                <td>
+                    @item.URL
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "MENUROL", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form>
+                            <input type="text" class="form-control" id="id_menu" name="id_menu" aria-describedby="id_menu" placeholder="" value="@item.ID_MENU" hidden="true">
+                            <input type="text" class="form-control" id="id_rol" name="id_rol" aria-describedby="id_rol" placeholder="" value="@ViewBag.rol.ID_ROL" hidden="true">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-minus"></i>Eliminar</button>
+                        </form>
+                    }
                 </td>
             </tr>
         }
