@@ -47,7 +47,9 @@ namespace SAP.Controllers
                     String[] all_menu = cadena.Split(new char[] { ',' });
                     if (all_menu != null)
                     {
-                        ViewBag.menus = db.MENU.ToList().Where(m => all_menu.Contains("" + m.ID_MENU));
+                        ViewBag.menus = db.MENU.ToList().Where(m => all_menu.Contains("" + m.ID_MENU) && (m.MEN_ID_MENU == null || string.IsNullOrEmpty(m.URL)));
+                        ViewBag.menus_sin_url = db.MENU.ToList().Where(m => all_menu.Contains("" + m.ID_MENU) && (m.MEN_ID_MENU != null || string.IsNullOrEmpty(m.URL)));
+                        ViewBag.menus_hijos = db.MENU.ToList().Where(m => all_menu.Contains("" + m.ID_MENU) && (m.MEN_ID_MENU != null || !string.IsNullOrEmpty(m.URL)));
                         return View();
                     }
                     else
