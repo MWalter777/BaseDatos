@@ -15,12 +15,34 @@
         if (string.IsNullOrEmpty(item.URL))
         {
             <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">@item.NOMBRE_MENU</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-bars"></i><span class="app-menu__label">@item.NOMBRE_MENU</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    @if(item.MENU1!=null){
+                    @if (item.MENU1 != null)
+                    {
                         foreach (var sub_menu in item.MENU1)
                         {
-                            <li><a class="treeview-item" href="@sub_menu.URL"><i class="icon fa fa-circle-o"></i>@sub_menu.NOMBRE_MENU</a></li>
+                            if (!string.IsNullOrEmpty(sub_menu.URL))
+                            {
+                                <li><a class="treeview-item" href="@sub_menu.URL"><i class="icon fa fa-bullseye"></i>@sub_menu.NOMBRE_MENU</a></li>
+                            }
+                            else
+                            {
+                                <li class="treeview">
+                                    <a class="treeview-item" href="#" data-toggle="treeview2"><i class="app-menu__icon fa fa-bullseye"></i><span class="app-menu__label">@sub_menu.NOMBRE_MENU</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                                    <ul class="treeview-menu2">
+                                        @if (sub_menu.MENU1 != null)
+                                        {
+                                            foreach (var sub_menu2 in sub_menu.MENU1)
+                                            {
+                                                if (!string.IsNullOrEmpty(sub_menu2.URL))
+                                                {
+                                                    <li><a class="treeview-item" href="@sub_menu2.URL"><i class="icon fa fa-circle-o"></i>@sub_menu2.NOMBRE_MENU</a></li>
+                                                }
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
                         }
                     }
                 </ul>
@@ -31,6 +53,7 @@
             <li><a class="app-menu__item active" href="@item.URL"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">@item.NOMBRE_MENU</span></a></li>
         }
     }
+
     @Scripts.Render("~/Scripts/jquery")
     @Scripts.Render("~/Scripts/bootstrap")
     @Scripts.Render("~/Scripts/js/jquery-3.2.1.min.js")
