@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
 using SAP.Models;
 using SAP.Security;
+using SAP.Servicio;
 
 namespace SAP.Controllers
 {
@@ -16,6 +17,7 @@ namespace SAP.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.menus = Menu_Dinamico.get_menu_padres();
             return View();
         }
 

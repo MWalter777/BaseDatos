@@ -47,6 +47,7 @@ namespace SAP.Controllers
                                 SessionPersister.email = usuario.EMAIL;
                                 SessionPersister.rol = usuario.ID_ROL.ToString();
                                 SessionPersister.id_usuario = usuario.ID_USUARIO.ToString();
+                                SessionPersister.menu_raiz = db.MENU.ToList();
                                 return RedirectToRoute(new
                                 {
                                     Controller = "Home",
@@ -169,7 +170,7 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(uSUARIO).State = EntityState.Modified;
+                db.Entry(uSUARIO).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

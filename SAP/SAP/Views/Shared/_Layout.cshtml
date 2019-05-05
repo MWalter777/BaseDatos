@@ -123,8 +123,14 @@
                 }
             </div>
         </div>
-        <ul class="app-menu">
-            <li><a class="app-menu__item active" href="/"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Inicio</span></a></li>
+        <ul class="app-menu" id="menu_mostrar_dinamico">
+            @if (ViewBag.menus!=null)
+            {
+                @foreach (var item in ViewBag.menus)
+                {
+                    <li><a class="app-menu__item active" href="/"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">@item.NOMBRE_MENU</span></a></li>
+                }
+            }
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Gestionar Usuarios</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
@@ -166,6 +172,8 @@
     @Scripts.Render("~/Scripts/js/plugins/chart.js")
 
     <!-- The javascript plugin to display page loading on top-->
+
+    
     <script type="text/javascript">
       var data = {
       	labels: ["January", "February", "March", "April", "May"],

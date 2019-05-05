@@ -45,7 +45,7 @@ namespace SAP.Controllers
             if (!string.IsNullOrEmpty(estado1) && !string.IsNullOrEmpty(id_estado1))
             {
                 ESTADO_CIVIL estado_civil = new ESTADO_CIVIL { ID_ESTADO_CIVIL = int.Parse(id_estado1), NOMBRE_ESTADO_CIVIL = estado1 };
-                db.Entry(estado_civil).State = EntityState.Modified;
+                db.Entry(estado_civil).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -131,7 +131,7 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(eSTADO_CIVIL).State = EntityState.Modified;
+                db.Entry(eSTADO_CIVIL).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

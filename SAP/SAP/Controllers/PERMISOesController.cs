@@ -84,7 +84,7 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pERMISO).State = EntityState.Modified;
+                db.Entry(pERMISO).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
