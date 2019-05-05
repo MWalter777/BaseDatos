@@ -15,7 +15,7 @@ namespace SAP.Security
         private Model1 db = new Model1();
         public override void OnAuthorization(AuthorizationContext filterContext)
         {            
-            if (string.IsNullOrEmpty(SessionPersister.username) || string.IsNullOrEmpty(SessionPersister.rol) || string.IsNullOrEmpty(SessionPersister.id_usuario))
+            if (string.IsNullOrEmpty(SessionPersister.username) || string.IsNullOrEmpty(SessionPersister.id_usuario))
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { Controller = "Usuario", Action = "login" }));
             }
@@ -27,7 +27,6 @@ namespace SAP.Security
                 if (!custom.IsInRole(Roles))
                 {
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { Controller = "NoValido", Action = "Index" }));
-
                 }
             }
             //            base.OnAuthorization(filterContext);

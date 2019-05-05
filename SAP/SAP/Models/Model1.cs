@@ -304,6 +304,10 @@ namespace SAP.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<USUARIO>()
+                .Property(e => e.USERNAME)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<USUARIO>()
                 .Property(e => e.PASSWORD)
                 .IsUnicode(false);
         }

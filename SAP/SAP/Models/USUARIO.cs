@@ -25,6 +25,14 @@ namespace SAP.Models
         [StringLength(60)]
         public string PASSWORD { get; set; }
 
+        [Required]
+        [StringLength(60)]
+        public string USERNAME { get; set; }
+
+        [StringLength(60)]
+        public string Imagen { get; set; }
+
+
         public bool? HABILITADO { get; set; }
     }
 }

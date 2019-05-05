@@ -975,7 +975,9 @@ go
 create table USUARIO (
    ID_USUARIO           int                  identity(1,1),
    ID_EMPLEADO          int                  null,
-   ID_ROL               int					null,
+   ID_ROL               int					 null,
+   USERNAME 			varchar(60)			 unique not null,
+   imagen 			  	varchar(60)			 null,
    EMAIL                varchar(60)          not null,
    PASSWORD             varchar(60)          not null,
    HABILITADO           bit                  not null,
@@ -1126,6 +1128,6 @@ insert into permite (id_rol,id_permiso) values(1,3);
 
 SET IDENTITY_INSERT usuario ON
 
-insert into usuario (id_usuario,id_rol,email,password,habilitado) values(1,1,'superusuariosap777@gmail.com','ouE4rTGaDgj/xKGFzgWTO/XAHVw=',1);
+insert into usuario (id_usuario,id_rol,USERNAME,email,password,habilitado) values(1,1,'BAD115','superusuariosap777@gmail.com','3GseFNXe8JBJ+WiHMprogrWwX4U=',1);
 
 SET IDENTITY_INSERT usuario off

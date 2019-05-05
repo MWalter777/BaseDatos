@@ -30,20 +30,21 @@ namespace SAP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult login(string email, string password)
+        public ActionResult login(string username, string password)
         {
-            if (!string.IsNullOrEmpty(email) || !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password))
             {
                 try
                 {
-                    USUARIO usuario = db.USUARIO.Where(u => u.EMAIL == email).Single();
+                    USUARIO usuario = db.USUARIO.Where(u => u.USERNAME == username).Single();
                     if (usuario != null)
                     {
                         if (usuario.HABILITADO == true)
                         {
-                            if (usuario.EMAIL.Equals(email) && usuario.PASSWORD.Equals(Encode.EncodePassword(password)))
+                            if (usuario.USERNAME.Equals(username) && usuario.PASSWORD.Equals(Encode.EncodePassword(password)))
                             {
-                                SessionPersister.username = usuario.EMAIL;
+                                SessionPersister.username = usuario.USERNAME;
+                                SessionPersister.email = usuario.EMAIL;
                                 SessionPersister.rol = usuario.ID_ROL.ToString();
                                 SessionPersister.id_usuario = usuario.ID_USUARIO.ToString();
                                 return RedirectToRoute(new
@@ -79,6 +80,7 @@ namespace SAP.Controllers
             SessionPersister.username = null;
             SessionPersister.rol = null;
             SessionPersister.id_usuario = null;
+            SessionPersister.email = null;
             return RedirectToAction("login");
         }
 
@@ -110,18 +112,18 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(String email, String password)
+        public ActionResult Create(String email, String password, String username)
         {
 
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(username))
             {
                 try
                 {
-                    USUARIO uSUARIO = new USUARIO { EMAIL = email, PASSWORD = Encode.EncodePassword(password), HABILITADO = false };
+                    USUARIO uSUARIO = new USUARIO { EMAIL = email, USERNAME = username, PASSWORD = Encode.EncodePassword(password), HABILITADO = false };
                     db.USUARIO.Add(uSUARIO);
                     db.SaveChanges();
-                    string mensaje = "El usuario "+email+ " solicita su ingreso al Sistema de Administracion de Planilla (SAP)\n\nIngrese a: http://localhost:52228/Usuario/Edit/"+uSUARIO.ID_USUARIO+"  \n\nSolicitamos cordialemente que NO acepte usuarios desconocidos ni le otorgue permisos que no deberian tener, feliz dia";
-                    int val = enviar_sms.enviar_correo(mensaje,"Solicitud de nuevo usuario",enviar_sms.correo);
+                    string mensaje = "El usuario " + email + " solicita su ingreso al Sistema de Administracion de Planilla (SAP)\n\nIngrese a: http://localhost:52228/Usuario/Edit/" + uSUARIO.ID_USUARIO + "  \n\nSolicitamos cordialemente que NO acepte usuarios desconocidos ni le otorgue permisos que no deberian tener, feliz dia";
+                    int val = enviar_sms.enviar_correo(mensaje, "Solicitud de nuevo usuario", enviar_sms.correo);
                     if (val == 1)
                     {
                         ViewBag.Success = "Usuario solicitado con exito, espere el mensaje de confirmacion en su correo";
@@ -133,7 +135,7 @@ namespace SAP.Controllers
                 }
                 catch (Exception e)
                 {
-                    ViewBag.Error = "Error al guardar, el correo ya existe";
+                    ViewBag.Error = "Error al guardar, el Usuario ya existe";
                 }
                 return View("Create");
             }

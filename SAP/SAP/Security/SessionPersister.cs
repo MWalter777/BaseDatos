@@ -10,6 +10,7 @@ namespace SAP.Security
         public static string usernamesessionvar = "username";
         public static string rolessessionvar = "rol";
         public static string idsessionvar = "id";
+        public static string emailsessionvar = "email";
 
         public static string username
         {
@@ -29,6 +30,27 @@ namespace SAP.Security
             set
             {
                 HttpContext.Current.Session[usernamesessionvar] = value;
+            }
+        }
+
+        public static string email
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    return string.Empty;
+                }
+                var sessionvar = HttpContext.Current.Session[emailsessionvar];
+                if (sessionvar != null)
+                {
+                    return sessionvar as string;
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[emailsessionvar] = value;
             }
         }
 
