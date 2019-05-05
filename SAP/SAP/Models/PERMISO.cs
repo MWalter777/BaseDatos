@@ -10,7 +10,6 @@ namespace SAP.Models
     public partial class PERMISO
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_PERMISO { get; set; }
 
         [Required]

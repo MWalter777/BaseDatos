@@ -274,15 +274,7 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\login.cshtml" />
     <Content Include="Views\NoValido\Index.cshtml" />
-    <Content Include="Views\ESTADO_CIVIL\Create.cshtml" />
-    <Content Include="Views\ESTADO_CIVIL\Delete.cshtml" />
-    <Content Include="Views\ESTADO_CIVIL\Details.cshtml" />
-    <Content Include="Views\ESTADO_CIVIL\Edit.cshtml" />
     <Content Include="Views\ESTADO_CIVIL\Index.cshtml" />
-    <Content Include="Views\PERMISOes\Create.cshtml" />
-    <Content Include="Views\PERMISOes\Delete.cshtml" />
-    <Content Include="Views\PERMISOes\Details.cshtml" />
-    <Content Include="Views\PERMISOes\Edit.cshtml" />
     <Content Include="Views\PERMISOes\Index.cshtml" />
     <Content Include="Views\MENUROL\Index.cshtml" />
     <Content Include="Views\MENUROL\Agregar.cshtml" />

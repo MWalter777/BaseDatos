@@ -22,98 +22,54 @@ namespace SAP.Controllers
             return View(db.PERMISO.ToList());
         }
 
-        // GET: PERMISOes/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PERMISO pERMISO = db.PERMISO.Find(id);
-            if (pERMISO == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pERMISO);
-        }
-
-        // GET: PERMISOes/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PERMISOes/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [MyAuthorize(Roles = "crear_permiso")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO")] PERMISO pERMISO)
+        public ActionResult Save(string permiso_nombre, string permiso_descripcion)
         {
-            if (ModelState.IsValid)
+            if (!string.IsNullOrEmpty(permiso_nombre) || string.IsNullOrEmpty(permiso_descripcion))
             {
-                db.PERMISO.Add(pERMISO);
+                PERMISO permiso = new PERMISO { NOMBRE_PERMISO = permiso_nombre, DESCRIPCION_PERMISO = permiso_descripcion};
+                db.PERMISO.Add(permiso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(pERMISO);
+            return RedirectToAction("Index");
         }
 
-        // GET: PERMISOes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PERMISO pERMISO = db.PERMISO.Find(id);
-            if (pERMISO == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pERMISO);
-        }
-
-        // POST: PERMISOes/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [MyAuthorize(Roles = "editar_permiso")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO")] PERMISO pERMISO)
+        public ActionResult Update(string id_estado1, string permiso_nombre, string permiso_descripcion)
         {
-            if (ModelState.IsValid)
+            if (!string.IsNullOrEmpty(permiso_descripcion) && !string.IsNullOrEmpty(id_estado1) && !string.IsNullOrEmpty(permiso_nombre))
             {
-                db.Entry(pERMISO).State = System.Data.Entity.EntityState.Modified;
+                PERMISO permiso = new PERMISO { ID_PERMISO = int.Parse(id_estado1), DESCRIPCION_PERMISO=permiso_descripcion, NOMBRE_PERMISO=permiso_nombre};
+                db.Entry(permiso).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pERMISO);
+            return RedirectToAction("Index");
         }
 
-        // GET: PERMISOes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PERMISO pERMISO = db.PERMISO.Find(id);
-            if (pERMISO == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pERMISO);
-        }
-
-        // POST: PERMISOes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [MyAuthorize(Roles = "eliminar_permiso")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(string id_estado)
         {
-            PERMISO pERMISO = db.PERMISO.Find(id);
-            db.PERMISO.Remove(pERMISO);
-            db.SaveChanges();
+            if (!string.IsNullOrEmpty(id_estado))
+            {
+                try
+                {
+                    PERMISO permiso = db.PERMISO.Find(int.Parse(id_estado));
+                    db.PERMISO.Remove(permiso);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }catch(Exception){
+                    ViewBag.error = "No se puede eliminar, hacer referencia a otra clase";
+                    return RedirectToAction("Index");
+                }
+            }
             return RedirectToAction("Index");
         }
 

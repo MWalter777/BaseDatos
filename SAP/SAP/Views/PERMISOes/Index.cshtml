@@ -4,36 +4,170 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="tile">
+    <h2 class="text-center">
+        Permisos
+    </h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">ViewBag.error</h2>
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NOMBRE_PERMISO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DESCRIPCION_PERMISO)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crear">
+            Nuevo permiso
+        </button>
+    </p>
+    <table class="table" id="sampleTable">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripcion
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE_PERMISO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DESCRIPCION_PERMISO)
+                </td>
+                <td>
+                    <a href="#" onclick="mostrar(@item.ID_PERMISO,'@item.NOMBRE_PERMISO','@item.DESCRIPCION_PERMISO')" class="btn btn-primary">Editar</a>
+                    <a href="#" onclick="eliminar(@item.ID_PERMISO,'@item.NOMBRE_PERMISO')" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </table>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NOMBRE_PERMISO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DESCRIPCION_PERMISO)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_PERMISO }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_PERMISO }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_PERMISO })
-        </td>
-    </tr>
-}
 
-</table>
+    <div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Permiso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @using (Html.BeginForm("Save", "PERMISOes", FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
+                    <form>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="Estado">Permiso</label>
+                                <input type="text" class="form-control" id="permiso_nombre" name="permiso_nombre" aria-describedby="permiso" placeholder="nombre_permiso">
+                                <small id="Estado_civil" class="form-text text-muted">Escriba el nombre del nuevo permiso.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Estado">Descripcion</label>
+                                <input type="text" class="form-control" id="permiso_descripcion" name="permiso_descripcion" aria-describedby="descripcion" placeholder="descripcion">
+                                <small id="Estado_civil" class="form-text text-muted">Descripcion del permiso.</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary" value="Save">Guardar</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Actualizar Permiso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @using (Html.BeginForm("Update", "PERMISOes", FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
+                    <form>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="Estado">Nombre:</label>
+                                <input type="text" class="form-control" id="id_estado1" name="id_estado1" hidden="true">
+                                <input type="text" class="form-control" id="permiso_nombre" name="permiso_nombre" value="">
+                                <small id="Estado_civil" class="form-text text-muted">Nombre del permiso.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Estado">Descripcion:</label>
+                                <input type="text" class="form-control" id="permiso_descripcion" name="permiso_descripcion">
+                                <small id="Estado_civil" class="form-text text-muted">Descripcion.</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary" value="Save">Guardar</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Actualizar estado civil</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @using (Html.BeginForm("Delete", "PERMISOes", FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
+                    <form>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="Estado">Seguro quieres eliminarlo?</label>
+                                <label for="Estado" id="estado2"></label>
+                                <input type="text" class="form-control" id="id_estado" name="id_estado" aria-describedby="Estado_civil" placeholder="Estado civil" hidden="true">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-danger" value="Save">Eliminar</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function mostrar(id_estado, valor1, valor2) {
+        var est = document.getElementById('permiso_nombre');
+        est.value = ""+valor1;
+        var est1 = document.getElementById('permiso_descripcion');
+        est1.value = ""+valor2;
+        var id_est = document.getElementById('id_estado1');
+        id_est.value=id_estado;
+        $("#actualizar").modal();
+    }
+
+
+    function eliminar(id_estado,valor){
+        var id_est = document.getElementById('id_estado');
+        id_est.value=id_estado;
+        $("#estado2").text(""+valor);
+        $("#eliminar").modal();
+    }
+
+</script>
