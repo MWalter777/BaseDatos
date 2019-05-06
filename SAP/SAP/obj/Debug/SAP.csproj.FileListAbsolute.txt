@@ -85,7 +85,6 @@ C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\bin\es\Microsoft.Owin
 C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\obj\Debug\SAP.dll
 C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\obj\Debug\SAP.pdb
-C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\obj\Debug\SAP.csprojResolveAssemblyReference.cache
 C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\bin\Microsoft.Data.Edm.dll
 C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\bin\Microsoft.Data.OData.dll
 C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\bin\Microsoft.Data.Services.Client.dll
@@ -431,3 +430,4 @@ C:\Users\Lucy\Desktop\BASESMARVIN\SAP\SAP\obj\Debug\SAP.csproj.CoreCompileInputs
 C:\Users\Lucy\Desktop\BASESMARVIN\SAP\SAP\obj\Debug\SAP.csproj.CopyComplete
 C:\Users\Lucy\Desktop\BASESMARVIN\SAP\SAP\obj\Debug\SAP.dll
 C:\Users\Lucy\Desktop\BASESMARVIN\SAP\SAP\obj\Debug\SAP.pdb
+C:\Users\HP\Desktop\testear\proyecto_SAP\BaseDatos\SAP\SAP\obj\Debug\SAP.csprojResolveAssemblyReference.cache

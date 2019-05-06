@@ -1105,30 +1105,3 @@ alter table USUARIO
       references ROL (ID_ROL)
 go
 
-SET IDENTITY_INSERT permiso ON
-
-insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (1,'lista_usuario','Permiso para ver todas las listas de usuarios');
-insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (2,'editar_usuario','Editar los usuarios');
-insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (3,'eliminar_usuario','Permiso para eliminar los usuarios');
-
-SET IDENTITY_INSERT permiso off
-
-SET IDENTITY_INSERT rol ON
-
-insert into rol (ID_ROL,NOMBRE_ROL,DESCRIPCION_ROL) values (1,'root','Rol de superusuario');
-insert into rol (ID_ROL,NOMBRE_ROL,DESCRIPCION_ROL) values (2,'Admin','Rol de Administrador');
-insert into rol (ID_ROL,NOMBRE_ROL,DESCRIPCION_ROL) values (3,'usuario','Rol de usuario');
-
-SET IDENTITY_INSERT rol off
-
-
-insert into permite (id_rol,id_permiso) values(1,1);
-insert into permite (id_rol,id_permiso) values(1,2);
-insert into permite (id_rol,id_permiso) values(1,3);
-
-
-SET IDENTITY_INSERT usuario ON
-
-insert into usuario (id_usuario,id_rol,USERNAME,email,password,habilitado) values(1,1,'BAD115','superusuariosap777@gmail.com','3GseFNXe8JBJ+WiHMprogrWwX4U=',1);
-
-SET IDENTITY_INSERT usuario off

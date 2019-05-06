@@ -178,8 +178,6 @@ namespace SAP.Controllers
         // GET: Usuario/Create
         public ActionResult Create()
         {
-            ViewBag.roles = db.ROL.ToList();
-            ViewBag.empleados = db.EMPLEADO.ToList();
             return View();
         }
 
@@ -236,6 +234,8 @@ namespace SAP.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ID_ROL = new SelectList(db.ROL.ToList().Where(rol => rol.ID_ROL!=1), "ID_ROL", "NOMBRE_ROL"); //Vamos a quitar el rol de superusuario y dejar olo del admin y demas
+            ViewBag.ID_EMPLEADO = new SelectList(db.EMPLEADO.ToList(), "ID_EMPLEADO", "NOMBRE_EMPLEADO");
             return View(uSUARIO);
         }
 
@@ -249,6 +249,7 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
+                uSUARIO.PASSWORD = Encode.EncodePassword(uSUARIO.PASSWORD);
                 db.Entry(uSUARIO).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
