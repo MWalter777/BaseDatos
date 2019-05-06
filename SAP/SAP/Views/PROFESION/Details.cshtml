@@ -1,0 +1,35 @@
+﻿@model SAP.Models.PROFESION
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>DETALLES DE</h2>
+
+<div>
+    <h4>PROFESION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            NOMBRE
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_PROFESION)
+        </dd>
+
+        <dt>
+            CÓDIGO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_PROFESION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_PROFESION }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>
+

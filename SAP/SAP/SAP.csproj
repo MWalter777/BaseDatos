@@ -199,6 +199,7 @@
     <Compile Include="Controllers\NoValidoController.cs" />
     <Compile Include="Controllers\PAISController.cs" />
     <Compile Include="Controllers\PERMISOesController.cs" />
+    <Compile Include="Controllers\PROFESIONController.cs" />
     <Compile Include="Controllers\REGIONController.cs" />
     <Compile Include="Controllers\SUB_REGIONController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -309,6 +310,11 @@
     <Content Include="Views\Home\Servicio.cshtml" />
     <Content Include="Views\Home\Redireccion.cshtml" />
     <Content Include="Views\Usuario\perfil.cshtml" />
+    <Content Include="Views\PROFESION\Index.cshtml" />
+    <Content Include="Views\PROFESION\Create.cshtml" />
+    <Content Include="Views\PROFESION\Delete.cshtml" />
+    <Content Include="Views\PROFESION\Details.cshtml" />
+    <Content Include="Views\PROFESION\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

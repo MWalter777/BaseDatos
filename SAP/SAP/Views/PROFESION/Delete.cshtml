@@ -1,0 +1,45 @@
+﻿@model SAP.Models.PROFESION
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+@if (ViewBag.error != null)
+{
+    <h2 class="text-center alert-danger">@ViewBag.error</h2>
+}
+<h3>Está seguro de eliminar la profesion?</h3>
+<div>
+    <h4>REGIÓN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            NOMBRE DE PROFESION
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_PROFESION)
+        </dd>
+
+        <dt>
+            CÓDIGO DE PROFESION
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_PROFESION)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>
+

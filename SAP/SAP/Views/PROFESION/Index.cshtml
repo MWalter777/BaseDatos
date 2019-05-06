@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SAP.Models.PROFESION>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>PROFESIONES</h2>
+@if (ViewBag.error != null)
+{
+    <h2 class="text-center alert-danger">@ViewBag.error</h2>
+}
+<p>
+    @Html.ActionLink("Nueva Profesion", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Codigo
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_PROFESION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOMBRE_PROFESION)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID_PROFESION }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.ID_PROFESION }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_PROFESION })
+            </td>
+        </tr>
+    }
+
+</table>
+
