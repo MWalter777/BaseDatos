@@ -9,31 +9,34 @@
 <p>
     @Html.ActionLink("Crear nuevo rol", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NOMBRE_ROL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DESCRIPCION_ROL)
-        </th>
-        <th></th>
-    </tr>
+<div class="tile">
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.NOMBRE_ROL)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DESCRIPCION_ROL)
+			</th>
+			<th>Acciones</th>
+		</tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NOMBRE_ROL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DESCRIPCION_ROL)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.ID_ROL }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.ID_ROL }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_ROL })
-        </td>
-    </tr>
-}
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.NOMBRE_ROL)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DESCRIPCION_ROL)
+				</td>
+				<td>
+					@Html.ActionLink("Editar", "Edit", new { id = item.ID_ROL }) |
+					@Html.ActionLink("Detalles", "Details", new { id = item.ID_ROL }) |
+					@Html.ActionLink("Eliminar", "Delete", new { id = item.ID_ROL })
+				</td>
+			</tr>
+		}
 
-</table>
+	</table>
+</div>
