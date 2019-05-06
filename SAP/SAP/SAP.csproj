@@ -201,6 +201,7 @@
     <Compile Include="Controllers\PERMISOesController.cs" />
     <Compile Include="Controllers\PROFESIONController.cs" />
     <Compile Include="Controllers\REGIONController.cs" />
+    <Compile Include="Controllers\ROLsController.cs" />
     <Compile Include="Controllers\SUB_REGIONController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -315,6 +316,11 @@
     <Content Include="Views\PROFESION\Delete.cshtml" />
     <Content Include="Views\PROFESION\Details.cshtml" />
     <Content Include="Views\PROFESION\Edit.cshtml" />
+    <Content Include="Views\ROLs\Create.cshtml" />
+    <Content Include="Views\ROLs\Delete.cshtml" />
+    <Content Include="Views\ROLs\Details.cshtml" />
+    <Content Include="Views\ROLs\Edit.cshtml" />
+    <Content Include="Views\ROLs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
