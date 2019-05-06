@@ -89,7 +89,7 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(mENU).State = EntityState.Modified;
+                db.Entry(mENU).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
