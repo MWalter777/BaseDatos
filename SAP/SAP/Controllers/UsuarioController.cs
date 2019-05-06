@@ -19,7 +19,7 @@ namespace SAP.Controllers
         [MyAuthorize(Roles = "lista_usuario")] //olvide cambiarle que ahi no es roles es permisos= "String" pero alv solo es el nombre de una variable XD
         public ActionResult Index()
         {
-            return View(db.USUARIO.ToList());
+            return View(db.USUARIO.ToList().Where(user => user.ID_USUARIO!=1));
         }
 
 
@@ -249,7 +249,7 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                uSUARIO.PASSWORD = Encode.EncodePassword(uSUARIO.PASSWORD);
+                //uSUARIO.PASSWORD = Encode.EncodePassword(uSUARIO.PASSWORD);
                 db.Entry(uSUARIO).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
