@@ -1,0 +1,51 @@
+﻿@model SAP.Models.SUB_REGION
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>SUB REGIÓN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            NOMBRE DE SUB REGIÓN
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_SUB_REGION)
+        </dd>
+
+        <dt>
+            CÓDIGO DE SUB REGIÓN
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CODIGO_SUB_REGION)
+        </dd>
+
+        <dt>
+            REGIÓN
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REGION.NOMBRE_REGION)
+        </dd>
+
+        <dt>
+            CÓDIGO DE REGIÓN
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REGION.CODIGO_REGION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_SUB_REGION }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>
+

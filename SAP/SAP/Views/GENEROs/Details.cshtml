@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>GENERO</h4>
+    <h4>GÉNERO</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NOMBRE_GENERO)
+            NOMBRE DE GÉNERO
         </dt>
 
         <dd>
@@ -21,7 +21,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_GENERO }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_GENERO }) |
+    @Html.ActionLink("Regresar", "Index")
 </p>
 

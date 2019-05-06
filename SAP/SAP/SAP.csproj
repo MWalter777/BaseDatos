@@ -174,7 +174,10 @@
     <Compile Include="Controllers\MENUROLController.cs" />
     <Compile Include="Controllers\MENUsController.cs" />
     <Compile Include="Controllers\NoValidoController.cs" />
+    <Compile Include="Controllers\PAISController.cs" />
     <Compile Include="Controllers\PERMISOesController.cs" />
+    <Compile Include="Controllers\REGIONController.cs" />
+    <Compile Include="Controllers\SUB_REGIONController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -272,6 +275,21 @@
     <Content Include="Views\GENEROs\Details.cshtml" />
     <Content Include="Views\GENEROs\Edit.cshtml" />
     <Content Include="Views\GENEROs\Delete.cshtml" />
+    <Content Include="Views\PAIS\Index.cshtml" />
+    <Content Include="Views\PAIS\Details.cshtml" />
+    <Content Include="Views\PAIS\Create.cshtml" />
+    <Content Include="Views\PAIS\Edit.cshtml" />
+    <Content Include="Views\PAIS\Delete.cshtml" />
+    <Content Include="Views\REGION\Index.cshtml" />
+    <Content Include="Views\REGION\Details.cshtml" />
+    <Content Include="Views\REGION\Create.cshtml" />
+    <Content Include="Views\REGION\Edit.cshtml" />
+    <Content Include="Views\REGION\Delete.cshtml" />
+    <Content Include="Views\SUB_REGION\Index.cshtml" />
+    <Content Include="Views\SUB_REGION\Details.cshtml" />
+    <Content Include="Views\SUB_REGION\Create.cshtml" />
+    <Content Include="Views\SUB_REGION\Edit.cshtml" />
+    <Content Include="Views\SUB_REGION\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

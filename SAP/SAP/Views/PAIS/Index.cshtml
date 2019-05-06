@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SAP.Models.PAIS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>PAÍSES</h2>
+@if (ViewBag.error != null)
+{
+    <h2 class="text-center alert-danger">@ViewBag.error</h2>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            NOMBRE DE PAÍS
+        </th>
+        <th>
+            CÓDIGO DE PAÍS
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOMBRE_PAIS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CODIGO_PAIS)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID_PAIS }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.ID_PAIS }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_PAIS })
+            </td>
+        </tr>
+    }
+
+</table>
+

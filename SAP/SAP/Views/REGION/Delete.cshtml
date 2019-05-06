@@ -1,22 +1,33 @@
-﻿@model SAP.Models.GENERO
+﻿@model SAP.Models.REGION
 
 @{
     ViewBag.Title = "Delete";
 }
 
 <h2>Eliminar</h2>
-
-<h3>Está seguro de eliminar el Género?</h3>
+@if (ViewBag.error != null)
+{
+    <h2 class="text-center alert-danger">@ViewBag.error</h2>
+}
+<h3>Está seguro de eliminar la región?</h3>
 <div>
-    <h4>GÉNERO</h4>
+    <h4>REGIÓN</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            NOMBRE DE GÉNERO
+            NOMBRE DE REGIÓN
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NOMBRE_GENERO)
+            @Html.DisplayFor(model => model.NOMBRE_REGION)
+        </dd>
+
+        <dt>
+            CÓDIGO DE REGIÓN
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CODIGO_REGION)
         </dd>
 
     </dl>
