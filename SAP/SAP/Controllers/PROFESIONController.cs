@@ -17,12 +17,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: PROFESION
+        [MyAuthorize(Roles = "index_profesion")]
         public ActionResult Index()
         {
             return View(db.PROFESION.ToList());
         }
 
         // GET: PROFESION/Details/5
+        [MyAuthorize(Roles = "index_profesion")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace SAP.Controllers
         }
 
         // GET: PROFESION/Create
+        [MyAuthorize(Roles = "crear_profesion")]
         public ActionResult Create()
         {
             PopulatePROFESIONDropDownList();
@@ -45,6 +48,7 @@ namespace SAP.Controllers
         }
 
         // POST: PROFESION/Create
+        [MyAuthorize(Roles = "crear_profesion")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_PROFESION,NOMBRE_PROFESION")] PROFESION profesion)
@@ -60,6 +64,7 @@ namespace SAP.Controllers
         }
 
         // GET: PROFESION/Edit/5
+        [MyAuthorize(Roles = "editar_profesion")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -76,6 +81,7 @@ namespace SAP.Controllers
         }
 
         // POST: PROFESION/Edit/5
+        [MyAuthorize(Roles = "editar_profesion")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
@@ -113,6 +119,7 @@ namespace SAP.Controllers
         }
 
         // GET: PROFESION/Delete/5
+        [MyAuthorize(Roles = "eliminar_profesion")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -128,6 +135,7 @@ namespace SAP.Controllers
         }
 
         // POST: PROFESION/Delete/5
+        [MyAuthorize(Roles = "eliminar_profesion")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

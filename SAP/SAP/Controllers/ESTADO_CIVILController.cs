@@ -68,7 +68,7 @@ namespace SAP.Controllers
                 }
                 catch (Exception)
                 {
-                    ViewBag.error = "No se puede eliminar, hacer referencia a otra clase";
+                    ViewBag.error = "No se puede eliminar, hace referencia a otra clase";
                     return View("Index", db.ESTADO_CIVIL.ToList());
                 }
             }

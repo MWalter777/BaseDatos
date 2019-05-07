@@ -17,6 +17,7 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: SUB_REGION
+        [MyAuthorize(Roles = "index_sub_region")]
         public ActionResult Index()
         {
             var sub_regiones = db.SUB_REGION.Include(c => c.REGION);
@@ -25,6 +26,7 @@ namespace SAP.Controllers
         }
 
         // GET: SUB_REGION/Details/5
+        [MyAuthorize(Roles = "index_sub_region")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,6 +42,7 @@ namespace SAP.Controllers
         }
 
         // GET: SUB_REGION/Create
+        [MyAuthorize(Roles = "crear_sub_region")]
         public ActionResult Create()
         {
             PopulateREGIONDropDownList();
@@ -47,6 +50,7 @@ namespace SAP.Controllers
         }
 
         // POST: SUB_REGION/Create
+        [MyAuthorize(Roles = "crear_sub_region")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_SUB_REGION,ID_REGION,NOMBRE_SUB_REGION,CODIGO_SUB_REGION")] SUB_REGION sub_region)
@@ -62,6 +66,7 @@ namespace SAP.Controllers
         }
 
         // GET: SUB_REGION/Edit/5
+        [MyAuthorize(Roles = "editar_sub_region")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace SAP.Controllers
         }
 
         // POST: SUB_REGION/Edit/5
+        [MyAuthorize(Roles = "editar_sub_region")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
@@ -114,6 +120,7 @@ namespace SAP.Controllers
         }
 
         // GET: SUB_REGION/Delete/5
+        [MyAuthorize(Roles = "eliminar_sub_region")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -129,13 +136,23 @@ namespace SAP.Controllers
         }
 
         // POST: SUB_REGION/Delete/5
+        [MyAuthorize(Roles = "eliminar_sub_region")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SUB_REGION sub_region = db.SUB_REGION.Find(id);
-            db.SUB_REGION.Remove(sub_region);
-            db.SaveChanges();
+            try
+            {
+                SUB_REGION sub_region = db.SUB_REGION.Find(id);
+                db.SUB_REGION.Remove(sub_region);
+                db.SaveChanges();
+            }
+            catch(Exception)
+            {
+                ViewBag.error = "No se puede eliminar, hacer referencia a otra clase";
+
+                return View("Index", db.SUB_REGION.ToList());
+            }
             return RedirectToAction("Index");
         }
 

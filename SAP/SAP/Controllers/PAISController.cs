@@ -16,12 +16,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: PAIS
+        [MyAuthorize(Roles = "index_pais")]
         public ActionResult Index()
         {
             return View(db.PAIS.ToList());
         }
 
         // GET: PAIS/Details/5
+        [MyAuthorize(Roles = "index_pais")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,12 +39,14 @@ namespace SAP.Controllers
         }
 
         // GET: PAIS/Create
+        [MyAuthorize(Roles = "crear_pais")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: PAIS/Create
+        [MyAuthorize(Roles = "crear_pais")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_PAIS,NOMBRE_PAIS,CODIGO_PAIS")] PAIS pais)
@@ -58,6 +62,7 @@ namespace SAP.Controllers
         }
 
         // GET: PAIS/Edit/5
+        [MyAuthorize(Roles = "editar_pais")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,6 +78,7 @@ namespace SAP.Controllers
         }
 
         // POST: PAIS/Edit/5
+        [MyAuthorize(Roles = "editar_pais")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_PAIS,NOMBRE_PAIS,CODIGO_PAIS")] PAIS pais)
@@ -87,6 +93,7 @@ namespace SAP.Controllers
         }
 
         // GET: PAIS/Delete/5
+        [MyAuthorize(Roles = "eliminar_pais")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -102,6 +109,7 @@ namespace SAP.Controllers
         }
 
         // POST: PAIS/Delete/5
+        [MyAuthorize(Roles = "eliminar_pais")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -114,9 +122,9 @@ namespace SAP.Controllers
             }
             catch(Exception)
             {
-                ViewBag.error = "No se puede eliminar, hacer referencia a otra clase";
+                ViewBag.error = "No se puede eliminar, hace referencia a otra clase";
 
-                return View("Index");
+                return View("Index", db.PAIS.ToList());
             }
             return RedirectToAction("Index");
         }

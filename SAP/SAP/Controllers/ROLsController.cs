@@ -18,12 +18,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: ROLs
+        [MyAuthorize(Roles = "index_rol")]
         public ActionResult Index()
         {
             return View(db.ROL.ToList());
         }
 
         // GET: ROLs/Details/5
+        [MyAuthorize(Roles = "index_rol")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -51,6 +53,7 @@ namespace SAP.Controllers
         }
 
         // GET: ROLs/Create
+        [MyAuthorize(Roles = "crear_rol")]
         public ActionResult Create()
         {
             IEnumerable<PERMISO> permisos = db.PERMISO.ToList();
@@ -62,6 +65,7 @@ namespace SAP.Controllers
         // POST: ROLs/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [MyAuthorize(Roles = "crear_rol")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_ROL,NOMBRE_ROL,DESCRIPCION_ROL")] ROL rOL, int[] id_permiso)
@@ -84,6 +88,7 @@ namespace SAP.Controllers
         }
 
         // GET: ROLs/Edit/5
+        [MyAuthorize(Roles = "editar_rol")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,6 +119,7 @@ namespace SAP.Controllers
         // POST: ROLs/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [MyAuthorize(Roles = "editar_rol")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_ROL,NOMBRE_ROL,DESCRIPCION_ROL")] ROL rOL, int[] id_permiso)
@@ -129,6 +135,7 @@ namespace SAP.Controllers
         }
 
         // GET: ROLs/Delete/5
+        [MyAuthorize(Roles = "eliminar_rol")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -144,6 +151,7 @@ namespace SAP.Controllers
         }
 
         // POST: ROLs/Delete/5
+        [MyAuthorize(Roles = "eliminar_rol")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -17,6 +17,7 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: REGION
+        [MyAuthorize(Roles = "index_region")]
         public ActionResult Index()
         {
             var regiones = db.REGION.Include(c => c.PAIS);
@@ -25,6 +26,7 @@ namespace SAP.Controllers
         }
 
         // GET: REGION/Details/5
+        [MyAuthorize(Roles = "index_region")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,6 +42,7 @@ namespace SAP.Controllers
         }
 
         // GET: REGION/Create
+        [MyAuthorize(Roles = "crear_region")]
         public ActionResult Create()
         {
             PopulatePAISDropDownList();
@@ -47,6 +50,7 @@ namespace SAP.Controllers
         }
 
         // POST: REGION/Create
+        [MyAuthorize(Roles = "crear_region")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_REGION,ID_PAIS,NOMBRE_REGION,CODIGO_REGION")] REGION region)
@@ -62,6 +66,7 @@ namespace SAP.Controllers
         }
 
         // GET: REGION/Edit/5
+        [MyAuthorize(Roles = "editar_region")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace SAP.Controllers
         }
 
         // POST: REGION/Edit/5
+        [MyAuthorize(Roles = "editar_region")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
@@ -114,6 +120,7 @@ namespace SAP.Controllers
         }
 
         // GET: REGION/Delete/5
+        [MyAuthorize(Roles = "eliminar_region")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -129,6 +136,7 @@ namespace SAP.Controllers
         }
 
         // POST: REGION/Delete/5
+        [MyAuthorize(Roles = "eliminar_region")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -144,7 +152,7 @@ namespace SAP.Controllers
             {
                 ViewBag.error = "No se puede eliminar, hacer referencia a otra clase";
 
-                return View("Index");
+                return View("Index", db.REGION.ToList());
             }
             return RedirectToAction("Index");
         }

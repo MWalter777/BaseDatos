@@ -16,12 +16,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: GENEROs
+        [MyAuthorize(Roles = "index_genero")]
         public ActionResult Index()
         {
             return View(db.GENERO.ToList());
         }
 
         // GET: GENEROs/Details/5
+        [MyAuthorize(Roles = "index_genero")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,12 +39,14 @@ namespace SAP.Controllers
         }
 
         // GET: GENEROs/Create
+        [MyAuthorize(Roles = "crear_genero")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: GENEROs/Create
+        [MyAuthorize(Roles = "crear_genero")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_GENERO,NOMBRE_GENERO")] GENERO gENERO)
@@ -58,6 +62,7 @@ namespace SAP.Controllers
         }
 
         // GET: GENEROs/Edit/5
+        [MyAuthorize(Roles = "editar_genero")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,6 +78,7 @@ namespace SAP.Controllers
         }
 
         // POST: GENEROs/Edit/5
+        [MyAuthorize(Roles = "editar_genero")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_GENERO,NOMBRE_GENERO")] GENERO gENERO)
@@ -87,6 +93,7 @@ namespace SAP.Controllers
         }
 
         // GET: GENEROs/Delete/5
+        [MyAuthorize(Roles = "eliminar_genero")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -102,6 +109,7 @@ namespace SAP.Controllers
         }
 
         // POST: GENEROs/Delete/5
+        [MyAuthorize(Roles = "eliminar_genero")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
