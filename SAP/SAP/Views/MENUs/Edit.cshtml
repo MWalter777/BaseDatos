@@ -16,7 +16,7 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.ID_MENU)
-
+            <input type="number" value="@ViewBag.ID_MENU" name="men_id_menu1" hidden="true" />
             <div class="form-group">
                 <div class="form-inline">
                     <label class="col-md-3">Menu padre</label>

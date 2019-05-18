@@ -15,38 +15,42 @@
     <p>
         @Html.ActionLink("Nuevo menu", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                Menu padre
-            </th>
-            <th>
-                Menu
-            </th>
-            <th>
-                URL
-            </th>
-            <th>Acciones</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <table class="table" id="sampleTable">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MENU2.NOMBRE_MENU)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NOMBRE_MENU)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.URL)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.ID_MENU }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_MENU })
-                </td>
+                <th>
+                    Menu padre
+                </th>
+                <th>
+                    Menu
+                </th>
+                <th>
+                    URL
+                </th>
+                <th>Acciones</th>
             </tr>
-        }
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MENU2.NOMBRE_MENU)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NOMBRE_MENU)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.URL)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_MENU }, htmlAttributes: new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_MENU }, htmlAttributes: new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
 
     </table>
 

@@ -19,30 +19,34 @@
         </button>
     </p>
     <table class="table" id="sampleTable">
-        <tr>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Descripcion
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NOMBRE_PERMISO)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DESCRIPCION_PERMISO)
-                </td>
-                <td>
-                    <a href="#" onclick="mostrar(@item.ID_PERMISO,'@item.NOMBRE_PERMISO','@item.DESCRIPCION_PERMISO')" class="btn btn-primary">Editar</a>
-                    <a href="#" onclick="eliminar(@item.ID_PERMISO,'@item.NOMBRE_PERMISO')" class="btn btn-danger">Eliminar</a>
-                </td>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Descripcion
+                </th>
+                <th></th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NOMBRE_PERMISO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DESCRIPCION_PERMISO)
+                    </td>
+                    <td>
+                        <a href="#" onclick="mostrar(@item.ID_PERMISO,'@item.NOMBRE_PERMISO','@item.DESCRIPCION_PERMISO')" class="btn btn-primary">Editar</a>
+                        <a href="#" onclick="eliminar(@item.ID_PERMISO,'@item.NOMBRE_PERMISO')" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 
 
@@ -100,12 +104,12 @@
                             <div class="form-group">
                                 <label for="Estado">Nombre:</label>
                                 <input type="text" class="form-control" id="id_estado1" name="id_estado1" hidden="true">
-                                <input type="text" class="form-control" id="permiso_nombre" name="permiso_nombre" value="">
+                                <input type="text" class="form-control" id="permiso_nombre1" name="permiso_nombre1">
                                 <small id="Estado_civil" class="form-text text-muted">Nombre del permiso.</small>
                             </div>
                             <div class="form-group">
                                 <label for="Estado">Descripcion:</label>
-                                <input type="text" class="form-control" id="permiso_descripcion" name="permiso_descripcion">
+                                <input type="text" class="form-control" id="permiso_descripcion1" name="permiso_descripcion1">
                                 <small id="Estado_civil" class="form-text text-muted">Descripcion.</small>
                             </div>
                         </div>
@@ -152,10 +156,12 @@
 
 
 <script type="text/javascript">
+
+
     function mostrar(id_estado, valor1, valor2) {
-        var est = document.getElementById('permiso_nombre');
+        var est = document.getElementById('permiso_nombre1');
         est.value = ""+valor1;
-        var est1 = document.getElementById('permiso_descripcion');
+        var est1 = document.getElementById('permiso_descripcion1');
         est1.value = ""+valor2;
         var id_est = document.getElementById('id_estado1');
         id_est.value=id_estado;

@@ -40,14 +40,18 @@ namespace SAP.Controllers
         [MyAuthorize(Roles = "editar_permiso")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(string id_estado1, string permiso_nombre, string permiso_descripcion)
+        public ActionResult Update(string id_estado1, string permiso_nombre1, string permiso_descripcion1)
         {
-            if (!string.IsNullOrEmpty(permiso_descripcion) && !string.IsNullOrEmpty(id_estado1) && !string.IsNullOrEmpty(permiso_nombre))
+            if (!string.IsNullOrEmpty(permiso_descripcion1) && !string.IsNullOrEmpty(id_estado1) && !string.IsNullOrEmpty(permiso_nombre1))
             {
-                PERMISO permiso = new PERMISO { ID_PERMISO = int.Parse(id_estado1), DESCRIPCION_PERMISO=permiso_descripcion, NOMBRE_PERMISO=permiso_nombre};
+                PERMISO permiso = new PERMISO { ID_PERMISO = int.Parse(id_estado1), DESCRIPCION_PERMISO=permiso_descripcion1, NOMBRE_PERMISO=permiso_nombre1};
                 db.Entry(permiso).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.error = "Datos no pueden ir vacios";
             }
             return RedirectToAction("Index");
         }

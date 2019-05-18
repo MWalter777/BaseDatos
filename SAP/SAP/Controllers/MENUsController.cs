@@ -77,6 +77,7 @@ namespace SAP.Controllers
             }
             //ViewBag.MEN_ID_MENU = new SelectList(db.MENU.Where(menu => menu.MEN_ID_MENU == null), "ID_MENU", "NOMBRE_MENU"); //por si solo se muestran menus padres
             ViewBag.MEN_ID_MENU = new SelectList(db.MENU.Where(menu => string.IsNullOrEmpty(menu.URL)), "ID_MENU", "NOMBRE_MENU");
+            ViewBag.ID_MENU = mENU.MEN_ID_MENU;
             return View(mENU);
         }
 
@@ -85,15 +86,21 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL")] MENU mENU)
+        public ActionResult Edit([Bind(Include = "ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL")] MENU mENU, int men_id_menu1)
         {
             if (ModelState.IsValid)
             {
+                if (mENU.MEN_ID_MENU==null)
+                {
+                    mENU.MEN_ID_MENU = men_id_menu1;
+                }
+
                 db.Entry(mENU).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.MEN_ID_MENU = new SelectList(db.MENU, "ID_MENU", "NOMBRE_MENU", mENU.MEN_ID_MENU);
+            ViewBag.ID_MENU = mENU.MEN_ID_MENU;
             return View(mENU);
         }
 
