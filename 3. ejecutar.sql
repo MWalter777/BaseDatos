@@ -129,9 +129,10 @@ insert into permite (id_rol,id_permiso) values(1,43);
 insert into permite (id_rol,id_permiso) values(1,44);
 
 
+
 SET IDENTITY_INSERT usuario ON
 
-insert into usuario (id_usuario,id_rol,USERNAME,email,password,habilitado) values(1,1,'BAD115','superusuariosap777@gmail.com','3GseFNXe8JBJ+WiHMprogrWwX4U=',1);
+insert into usuario (id_usuario,id_empleado,id_rol,USERNAME,email,password,habilitado) values(1,null,1,'BAD115','superusuariosap777@gmail.com','3GseFNXe8JBJ+WiHMprogrWwX4U=',1);
 
 SET IDENTITY_INSERT usuario off
 
