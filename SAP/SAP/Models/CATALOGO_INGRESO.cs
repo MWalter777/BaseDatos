@@ -16,5 +16,8 @@ namespace SAP.Models
         public string NOMBRE_INGRESO { get; set; }
 
         public bool DELEY_INGRESO { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? INGRESO { get; set; }
     }
 }

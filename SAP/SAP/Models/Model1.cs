@@ -330,13 +330,28 @@ namespace SAP.Models
                 .IsUnicode(false);
 
 
+
             modelBuilder.Entity<CATALOGO_DESCUENTO>()
-    .Property(e => e.NOMBRE_DESCUENTO)
-    .IsUnicode(false);
+                .Property(e => e.NOMBRE_DESCUENTO)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<CATALOGO_DESCUENTO>()
+                .Property(e => e.PORCENTAJE)
+                .HasPrecision(2, 2);
+
+            modelBuilder.Entity<CATALOGO_DESCUENTO>()
+                .Property(e => e.DESCUENTO)
+                .HasPrecision(8, 2);
 
             modelBuilder.Entity<CATALOGO_INGRESO>()
                 .Property(e => e.NOMBRE_INGRESO)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<CATALOGO_INGRESO>()
+                .Property(e => e.INGRESO)
+                .HasPrecision(8, 2);
+
+
 
             modelBuilder.Entity<CENTRO_COSTO>()
                 .Property(e => e.MONTO_ASIGNADO)

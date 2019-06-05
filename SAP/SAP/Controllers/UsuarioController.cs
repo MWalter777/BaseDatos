@@ -210,6 +210,7 @@ namespace SAP.Controllers
                 catch (Exception e)
                 {
                     ViewBag.Error = "Error al guardar, el Usuario ya existe";
+                    
                 }
                 return View("Create");
             }

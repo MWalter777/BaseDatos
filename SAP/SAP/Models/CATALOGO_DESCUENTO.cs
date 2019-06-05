@@ -16,5 +16,15 @@ namespace SAP.Models
         public string NOMBRE_DESCUENTO { get; set; }
 
         public bool DELEY_DESCUENTO { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? PORCENTAJE { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? DESCUENTO { get; set; }
+
+        public DateTime? FECHA_INICIO { get; set; }
+
+        public DateTime? FECHA_FIN { get; set; }
     }
 }

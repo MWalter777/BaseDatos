@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     4/6/2019 07:49:09                            */
+/* Created on:     5/6/2019 08:02:28                            */
 /*==============================================================*/
 
 
@@ -476,6 +476,10 @@ create table CATALOGO_DESCUENTO (
    ID_DESCUENTO         int                  not null identity(1,1),
    NOMBRE_DESCUENTO     varchar(75)          not null,
    DELEY_DESCUENTO      bit                  not null,
+   PORCENTAJE           numeric(2,2)         null,
+   DESCUENTO            numeric(8,2)         null,
+   FECHA_INICIO         datetime             null,
+   FECHA_FIN            datetime             null,
    constraint PK_CATALOGO_DESCUENTO primary key nonclustered (ID_DESCUENTO)
 )
 go
@@ -487,6 +491,7 @@ create table CATALOGO_INGRESO (
    ID_INGRESO           int                  not null identity(1,1),
    NOMBRE_INGRESO       varchar(75)          not null,
    DELEY_INGRESO        bit                  not null,
+   INGRESO              numeric(8,2)         null,
    constraint PK_CATALOGO_INGRESO primary key nonclustered (ID_INGRESO)
 )
 go
@@ -991,7 +996,7 @@ go
 create table USUARIO (
    ID_USUARIO           int                  not null identity(1,1),
    ID_EMPLEADO          int                  null,
-   ID_ROL               int                  not null,
+   ID_ROL               int                  null,
    EMAIL                varchar(60)          not null,
    USERNAME             varchar(60)          unique not null,
    PASSWORD             varchar(60)          not null,
