@@ -126,7 +126,7 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rOL).State = EntityState.Modified;
+                db.Entry(rOL).State = EntityState.Modified;  
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
