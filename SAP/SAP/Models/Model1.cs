@@ -31,19 +31,6 @@ namespace SAP.Models
         public virtual DbSet<USUARIO> USUARIO { get; set; }
 
 
-        public virtual DbSet<CATALOGO_DESCUENTO> CATALOGO_DESCUENTO { get; set; }
-        public virtual DbSet<CATALOGO_INGRESO> CATALOGO_INGRESO { get; set; }
-        public virtual DbSet<CENTRO_COSTO> CENTRO_COSTO { get; set; }
-        public virtual DbSet<DESCUENTO_EMPLEADO> DESCUENTO_EMPLEADO { get; set; }
-        public virtual DbSet<DESCUENTO_RENTA> DESCUENTO_RENTA { get; set; }
-        public virtual DbSet<DETALLEPLANILLA> DETALLEPLANILLA { get; set; }
-        public virtual DbSet<INGRESO_EMPLEADO> INGRESO_EMPLEADO { get; set; }
-        public virtual DbSet<PERIODICIDAD_ANUAL> PERIODICIDAD_ANUAL { get; set; }
-        public virtual DbSet<PLANILLA> PLANILLA { get; set; }
-        public virtual DbSet<RANGO_COMISION> RANGO_COMISION { get; set; }
-        public virtual DbSet<SALARIO_MINIMO> SALARIO_MINIMO { get; set; }
-
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DEPARTAMENTO>()
@@ -328,84 +315,6 @@ namespace SAP.Models
             modelBuilder.Entity<USUARIO>()
                 .Property(e => e.PASSWORD)
                 .IsUnicode(false);
-
-
-
-            modelBuilder.Entity<CATALOGO_DESCUENTO>()
-                .Property(e => e.NOMBRE_DESCUENTO)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CATALOGO_DESCUENTO>()
-                .Property(e => e.PORCENTAJE)
-                .HasPrecision(2, 2);
-
-            modelBuilder.Entity<CATALOGO_DESCUENTO>()
-                .Property(e => e.DESCUENTO)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<CATALOGO_INGRESO>()
-                .Property(e => e.NOMBRE_INGRESO)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CATALOGO_INGRESO>()
-                .Property(e => e.INGRESO)
-                .HasPrecision(8, 2);
-
-
-
-            modelBuilder.Entity<CENTRO_COSTO>()
-                .Property(e => e.MONTO_ASIGNADO)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<CENTRO_COSTO>()
-                .Property(e => e.SALDO)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<DESCUENTO_RENTA>()
-                .Property(e => e.MIN_RENTA)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<DESCUENTO_RENTA>()
-                .Property(e => e.MAX_RENTA)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<DESCUENTO_RENTA>()
-                .Property(e => e.PORCENTAJE_RENTA)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<PLANILLA>()
-                .Property(e => e.CODIGO_PLANILLA)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PLANILLA>()
-                .Property(e => e.TOTAL_INGRESOS)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<PLANILLA>()
-                .Property(e => e.TOTAL_DESCUENTOS)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<PLANILLA>()
-                .Property(e => e.TOTAL_PAGAR)
-                .HasPrecision(10, 2);
-
-            modelBuilder.Entity<RANGO_COMISION>()
-                .Property(e => e.MIN_COMISION)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<RANGO_COMISION>()
-                .Property(e => e.MAX_COMISION)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<RANGO_COMISION>()
-                .Property(e => e.PORCENTAJE_POR_COMISION)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<SALARIO_MINIMO>()
-                .Property(e => e.MONTO_SALARIO_MINIMO)
-                .HasPrecision(8, 2);
-
-
         }
     }
 }
