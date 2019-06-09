@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     5/6/2019 08:02:28                            */
+/* Created on:     8/6/2019 19:27:37                            */
 /*==============================================================*/
 
 
@@ -474,12 +474,13 @@ go
 /*==============================================================*/
 create table CATALOGO_DESCUENTO (
    ID_DESCUENTO         int                  not null identity(1,1),
-   NOMBRE_DESCUENTO     varchar(75)          not null,
+   NOMBRE_DESCUENTO     varchar(75)          unique not null,
    DELEY_DESCUENTO      bit                  not null,
    PORCENTAJE           numeric(2,2)         null,
    DESCUENTO            numeric(8,2)         null,
    FECHA_INICIO         datetime             null,
    FECHA_FIN            datetime             null,
+   ACTIVO               bit                  not null,
    constraint PK_CATALOGO_DESCUENTO primary key nonclustered (ID_DESCUENTO)
 )
 go
@@ -489,9 +490,10 @@ go
 /*==============================================================*/
 create table CATALOGO_INGRESO (
    ID_INGRESO           int                  not null identity(1,1),
-   NOMBRE_INGRESO       varchar(75)          not null,
+   NOMBRE_INGRESO       varchar(75)          unique not null,
    DELEY_INGRESO        bit                  not null,
    INGRESO              numeric(8,2)         null,
+   ACTIVO               bit                  not null,
    constraint PK_CATALOGO_INGRESO primary key nonclustered (ID_INGRESO)
 )
 go
@@ -593,6 +595,7 @@ create table DETALLEPLANILLA (
    ID_INGRESO_EMPLEADO  int                  null,
    ID_PLANILLA          int                  not null,
    ID_DESCUENTO_EMPLEADO int                  null,
+   SALARIO              numeric(8,2)         not null,
    constraint PK_DETALLEPLANILLA primary key nonclustered (ID_DETALLE_PLANILLA)
 )
 go
@@ -673,6 +676,7 @@ create table EMPLEADO (
    SALARIO_BASE         decimal(8,2)         not null,
    CORREO_PERSONAL      varchar(60)          not null,
    CORREO_INSTITUCIONAL varchar(60)          not null,
+   COMISION             bit                  null,
    constraint PK_EMPLEADO primary key nonclustered (ID_EMPLEADO)
 )
 go
@@ -881,6 +885,7 @@ create table PLANILLA (
    TOTAL_INGRESOS       numeric(8,2)         null,
    TOTAL_DESCUENTOS     numeric(8,2)         null,
    TOTAL_PAGAR          numeric(10,2)        null,
+   ACTIVO               bit                  not null,
    constraint PK_PLANILLA primary key nonclustered (ID_PLANILLA)
 )
 go
@@ -899,7 +904,7 @@ go
 /* Table: PUESTO                                                */
 /*==============================================================*/
 create table PUESTO (
-   ID_PUESTO            int                  not null identity(1,1),
+   ID_PUESTO            int                  not null identity(1,1), 
    ID_DEPARTAMENTO      int                  not null,
    CODIGO_PUESTO        varchar(10)          not null,
    NOMBRE_PUESTO        varchar(60)          not null,
@@ -994,7 +999,7 @@ go
 /* Table: USUARIO                                               */
 /*==============================================================*/
 create table USUARIO (
-   ID_USUARIO           int                  not null identity(1,1),
+   ID_USUARIO           int                  not null identity(1,1), 
    ID_EMPLEADO          int                  null,
    ID_ROL               int                  null,
    EMAIL                varchar(60)          not null,

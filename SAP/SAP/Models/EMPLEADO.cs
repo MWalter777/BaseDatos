@@ -9,13 +9,6 @@ namespace SAP.Models
     [Table("EMPLEADO")]
     public partial class EMPLEADO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EMPLEADO()
-        {
-            EMPLEADO1 = new HashSet<EMPLEADO>();
-            USUARIO = new HashSet<USUARIO>();
-        }
-
         [Key]
         public int ID_EMPLEADO { get; set; }
 
@@ -80,22 +73,6 @@ namespace SAP.Models
         [StringLength(60)]
         public string CORREO_INSTITUCIONAL { get; set; }
 
-        public virtual DIRECCION DIRECCION { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPLEADO> EMPLEADO1 { get; set; }
-
-        public virtual EMPLEADO EMPLEADO2 { get; set; }
-
-        public virtual PROFESION PROFESION { get; set; }
-
-        public virtual ESTADO_CIVIL ESTADO_CIVIL { get; set; }
-
-        public virtual GENERO GENERO { get; set; }
-
-        public virtual PUESTO PUESTO { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
+        public bool? COMISION { get; set; }
     }
 }

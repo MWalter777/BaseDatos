@@ -17,5 +17,8 @@ namespace SAP.Models
         public int ID_PLANILLA { get; set; }
 
         public int? ID_DESCUENTO_EMPLEADO { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal SALARIO { get; set; }
     }
 }

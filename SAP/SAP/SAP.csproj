@@ -199,6 +199,7 @@
     <Compile Include="Controllers\NoValidoController.cs" />
     <Compile Include="Controllers\PAISController.cs" />
     <Compile Include="Controllers\PERMISOesController.cs" />
+    <Compile Include="Controllers\PLANILLAsController.cs" />
     <Compile Include="Controllers\PROFESIONController.cs" />
     <Compile Include="Controllers\REGIONController.cs" />
     <Compile Include="Controllers\ROLsController.cs" />
@@ -208,21 +209,32 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ACCEDE.cs" />
+    <Compile Include="Models\CATALOGO_DESCUENTO.cs" />
+    <Compile Include="Models\CATALOGO_INGRESO.cs" />
+    <Compile Include="Models\CENTRO_COSTO.cs" />
     <Compile Include="Models\DEPARTAMENTO.cs" />
+    <Compile Include="Models\DESCUENTO_EMPLEADO.cs" />
+    <Compile Include="Models\DESCUENTO_RENTA.cs" />
+    <Compile Include="Models\DETALLEPLANILLA.cs" />
     <Compile Include="Models\DIRECCION.cs" />
     <Compile Include="Models\EMPLEADO.cs" />
     <Compile Include="Models\EMPRESA.cs" />
     <Compile Include="Models\ESTADO_CIVIL.cs" />
     <Compile Include="Models\GENERO.cs" />
+    <Compile Include="Models\INGRESO_EMPLEADO.cs" />
     <Compile Include="Models\MENU.cs" />
     <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\PAIS.cs" />
+    <Compile Include="Models\PERIODICIDAD_ANUAL.cs" />
     <Compile Include="Models\PERMISO.cs" />
     <Compile Include="Models\PERMITE.cs" />
+    <Compile Include="Models\PLANILLA.cs" />
     <Compile Include="Models\PROFESION.cs" />
     <Compile Include="Models\PUESTO.cs" />
+    <Compile Include="Models\RANGO_COMISION.cs" />
     <Compile Include="Models\REGION.cs" />
     <Compile Include="Models\ROL.cs" />
+    <Compile Include="Models\SALARIO_MINIMO.cs" />
     <Compile Include="Models\SUB_REGION.cs" />
     <Compile Include="Models\USUARIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -321,6 +333,11 @@
     <Content Include="Views\ROLs\Details.cshtml" />
     <Content Include="Views\ROLs\Edit.cshtml" />
     <Content Include="Views\ROLs\Index.cshtml" />
+    <Content Include="Views\PLANILLAs\Create.cshtml" />
+    <Content Include="Views\PLANILLAs\Delete.cshtml" />
+    <Content Include="Views\PLANILLAs\Details.cshtml" />
+    <Content Include="Views\PLANILLAs\Edit.cshtml" />
+    <Content Include="Views\PLANILLAs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

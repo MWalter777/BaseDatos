@@ -26,5 +26,7 @@ namespace SAP.Models
         public DateTime? FECHA_INICIO { get; set; }
 
         public DateTime? FECHA_FIN { get; set; }
+
+        public bool ACTIVO { get; set; }
     }
 }

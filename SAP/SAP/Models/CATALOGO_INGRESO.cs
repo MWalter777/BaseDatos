@@ -19,5 +19,7 @@ namespace SAP.Models
 
         [Column(TypeName = "numeric")]
         public decimal? INGRESO { get; set; }
+
+        public bool ACTIVO { get; set; }
     }
 }

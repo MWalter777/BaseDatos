@@ -26,5 +26,7 @@ namespace SAP.Models
 
         [Column(TypeName = "numeric")]
         public decimal? TOTAL_PAGAR { get; set; }
+
+        public bool ACTIVO { get; set; }
     }
 }

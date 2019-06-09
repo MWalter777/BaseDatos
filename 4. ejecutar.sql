@@ -1,18 +1,18 @@
 
 SET IDENTITY_INSERT CATALOGO_DESCUENTO ON
 
-insert into CATALOGO_DESCUENTO (ID_DESCUENTO,NOMBRE_DESCUENTO,DELEY_DESCUENTO,PORCENTAJE,DESCUENTO,FECHA_INICIO,FECHA_FIN) VALUES (1,'AFP',1,0.03,null,null,null);
-insert into CATALOGO_DESCUENTO (ID_DESCUENTO,NOMBRE_DESCUENTO,DELEY_DESCUENTO,PORCENTAJE,DESCUENTO,FECHA_INICIO,FECHA_FIN) VALUES (2,'ISSS',1,0.06, null, null, null);
-insert into CATALOGO_DESCUENTO (ID_DESCUENTO,NOMBRE_DESCUENTO,DELEY_DESCUENTO,PORCENTAJE,DESCUENTO,FECHA_INICIO,FECHA_FIN) VALUES (3,'ISSS',0,null, 70.56, '2018-05-06', '2019-09-09');
+insert into CATALOGO_DESCUENTO (ID_DESCUENTO,NOMBRE_DESCUENTO,DELEY_DESCUENTO,PORCENTAJE,DESCUENTO,FECHA_INICIO,FECHA_FIN,activo) VALUES (1,'AFP',1,0.03,null,null,null,0);
+insert into CATALOGO_DESCUENTO (ID_DESCUENTO,NOMBRE_DESCUENTO,DELEY_DESCUENTO,PORCENTAJE,DESCUENTO,FECHA_INICIO,FECHA_FIN,activo) VALUES (2,'ISSS',1,0.06, null, null, null,1);
+insert into CATALOGO_DESCUENTO (ID_DESCUENTO,NOMBRE_DESCUENTO,DELEY_DESCUENTO,PORCENTAJE,DESCUENTO,FECHA_INICIO,FECHA_FIN,activo) VALUES (3,'cuota mensual',0,null, 70.56, '2018-05-06', '2019-09-09',1);
 
 SET IDENTITY_INSERT CATALOGO_DESCUENTO off
 
 SET IDENTITY_INSERT catalogo_ingreso ON
 
-insert into catalogo_ingreso(ID_INGRESO,NOMBRE_INGRESO,DELEY_INGRESO,INGRESO) VALUES(1,'salario base',1,356.56);
-insert into catalogo_ingreso(ID_INGRESO,NOMBRE_INGRESO,DELEY_INGRESO,INGRESO) VALUES(2,'sueldo',0,506.89);
-insert into catalogo_ingreso(ID_INGRESO,NOMBRE_INGRESO,DELEY_INGRESO,INGRESO) VALUES(3,'bonificacion',0,253.56);
-insert into catalogo_ingreso(ID_INGRESO,NOMBRE_INGRESO,DELEY_INGRESO,INGRESO) VALUES(4,'salario base',1,256.56);
+insert into catalogo_ingreso(ID_INGRESO,NOMBRE_INGRESO,DELEY_INGRESO,INGRESO,activo) VALUES(1,'salario base',1,356.56,1);
+insert into catalogo_ingreso(ID_INGRESO,NOMBRE_INGRESO,DELEY_INGRESO,INGRESO,activo) VALUES(2,'sueldo',0,506.89,1);
+insert into catalogo_ingreso(ID_INGRESO,NOMBRE_INGRESO,DELEY_INGRESO,INGRESO,activo) VALUES(3,'bonificacion',0,253.56,1);
+insert into catalogo_ingreso(ID_INGRESO,NOMBRE_INGRESO,DELEY_INGRESO,INGRESO,activo) VALUES(4,'salario base',1,256.56,1);
 
 SET IDENTITY_INSERT catalogo_ingreso off
 
@@ -72,8 +72,8 @@ SET IDENTITY_INSERT puesto off
 
 
 SET IDENTITY_INSERT empleado ON
-insert into empleado (id_empleado,id_direccion,emp_id_empleado,id_genero,id_profesion,id_estado_civil,id_puesto,codigo_empleado,apellido_materno,apellido_paterno,primer_nombre,segundo_nombre,fecha_nacimiento,dui,pasaporte,nit,isss,nup,salario_base,correo_personal,correo_institucional) 
-values(1,1,null,1,1,1,1,'EMP001','Martinez','Hernandez','Gabriela','Lisset','1995-05-06','8756984-3',null,'78459632-5','784526-4','7856425-54',563,'correo@gmail.com','correo@empresa.com');
+insert into empleado (id_empleado,id_direccion,emp_id_empleado,id_genero,id_profesion,id_estado_civil,id_puesto,codigo_empleado,apellido_materno,apellido_paterno,primer_nombre,segundo_nombre,fecha_nacimiento,dui,pasaporte,nit,isss,nup,salario_base,correo_personal,correo_institucional,comision) 
+values(1,1,null,1,1,1,1,'EMP001','Martinez','Hernandez','Gabriela','Lisset','1995-05-06','8756984-3',null,'78459632-5','784526-4','7856425-54',563,'correo@gmail.com','correo@empresa.com',0);
 SET IDENTITY_INSERT empleado off
 
 SET IDENTITY_INSERT descuento_empleado ON
