@@ -16,5 +16,7 @@ namespace SAP.Models
         public int ID_EMPLEADO { get; set; }
 
         public int ID_DESCUENTO { get; set; }
+        [ForeignKey("ID_DESCUENTO")]
+        public virtual CATALOGO_DESCUENTO descuento { get; set; }
     }
 }

@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Boleta de pago";
+}
+
+<div class="tile">
+    <h2 class="text-center">Boleta de pago para los siguientes empleados</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
+
+    <p>
+        <a href="/Planillas" class="btn btn-primary">
+            Regresar
+        </a>
+    </p>
+    @if (ViewBag.empleados != null)
+    {
+        <table class="table" id="sampleTable">
+            <thead>
+                <tr>
+                    <th>
+                        Codigo
+                    </th>
+                    <th>
+                        Apellido
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Dui
+                    </th>
+                    <th>
+                        Salario Base
+                    </th>
+                    <th>
+                        Correo
+                    </th>
+                    <th>
+                        Tiene comision?
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in ViewBag.empleados)
+                {
+                    <tr>
+                        <td>
+                            <label>@item.CODIGO_EMPLEADO</label>
+                        </td>
+                        <td>
+                            <label>@item.APELLIDO_PATERNO @item.APELLIDO_MATERNO</label>
+                        </td>
+                        <td>
+                            <label>@item.PRIMER_NOMBRE @item.SEGUNDO_NOMBRE</label>
+                        </td>
+                        <td>
+                            <label>@item.DUI</label>
+                        </td>
+                        <td>
+                            <label>@item.SALARIO_BASE</label>
+                        </td>
+                        <td>
+                            <label>@item.CORREO_PERSONAL</label>
+                        </td>
+                        <td>
+                            @if (item.COMISION != null)
+                            {
+                                <label>@item.COMISION</label>
+                            }
+                            else
+                            {
+                                <label>Sin asignar</label>
+                            }
+                        </td>
+                        <td>
+                            <a href="/Planillas/Verboleta/@item.ID_EMPLEADO" class="btn btn-primary">Ver boleta</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+

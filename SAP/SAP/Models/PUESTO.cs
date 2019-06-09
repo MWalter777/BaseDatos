@@ -20,6 +20,7 @@ namespace SAP.Models
 
         public int ID_DEPARTAMENTO { get; set; }
 
+
         [Required]
         [StringLength(10)]
         public string CODIGO_PUESTO { get; set; }

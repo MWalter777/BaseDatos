@@ -339,6 +339,8 @@
     <Content Include="Views\PLANILLAs\Edit.cshtml" />
     <Content Include="Views\PLANILLAs\Index.cshtml" />
     <Content Include="Views\PLANILLAs\VerPlanilla.cshtml" />
+    <Content Include="Views\PLANILLAs\PlanillaPorEmpleado.cshtml" />
+    <Content Include="Views\PLANILLAs\Verboleta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

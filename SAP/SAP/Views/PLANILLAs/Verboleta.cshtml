@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "Boleta de pago";
+}
+
+<div class="tile">
+    <h2 class="text-center">Boleta de pago</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
+
+    <p>
+        <a href="/Planillas" class="btn btn-primary">
+            Regresar
+        </a>
+        <a href="#" class="btn btn-primary" onclick="imprimir('boleta')">
+            Imprimir
+        </a>
+    </p>
+    <div id="boleta">
+        @if (ViewBag.descuento != null && ViewBag.ingreso != null)
+        {
+            <h2 class="text-center" id="ocultar">@ViewBag.empleado.puesto.DEPARTAMENTO.EMPRESA.NOMBRE_EMPRESA</h2>
+            <h3 class="text-center" id="ocultar">@ViewBag.empleado.puesto.DEPARTAMENTO.NOMBRE_DEPARTAMENTO</h3>
+            <h4 class="text-right" id="ocultar">Tipo de pago: @ViewBag.tipo_pago <label class="alert-info">@ViewBag.fecha_actual</label> </h4>
+            <h4 class="text-left" id="ocultar">Empleado: <label>@ViewBag.empleado.APELLIDO_PATERNO</label> <label>@ViewBag.empleado.APELLIDO_MATERNO</label>, <label>@ViewBag.empleado.PRIMER_NOMBRE</label> <label>@ViewBag.empleado.SEGUNDO_NOMBRE</label> </h4>
+            <h4 class="text-left">DUI: @ViewBag.empleado.DUI</h4>
+            <h4 class="text-left">PUESTO: @ViewBag.empleado.puesto.NOMBRE_PUESTO</h4>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            ID
+                        </th>
+                        <th class="text-center">
+                            Nombre
+                        </th>
+                        <th class="text-center">
+                            Ingreso/descuento
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="alert alert-info">
+                        <td></td>
+                        <td class="text-center">
+                            INGRESOS
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    @if (ViewBag.empleado.COMISION == true)
+                    {
+
+                        <tr class="alert alert-info">
+                            <td></td>
+                            <td class="text-center">
+                                COMISION
+                            </td>
+                            <td>@ViewBag.comision</td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td class="text-center">
+                            <label>@ViewBag.empleado.CODIGO_EMPLEADO</label>
+                        </td>
+                        <td class="text-center">
+                            <label>SALARIO BASE</label>
+                        </td>
+                        <td class="text-center">
+                            <label>@ViewBag.empleado.SALARIO_BASE</label>
+                        </td>
+                    </tr>
+                    @foreach (var item in ViewBag.ingreso)
+                    {
+                        if (item.ingreso.DELEY_INGRESO)
+                        {
+
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <label>@item.ID_INGRESO_EMPLEADO</label>
+                                </td>
+                                <td class="text-center">
+                                    <label>@item.ingreso.NOMBRE_INGRESO</label>
+                                </td>
+                                <td class="text-center">
+                                    <label>@item.ingreso.INGRESO</label>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    <tr class="alert alert-info">
+                        <td></td>
+                        <td class="text-center">
+                            DESCUENTOS
+                        </td>
+                        <td></td>
+                    </tr>
+                    @foreach (var item in ViewBag.descuento)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                <label>@item.ID_DESCUENTO_EMPLEADO</label>
+                            </td>
+                            <td class="text-center">
+                                <label>@item.descuento.NOMBRE_DESCUENTO</label>
+                            </td>
+                            <td class="text-center">
+                                @if (item.descuento.DELEY_DESCUENTO)
+                                {
+                                    decimal a;
+                                    {
+                                        a = @item.descuento.PORCENTAJE * ViewBag.empleado.SALARIO_BASE;
+                                    }
+                                    <label>@a</label>
+                                }
+                                else
+                                {
+                                    <label>@item.descuento.DESCUENTO</label>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    <tr class="alert alert-info">
+                        <td></td>
+                        <td class="text-right">
+                            Total...
+                        </td>
+                        <td class="text-center"> @ViewBag.total </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    function descargar(nombre) {
+        var source = document.getElementById('boleta');
+        var pdf = new jsPDF('p', 'pt', 'letter');
+
+        specialElementHandlers = {
+            '#bypassme': function (element, renderer) {
+                return true
+            }
+        };
+        margins = {
+            top: 80,
+            bottom: 60,
+            left: 40,
+            width: 522
+        };
+
+        pdf.fromHTML(
+            source,
+            margins.left, 
+            margins.top, { 
+                'width': margins.width,
+                'elementHandlers': specialElementHandlers
+            },
+
+            function (dispose) {
+                pdf.save(nombre);
+            }, margins
+        );
+    }
+
+    function imprimir(valor) {
+        var printContents = document.getElementById(valor).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+
+
+</script>
+
+
+

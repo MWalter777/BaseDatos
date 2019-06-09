@@ -24,6 +24,9 @@ namespace SAP.Models
 
         public int ID_PUESTO { get; set; }
 
+        [ForeignKey("ID_PUESTO")]
+        public virtual PUESTO puesto { get; set; }
+
         [Required]
         [StringLength(25)]
         public string CODIGO_EMPLEADO { get; set; }

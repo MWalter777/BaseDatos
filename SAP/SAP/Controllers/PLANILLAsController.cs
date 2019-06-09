@@ -20,7 +20,84 @@ namespace SAP.Controllers
             return View(db.PLANILLA.ToList());
         }
 
+        public ActionResult PlanillaPorEmpleado()
+        {
+            ViewBag.empleados = db.EMPLEADO.ToList();
+            return View();
+        }
 
+        public ActionResult Verboleta(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            EMPLEADO empleado = db.EMPLEADO.Find(id);
+            if (empleado == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            int anio = DateTime.Now.Year;
+            PERIODICIDAD_ANUAL periodo = db.PERIODICIDAD_ANUAL.Where(PERIODICIDAD_ANUAL => PERIODICIDAD_ANUAL.ANIO_PERIODICIDAD == anio).First();
+            if (periodo == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ViewBag.empleado = empleado;
+            ViewBag.descuento = db.DESCUENTO_EMPLEADO.Where(DESCUENTO_EMPLEADO => DESCUENTO_EMPLEADO.ID_EMPLEADO == empleado.ID_EMPLEADO && DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO);
+            ViewBag.ingreso = db.INGRESO_EMPLEADO.Where(INGRESO_EMPLEADO => INGRESO_EMPLEADO.ID_EMPLEADO == empleado.ID_EMPLEADO);
+
+            decimal total = empleado.SALARIO_BASE;
+            decimal comision = 0;
+
+            foreach (INGRESO_EMPLEADO i in ViewBag.ingreso)
+            {
+                if (!i.ingreso.DELEY_INGRESO)
+                {
+                    total = total + (decimal)i.ingreso.INGRESO;
+                }
+                else
+                {
+                    if (empleado.COMISION != null && empleado.COMISION == true)
+                    {
+                        RANGO_COMISION rango = db.RANGO_COMISION.Where(RANGO_COMISION => i.ingreso.INGRESO >= RANGO_COMISION.MIN_COMISION && i.ingreso.INGRESO <= RANGO_COMISION.MAX_COMISION).First();
+                        if (rango != null)
+                        {
+                            comision = comision + (decimal)(i.ingreso.INGRESO * rango.PORCENTAJE_POR_COMISION);
+                            total = total + comision;
+                        }
+                    }
+                }
+            }
+
+            foreach (DESCUENTO_EMPLEADO i in ViewBag.descuento)
+            {
+                if (i.descuento.DELEY_DESCUENTO)
+                {
+                    total = total - (decimal)(i.descuento.PORCENTAJE * empleado.SALARIO_BASE);
+                }
+                else
+                {
+                    total = total - (decimal)i.descuento.DESCUENTO;
+                }
+            }
+            DateTime fecha_actual = DateTime.Now;
+            String tipo_pago = null;
+            if (periodo.MENSUAL)
+            {
+                tipo_pago = "MENSUAL";
+            }else
+            {
+                tipo_pago = "QUINCENAL";
+            }
+
+
+            ViewBag.comision = comision;
+            ViewBag.tipo_pago = tipo_pago;
+            ViewBag.total = total;
+
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
