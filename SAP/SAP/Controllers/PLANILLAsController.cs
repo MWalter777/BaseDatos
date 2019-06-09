@@ -20,6 +20,50 @@ namespace SAP.Controllers
             return View(db.PLANILLA.ToList());
         }
 
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(string codigo)
+        {
+            if (!string.IsNullOrEmpty(codigo))
+            {
+                PLANILLA planilla = new PLANILLA{ID_PLANILLA = 1, CODIGO_PLANILLA = codigo, FECHA = DateTime.Now, ACTIVO=true, TOTAL_DESCUENTOS =0, TOTAL_INGRESOS=0,TOTAL_PAGAR=0};
+                db.PLANILLA.Add(planilla);
+                db.SaveChanges();
+                IEnumerable<DESCUENTO_EMPLEADO> descuento = db.DESCUENTO_EMPLEADO.ToList().Where(DESCUENTO_EMPLEADO => DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO == true);
+                int id = db.PLANILLA.ToList().Where(PLANILLA => PLANILLA.CODIGO_PLANILLA.Equals(codigo)).First().ID_PLANILLA;
+                foreach (DESCUENTO_EMPLEADO d in descuento)
+                {
+                    DETALLEPLANILLA detalle = new DETALLEPLANILLA { ID_DETALLE_PLANILLA = 1, ID_PLANILLA = id, ID_DESCUENTO_EMPLEADO = d.ID_DESCUENTO_EMPLEADO, ID_INGRESO_EMPLEADO = null, SALARIO = 0 };
+                    db.DETALLEPLANILLA.Add(detalle);
+                    db.SaveChanges();
+                }
+                IEnumerable<INGRESO_EMPLEADO> ingreso = db.INGRESO_EMPLEADO.ToList().Where(INGRESO_EMPLEADO => INGRESO_EMPLEADO.HABILITAR_INGRESO == true);
+                foreach (INGRESO_EMPLEADO d in ingreso)
+                {
+                    DETALLEPLANILLA detalle = new DETALLEPLANILLA { ID_DETALLE_PLANILLA = 1, ID_PLANILLA = db.PLANILLA.ToList().Where(PLANILLA => PLANILLA.CODIGO_PLANILLA.Equals(codigo)).First().ID_PLANILLA, ID_DESCUENTO_EMPLEADO = null, ID_INGRESO_EMPLEADO = d.ID_INGRESO_EMPLEADO, SALARIO = 0 };
+                    db.DETALLEPLANILLA.Add(detalle);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+        // GET: PLANILLAs/VerPlanilla/5
+        public ActionResult VerPlanilla(int? id)
+        {
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            return View();
+        }
+
+
         // GET: PLANILLAs/Details/5
         public ActionResult Details(int? id)
         {

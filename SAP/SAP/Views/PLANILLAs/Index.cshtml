@@ -4,60 +4,105 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="tile">
+    <h2 class="text-center">Planillas</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FECHA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CODIGO_PLANILLA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TOTAL_INGRESOS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TOTAL_DESCUENTOS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TOTAL_PAGAR)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ACTIVO)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crear">
+            Nueva planilla
+        </button>
+    </p>
+    <table class="table" id="sampleTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FECHA)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CODIGO_PLANILLA)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TOTAL_INGRESOS)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TOTAL_DESCUENTOS)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TOTAL_PAGAR)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ACTIVO)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FECHA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CODIGO_PLANILLA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TOTAL_INGRESOS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TOTAL_DESCUENTOS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TOTAL_PAGAR)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ACTIVO)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_PLANILLA }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_PLANILLA }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_PLANILLA })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FECHA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CODIGO_PLANILLA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TOTAL_INGRESOS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TOTAL_DESCUENTOS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TOTAL_PAGAR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ACTIVO)
+                    </td>
+                    <td>
+                        <a href="/Planillas/verplanilla/@item.ID_PLANILLA" class="btn btn-primary">ver planilla</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
 
-</table>
+    </table>
+
+    <div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nuevo estado civil</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @using (Html.BeginForm("Save", "PLANILLAs", FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
+                    <form>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="Estado">Codigo planilla</label>
+                                <input type="text" class="form-control" id="codigo" name="codigo" aria-describedby="Codigo planilla" placeholder="Codigo planilla" required="">
+                                <small id="Estado_civil" class="form-text text-muted">Codigo de planill.</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cerrar</button>
+                            <button type="submit" class="btn btn-primary" value="Save">Guardar</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+
+

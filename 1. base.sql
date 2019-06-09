@@ -881,7 +881,7 @@ go
 create table PLANILLA (
    ID_PLANILLA          int                  not null identity(1,1),
    FECHA                datetime             not null,
-   CODIGO_PLANILLA      varchar(15)          not null,
+   CODIGO_PLANILLA      varchar(15)          unique not null,
    TOTAL_INGRESOS       numeric(8,2)         null,
    TOTAL_DESCUENTOS     numeric(8,2)         null,
    TOTAL_PAGAR          numeric(10,2)        null,
