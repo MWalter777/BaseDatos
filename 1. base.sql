@@ -490,10 +490,11 @@ go
 /*==============================================================*/
 create table CATALOGO_INGRESO (
    ID_INGRESO           int                  not null identity(1,1),
-   NOMBRE_INGRESO       varchar(75)          unique not null,
+   NOMBRE_INGRESO       varchar(75)          not null,
    DELEY_INGRESO        bit                  not null,
    INGRESO              numeric(8,2)         null,
    ACTIVO               bit                  not null,
+   COMISION             numeric(2,2)         null,
    constraint PK_CATALOGO_INGRESO primary key nonclustered (ID_INGRESO)
 )
 go

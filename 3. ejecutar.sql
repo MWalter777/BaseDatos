@@ -67,6 +67,10 @@ insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (42,'
 insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (43,'editar_sub_region','Editar sub_region');
 insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (44,'eliminar_sub_region','eliminar sub_region');
 
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (45,'ver_planilla','ver_planilla');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (46,'crear_planilla','crear_planilla');
+
+
 
 SET IDENTITY_INSERT permiso off
 
@@ -129,6 +133,10 @@ insert into permite (id_rol,id_permiso) values(1,43);
 insert into permite (id_rol,id_permiso) values(1,44);
 
 
+insert into permite (id_rol,id_permiso) values(1,45);
+insert into permite (id_rol,id_permiso) values(1,46);
+
+
 
 SET IDENTITY_INSERT usuario ON
 
@@ -149,11 +157,17 @@ insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (6,2,'Estado Civil
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (7,1,'Profesion','/profesion/Index');
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (8,2,'Genero','/generos/Index');
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (9,2,'Region ','/region/Index');
-insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (10,2,'Region ','/sub_region/Index');
+insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (10,2,'Sub Region ','/sub_region/Index');
 
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (11,null,'Gestion de menu',null);
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (12,11,'Menus','/Menus/Index');
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (13,11,'Asignar menu a roles','/MENUROL/Index');
+
+
+insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (14,null,'Planillas',null);
+insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (15,14,'Planilla','/Planillas');
+insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL) values (16,14,'Boleta de pago','/Planillas/PlanillaPorEmpleado');
+
 
 SET IDENTITY_INSERT MENU off
 
@@ -170,6 +184,9 @@ insert into accede (ID_ROL,ID_MENU) values (1,10);
 insert into accede (ID_ROL,ID_MENU) values (1,11);
 insert into accede (ID_ROL,ID_MENU) values (1,12);
 insert into accede (ID_ROL,ID_MENU) values (1,13);
+insert into accede (ID_ROL,ID_MENU) values (1,14);
+insert into accede (ID_ROL,ID_MENU) values (1,15);
+insert into accede (ID_ROL,ID_MENU) values (1,16);
 
 
 

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SAP.Models;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
@@ -15,17 +16,22 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: PLANILLAs
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult Index()
         {
             return View(db.PLANILLA.ToList());
         }
 
+
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult PlanillaPorEmpleado()
         {
             ViewBag.empleados = db.EMPLEADO.ToList();
             return View();
         }
 
+
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult Verboleta(int? id)
         {
             if (id == null)
@@ -101,6 +107,7 @@ namespace SAP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "crear_planilla")]
         public ActionResult Save(string codigo)
         {
             if (!string.IsNullOrEmpty(codigo))
@@ -129,19 +136,43 @@ namespace SAP.Controllers
         }
 
         // GET: PLANILLAs/VerPlanilla/5
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult VerPlanilla(int? id)
         {
             if(id==null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            PLANILLA planilla = db.PLANILLA.Where(PLANILLA => PLANILLA.ID_PLANILLA == id).First();
+            if (planilla == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-
+            IEnumerable<DETALLEPLANILLA> detalle = db.DETALLEPLANILLA.Where(DETALLEPLANILLA => DETALLEPLANILLA.ID_PLANILLA == planilla.ID_PLANILLA);
+            EMPRESA empresa = db.EMPRESA.Find(1); //Empresa numero 1, esto cambiara cuando kike haga la estructura organizativa
+            IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA==1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
+            IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO);
+            IEnumerable<CATALOGO_INGRESO> descontar = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO && CATALOGO_INGRESO.DELEY_INGRESO);
+            IEnumerable<CATALOGO_DESCUENTO> catalogo_descuento = db.CATALOGO_DESCUENTO.Where(CATALOGO_DESCUENTO => CATALOGO_DESCUENTO.ACTIVO);
+            ViewBag.planilla = planilla;
+            ViewBag.detalle_planilla = detalle;
+            ViewBag.catalogo_ingreso = catalogo_ingreso;
+            ViewBag.catalogo_descuento = catalogo_descuento;
+            ViewBag.empleados = empleados;
+            int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
+            int candidad_descuento = catalogo_descuento.Count();
+            ViewBag.cantidad_ingreso = cantidad_ingreso;
+            ViewBag.candidad_descuento = candidad_descuento;
+            ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 3;
+            ViewBag.empresa = empresa;
+            ViewBag.fecha_actual = DateTime.Now;
             return View();
         }
 
 
         // GET: PLANILLAs/Details/5
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult Details(int? id)
         {
             if (id == null)

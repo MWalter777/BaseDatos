@@ -21,5 +21,9 @@ namespace SAP.Models
         public decimal? INGRESO { get; set; }
 
         public bool ACTIVO { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? COMISION { get; set; }
+
     }
 }

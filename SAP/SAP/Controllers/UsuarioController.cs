@@ -236,7 +236,7 @@ namespace SAP.Controllers
                 return HttpNotFound();
             }
             ViewBag.ID_ROL = new SelectList(db.ROL.ToList().Where(rol => rol.ID_ROL!=1), "ID_ROL", "NOMBRE_ROL"); //Vamos a quitar el rol de superusuario y dejar olo del admin y demas
-            ViewBag.ID_EMPLEADO = new SelectList(db.EMPLEADO.ToList(), "ID_EMPLEADO", "NOMBRE_EMPLEADO");
+            ViewBag.ID_EMPLEADO = new SelectList(db.EMPLEADO.ToList(), "ID_EMPLEADO", "PRIMER_NOMBRE");
             return View(uSUARIO);
         }
 

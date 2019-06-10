@@ -1,7 +1,196 @@
-﻿
-@{
-    ViewBag.Title = "VerPlanilla";
+﻿@{
+    ViewBag.Title = "Planilla";
 }
 
-<h2>VerPlanilla</h2>
+<div class="tile">
+    <h2 class="text-center">Planilla</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
+
+    <p>
+        <a href="/Planillas" class="btn btn-info">
+            Regresar
+        </a>
+        <a href="#" class="btn btn-info" onclick="imprimir('planilla')">
+            Imprimir
+        </a>
+        <a href="#" class="btn btn-primary" onclick="">
+            Pagar planilla
+        </a>
+    </p>
+    <div id="planilla">
+        @if (ViewBag.planilla != null && ViewBag.detalle_planilla != null)
+        {
+            <h2 class="text-center" id="ocultar">@ViewBag.empresa.NOMBRE_EMPRESA</h2>
+            <h3 class="text-center" id="ocultar">@ViewBag.empresa.CORREO_EMPRESA</h3>
+            <h5 class="text-right" id="ocultar">Telefono: @ViewBag.empresa.TELEFONO_EMPRESA<label class="alert-info">fecha: @ViewBag.fecha_actual</label> </h5>
+            <h5 class="text-left">NIC: @ViewBag.empresa.NIC</h5>
+            <h5 class="text-left">PAGINA WEB: @ViewBag.empresa.PAGINA_WEB</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">Codigo</th>
+                        <th class="text-center">Empleado</th>
+                        <th class="text-center">Salario base</th>
+                        <th class="text-center">COMISION</th>
+
+                        @foreach (var item_ingreso in ViewBag.catalogo_ingreso)
+                        {
+                            if (item_ingreso.ACTIVO)
+                            {
+                                if (item_ingreso.DELEY_INGRESO)
+                                {
+
+                                }
+                                else
+                                {
+                                    <th class="text-center">
+                                        @item_ingreso.NOMBRE_INGRESO
+                                    </th>
+                                }
+                            }
+                        }
+
+                        @foreach (var item_descuento in ViewBag.catalogo_descuento)
+                        {
+                            if (item_descuento.ACTIVO)
+                            {
+                                <th class="text-center">
+                                    @item_descuento.NOMBRE_DESCUENTO
+                                </th>
+                            }
+                        }
+                        <th class="text-center">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{double total_planilla = 0;}
+
+                    @foreach (var detalle in ViewBag.empleados)
+                    {
+                        double total = (double) detalle.SALARIO_BASE;
+                        <tr>
+                            <td class="text-center">@detalle.CODIGO_EMPLEADO</td>
+                            <td class="text-center">@detalle.PRIMER_NOMBRE</td>
+                            <td class="text-center">@detalle.SALARIO_BASE</td>
+
+                            @{int conteo = 0;}
+
+                            @foreach (var valor in detalle.ingreso_empleados)
+                            {
+                                conteo = conteo + 1;
+                                if (valor.HABILITAR_INGRESO)
+                                {
+                                    if (valor.ingreso.DELEY_INGRESO)
+                                    {
+                                        decimal com = valor.ingreso.INGRESO * valor.ingreso.COMISION;
+                                        total = total + (double) com;
+                                        <td class="text-center">@com</td>
+                                    }
+                                    else
+                                    {
+                                        total = total + (double)@valor.ingreso.INGRESO;
+                                        <td class="text-center">@valor.ingreso.INGRESO</td>
+                                    }
+                                }
+                            }
+                            @if (conteo < ViewBag.cantidad_ingreso)
+                            {
+                                for (int i = 0; i < (ViewBag.cantidad_ingreso - conteo); i++)
+                                {
+                                    <td></td>
+                                }
+                            }
+
+                            @{conteo = 0;}
+                            @foreach (var valor in detalle.descuento_empleados)
+                            {
+                                conteo = conteo + 1;
+                                if (valor.HABILITAR_DESCUENTO)
+                                {
+                                    if (valor.descuento.ACTIVO)
+                                    {
+                                        if (valor.descuento.DELEY_DESCUENTO)
+                                        {
+                                            decimal desc = detalle.SALARIO_BASE * valor.descuento.PORCENTAJE;
+                                            <td class="text-center">@desc</td>
+                                            total = total - (double)desc;
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center">@valor.descuento.DESCUENTO</td>
+                                            total = total - (double)@valor.descuento.DESCUENTO;
+                                        }
+                                    }
+                                }
+                            }
+                            @if (conteo < ViewBag.cantidad_descuento)
+                            {
+                                for (int i = 0; i < (ViewBag.cantidad_descuento - conteo); i++)
+                                {
+                                    <td></td>
+                                }
+                            }
+                            @{total_planilla = total_planilla + total;}
+                            <td>@total</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="@ViewBag.total_espacio" class="text-right"> Total </td>
+                        <td>@total_planilla</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    function descargar(nombre) {
+        var source = document.getElementById('boleta');
+        var pdf = new jsPDF('p', 'pt', 'letter');
+
+        specialElementHandlers = {
+            '#bypassme': function (element, renderer) {
+                return true
+            }
+        };
+        margins = {
+            top: 80,
+            bottom: 60,
+            left: 40,
+            width: 522
+        };
+
+        pdf.fromHTML(
+            source,
+            margins.left,
+            margins.top, {
+                'width': margins.width,
+                'elementHandlers': specialElementHandlers
+            },
+
+            function (dispose) {
+                pdf.save(nombre);
+            }, margins
+        );
+    }
+
+    function imprimir(valor) {
+        var printContents = document.getElementById(valor).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+
+
+</script>
+
+
 
