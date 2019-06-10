@@ -160,11 +160,11 @@ namespace SAP.Controllers
             ViewBag.catalogo_ingreso = catalogo_ingreso;
             ViewBag.catalogo_descuento = catalogo_descuento;
             ViewBag.empleados = empleados;
-            int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count();
+            int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
             int candidad_descuento = catalogo_descuento.Count();
             ViewBag.cantidad_ingreso = cantidad_ingreso;
             ViewBag.candidad_descuento = candidad_descuento;
-            ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 4;
+            ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 3;
             ViewBag.empresa = empresa;
             ViewBag.fecha_actual = DateTime.Now;
             return View();

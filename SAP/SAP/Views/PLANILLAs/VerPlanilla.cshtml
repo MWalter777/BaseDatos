@@ -80,9 +80,9 @@
 
                             @foreach (var valor in detalle.ingreso_empleados)
                             {
+                                conteo = conteo + 1;
                                 if (valor.HABILITAR_INGRESO)
                                 {
-                                    conteo = conteo + 1;
                                     if (valor.ingreso.DELEY_INGRESO)
                                     {
                                         decimal com = valor.ingreso.INGRESO * valor.ingreso.COMISION;
@@ -107,19 +107,22 @@
                             @{conteo = 0;}
                             @foreach (var valor in detalle.descuento_empleados)
                             {
+                                conteo = conteo + 1;
                                 if (valor.HABILITAR_DESCUENTO)
                                 {
-                                    conteo = conteo + 1;
-                                    if (valor.descuento.DELEY_DESCUENTO)
+                                    if (valor.descuento.ACTIVO)
                                     {
-                                        decimal desc = detalle.SALARIO_BASE * valor.descuento.PORCENTAJE;
-                                        <td class="text-center">@desc</td>
-                                        total = total - (double)desc;
-                                    }
-                                    else
-                                    {
-                                        <td class="text-center">@valor.descuento.DESCUENTO</td>
-                                        total = total - (double)@valor.descuento.DESCUENTO;
+                                        if (valor.descuento.DELEY_DESCUENTO)
+                                        {
+                                            decimal desc = detalle.SALARIO_BASE * valor.descuento.PORCENTAJE;
+                                            <td class="text-center">@desc</td>
+                                            total = total - (double)desc;
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center">@valor.descuento.DESCUENTO</td>
+                                            total = total - (double)@valor.descuento.DESCUENTO;
+                                        }
                                     }
                                 }
                             }
