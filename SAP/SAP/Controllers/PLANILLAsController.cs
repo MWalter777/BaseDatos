@@ -16,14 +16,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: PLANILLAs
-        [MyAuthorize(Roles = "ver_planilla")]
+
         public ActionResult Index()
         {
             return View(db.PLANILLA.ToList());
         }
 
 
-        [MyAuthorize(Roles = "ver_planilla")]
+
         public ActionResult PlanillaPorEmpleado()
         {
             ViewBag.empleados = db.EMPLEADO.ToList();
@@ -31,10 +31,15 @@ namespace SAP.Controllers
         }
 
 
-        [MyAuthorize(Roles = "ver_planilla")]
+
         public ActionResult Verboleta(int? id)
         {
             if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PLANILLA planilla = db.PLANILLA.Find(id);
+            if (planilla == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -101,42 +106,50 @@ namespace SAP.Controllers
             ViewBag.comision = comision;
             ViewBag.tipo_pago = tipo_pago;
             ViewBag.total = total;
-
+            ViewBag.planilla = planilla;            
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [MyAuthorize(Roles = "crear_planilla")]
+
         public ActionResult Save(string codigo)
         {
             if (!string.IsNullOrEmpty(codigo))
             {
-                PLANILLA planilla = new PLANILLA{ID_PLANILLA = 1, CODIGO_PLANILLA = codigo, FECHA = DateTime.Now, ACTIVO=true, TOTAL_DESCUENTOS =0, TOTAL_INGRESOS=0,TOTAL_PAGAR=0};
-                db.PLANILLA.Add(planilla);
-                db.SaveChanges();
-                IEnumerable<DESCUENTO_EMPLEADO> descuento = db.DESCUENTO_EMPLEADO.ToList().Where(DESCUENTO_EMPLEADO => DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO == true);
-                int id = db.PLANILLA.ToList().Where(PLANILLA => PLANILLA.CODIGO_PLANILLA.Equals(codigo)).First().ID_PLANILLA;
-                foreach (DESCUENTO_EMPLEADO d in descuento)
+                IEnumerable<PLANILLA> planillas = db.PLANILLA.Where(PLANILLA=> PLANILLA.ACTIVO);
+                if (planillas.Count() <=0)
                 {
-                    DETALLEPLANILLA detalle = new DETALLEPLANILLA { ID_DETALLE_PLANILLA = 1, ID_PLANILLA = id, ID_DESCUENTO_EMPLEADO = d.ID_DESCUENTO_EMPLEADO, ID_INGRESO_EMPLEADO = null, SALARIO = 0 };
-                    db.DETALLEPLANILLA.Add(detalle);
+                    PLANILLA planilla = new PLANILLA { ID_PLANILLA = 1, CODIGO_PLANILLA = codigo, FECHA = DateTime.Now, ACTIVO = true, TOTAL_DESCUENTOS = 0, TOTAL_INGRESOS = 0, TOTAL_PAGAR = 0 };
+                    db.PLANILLA.Add(planilla);
                     db.SaveChanges();
+                    IEnumerable<DESCUENTO_EMPLEADO> descuento = db.DESCUENTO_EMPLEADO.ToList().Where(DESCUENTO_EMPLEADO => DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO == true);
+                    int id = db.PLANILLA.ToList().Where(PLANILLA => PLANILLA.CODIGO_PLANILLA.Equals(codigo)).First().ID_PLANILLA;
+                    foreach (DESCUENTO_EMPLEADO d in descuento)
+                    {
+                        DETALLEPLANILLA detalle = new DETALLEPLANILLA { ID_DETALLE_PLANILLA = 1, ID_PLANILLA = id, ID_DESCUENTO_EMPLEADO = d.ID_DESCUENTO_EMPLEADO, ID_INGRESO_EMPLEADO = null, SALARIO = 0 };
+                        db.DETALLEPLANILLA.Add(detalle);
+                        db.SaveChanges();
+                    }
+                    IEnumerable<INGRESO_EMPLEADO> ingreso = db.INGRESO_EMPLEADO.ToList().Where(INGRESO_EMPLEADO => INGRESO_EMPLEADO.HABILITAR_INGRESO == true);
+                    foreach (INGRESO_EMPLEADO d in ingreso)
+                    {
+                        DETALLEPLANILLA detalle = new DETALLEPLANILLA { ID_DETALLE_PLANILLA = 1, ID_PLANILLA = db.PLANILLA.ToList().Where(PLANILLA => PLANILLA.CODIGO_PLANILLA.Equals(codigo)).First().ID_PLANILLA, ID_DESCUENTO_EMPLEADO = null, ID_INGRESO_EMPLEADO = d.ID_INGRESO_EMPLEADO, SALARIO = 0 };
+                        db.DETALLEPLANILLA.Add(detalle);
+                        db.SaveChanges();
+                    }
+                    return RedirectToAction("Index");
                 }
-                IEnumerable<INGRESO_EMPLEADO> ingreso = db.INGRESO_EMPLEADO.ToList().Where(INGRESO_EMPLEADO => INGRESO_EMPLEADO.HABILITAR_INGRESO == true);
-                foreach (INGRESO_EMPLEADO d in ingreso)
+                else
                 {
-                    DETALLEPLANILLA detalle = new DETALLEPLANILLA { ID_DETALLE_PLANILLA = 1, ID_PLANILLA = db.PLANILLA.ToList().Where(PLANILLA => PLANILLA.CODIGO_PLANILLA.Equals(codigo)).First().ID_PLANILLA, ID_DESCUENTO_EMPLEADO = null, ID_INGRESO_EMPLEADO = d.ID_INGRESO_EMPLEADO, SALARIO = 0 };
-                    db.DETALLEPLANILLA.Add(detalle);
-                    db.SaveChanges();
+                    ViewBag.error = "No puedes crear planillas, por que hay alguna activa, primero tienes que cerrar planillas :v";
+                    return View("Index",db.PLANILLA.ToList());
                 }
-                return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
         }
 
         // GET: PLANILLAs/VerPlanilla/5
-        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult VerPlanilla(int? id)
         {
             if(id==null)
@@ -148,27 +161,93 @@ namespace SAP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            IEnumerable<DETALLEPLANILLA> detalle = db.DETALLEPLANILLA.Where(DETALLEPLANILLA => DETALLEPLANILLA.ID_PLANILLA == planilla.ID_PLANILLA);
-            EMPRESA empresa = db.EMPRESA.Find(1); //Empresa numero 1, esto cambiara cuando kike haga la estructura organizativa
-            IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA==1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
-            IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO);
-            IEnumerable<CATALOGO_INGRESO> descontar = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO && CATALOGO_INGRESO.DELEY_INGRESO);
-            IEnumerable<CATALOGO_DESCUENTO> catalogo_descuento = db.CATALOGO_DESCUENTO.Where(CATALOGO_DESCUENTO => CATALOGO_DESCUENTO.ACTIVO);
+            if (planilla.ACTIVO)
+            {
+                IEnumerable<DETALLEPLANILLA> detalle = db.DETALLEPLANILLA.Where(DETALLEPLANILLA => DETALLEPLANILLA.ID_PLANILLA == planilla.ID_PLANILLA);
+                EMPRESA empresa = db.EMPRESA.Find(1); //Empresa numero 1, esto cambiara cuando kike haga la estructura organizativa
+                IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA == 1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
+                IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO);
+                IEnumerable<CATALOGO_INGRESO> descontar = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO && CATALOGO_INGRESO.DELEY_INGRESO);
+                IEnumerable<CATALOGO_DESCUENTO> catalogo_descuento = db.CATALOGO_DESCUENTO.Where(CATALOGO_DESCUENTO => CATALOGO_DESCUENTO.ACTIVO);
+                ViewBag.detalle_planilla = detalle;
+                ViewBag.catalogo_ingreso = catalogo_ingreso;
+                ViewBag.catalogo_descuento = catalogo_descuento;
+                ViewBag.empleados = empleados;
+                int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
+                int candidad_descuento = catalogo_descuento.Count();
+                ViewBag.cantidad_ingreso = cantidad_ingreso;
+                ViewBag.candidad_descuento = candidad_descuento;
+                ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 3;
+                ViewBag.empresa = empresa;
+                ViewBag.fecha_actual = DateTime.Now;
+            }
+            else
+            {
+                ViewBag.error = "La planilla ya no esta activa";
+                ViewBag.planilla = planilla;
+                return View("Planilla_desactivada");
+            }
             ViewBag.planilla = planilla;
-            ViewBag.detalle_planilla = detalle;
-            ViewBag.catalogo_ingreso = catalogo_ingreso;
-            ViewBag.catalogo_descuento = catalogo_descuento;
-            ViewBag.empleados = empleados;
-            int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
-            int candidad_descuento = catalogo_descuento.Count();
-            ViewBag.cantidad_ingreso = cantidad_ingreso;
-            ViewBag.candidad_descuento = candidad_descuento;
-            ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 3;
-            ViewBag.empresa = empresa;
-            ViewBag.fecha_actual = DateTime.Now;
             return View();
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Pagar(String id_planilla)
+        {
+            if (!string.IsNullOrEmpty(id_planilla)) {
+                int id = int.Parse(id_planilla);
+                PLANILLA planilla = db.PLANILLA.Find(id);
+                if (planilla == null)
+                {
+                    ViewBag.error = "Error, no tiene Planilla especificada";
+                }
+                else
+                {
+                    if (planilla.ACTIVO)
+                    {
+                        planilla.ACTIVO = false;
+                        db.Entry(planilla).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                        int id_empresa = 1;
+                        int id_pla = planilla.ID_PLANILLA;
+                        db.Database.ExecuteSqlCommand("exec guardar_planilla " + id_empresa + "," + id_pla);
+                        ViewBag.exito = "Planilla cerrada con exito";
+                        IEnumerable<DETALLEPLANILLA> detalle = db.DETALLEPLANILLA.Where(DETALLEPLANILLA => DETALLEPLANILLA.ID_PLANILLA == planilla.ID_PLANILLA);
+                        EMPRESA empresa = db.EMPRESA.Find(1); //Empresa numero 1, esto cambiara cuando kike haga la estructura organizativa
+                        IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA == 1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
+                        IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO);
+                        IEnumerable<CATALOGO_INGRESO> descontar = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO && CATALOGO_INGRESO.DELEY_INGRESO);
+                        IEnumerable<CATALOGO_DESCUENTO> catalogo_descuento = db.CATALOGO_DESCUENTO.Where(CATALOGO_DESCUENTO => CATALOGO_DESCUENTO.ACTIVO);
+                        ViewBag.detalle_planilla = detalle;
+                        ViewBag.catalogo_ingreso = catalogo_ingreso;
+                        ViewBag.catalogo_descuento = catalogo_descuento;
+                        ViewBag.empleados = empleados;
+                        int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
+                        int candidad_descuento = catalogo_descuento.Count();
+                        ViewBag.cantidad_ingreso = cantidad_ingreso;
+                        ViewBag.candidad_descuento = candidad_descuento;
+                        ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 3;
+                        ViewBag.empresa = empresa;
+                        ViewBag.fecha_actual = DateTime.Now;
+                    }
+                    else
+                    {
+                        ViewBag.error = "La planilla ya no esta activa";
+                        ViewBag.planilla = planilla;
+                        return View("Planilla_desactivada");
+                    }
+                }
+                ViewBag.planilla = planilla;
+                return View("VerPlanilla");
+            }
+            else
+            {
+                return RedirectToAction("/" );
+            }
+        }
+
 
 
         // GET: PLANILLAs/Details/5

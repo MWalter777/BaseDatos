@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     8/6/2019 19:27:37                            */
+/* Created on:     9/6/2019 22:07:33                            */
 /*==============================================================*/
 
 
@@ -82,6 +82,22 @@ if exists (select 1
            where  id = object_id('DEPARTAMENTO')
             and   type = 'U')
    drop table DEPARTAMENTO
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('DESCUENTO')
+            and   name  = 'TIENE_MUCHOS_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index DESCUENTO.TIENE_MUCHOS_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('DESCUENTO')
+            and   type = 'U')
+   drop table DESCUENTO
 go
 
 if exists (select 1
@@ -246,6 +262,38 @@ if exists (select 1
            where  id = object_id('GENERO')
             and   type = 'U')
    drop table GENERO
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('HISTORIAL')
+            and   name  = 'TIENE_HISTORIAL_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index HISTORIAL.TIENE_HISTORIAL_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('HISTORIAL')
+            and   type = 'U')
+   drop table HISTORIAL
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('INGRESO')
+            and   name  = 'TIENE_MUCHOS_INGR_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index INGRESO.TIENE_MUCHOS_INGR_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('INGRESO')
+            and   type = 'U')
+   drop table INGRESO
 go
 
 if exists (select 1
@@ -474,7 +522,7 @@ go
 /*==============================================================*/
 create table CATALOGO_DESCUENTO (
    ID_DESCUENTO         int                  not null identity(1,1),
-   NOMBRE_DESCUENTO     varchar(75)          unique not null,
+   NOMBRE_DESCUENTO     varchar(75)          not null,
    DELEY_DESCUENTO      bit                  not null,
    PORCENTAJE           numeric(2,2)         null,
    DESCUENTO            numeric(8,2)         null,
@@ -545,6 +593,26 @@ go
 /*==============================================================*/
 create index CONSTITUIDA_FK on DEPARTAMENTO (
 ID_EMPRESA ASC
+)
+go
+
+/*==============================================================*/
+/* Table: DESCUENTO                                             */
+/*==============================================================*/
+create table DESCUENTO (
+   ID_DESC_HISOTIRAL    int                  not null identity(1,1),
+   ID_HISTORIAL         int                  null,
+   NOMBRE_DESCUENTO_HISTORIAL varchar(100)         not null,
+   DESCUENTO_HISTORIAL  numeric(8,2)         not null,
+   constraint PK_DESCUENTO primary key nonclustered (ID_DESC_HISOTIRAL)
+)
+go
+
+/*==============================================================*/
+/* Index: TIENE_MUCHOS_FK                                       */
+/*==============================================================*/
+create index TIENE_MUCHOS_FK on DESCUENTO (
+ID_HISTORIAL ASC
 )
 go
 
@@ -677,7 +745,7 @@ create table EMPLEADO (
    SALARIO_BASE         decimal(8,2)         not null,
    CORREO_PERSONAL      varchar(60)          not null,
    CORREO_INSTITUCIONAL varchar(60)          not null,
-   COMISION             bit                  null,
+   COMISION             bit         null,
    constraint PK_EMPLEADO primary key nonclustered (ID_EMPLEADO)
 )
 go
@@ -765,6 +833,47 @@ create table GENERO (
    ID_GENERO            int                  not null identity(1,1),
    NOMBRE_GENERO        varchar(50)          not null,
    constraint PK_GENERO primary key nonclustered (ID_GENERO)
+)
+go
+
+/*==============================================================*/
+/* Table: HISTORIAL                                             */
+/*==============================================================*/
+create table HISTORIAL (
+   ID_HISTORIAL         int                  not null identity(1,1),
+   ID_PLANILLA          int                  null,
+   NOMBRE_EMPLEADO_HISTORIAL varchar(100)         not null,
+   TOTAL                numeric(8,2)         null,
+   CODIGO_EMPLEADO      varchar(25)          null,
+   constraint PK_HISTORIAL primary key nonclustered (ID_HISTORIAL)
+)
+go
+
+/*==============================================================*/
+/* Index: TIENE_HISTORIAL_FK                                    */
+/*==============================================================*/
+create index TIENE_HISTORIAL_FK on HISTORIAL (
+ID_PLANILLA ASC
+)
+go
+
+/*==============================================================*/
+/* Table: INGRESO                                               */
+/*==============================================================*/
+create table INGRESO (
+   ID_ING_HISTORIAL     int                  not null identity(1,1),
+   ID_HISTORIAL         int                  null,
+   NOMBRE_INGRESO_HISTORIAL varchar(100)         null,
+   INGRESO_HISTORIAL    numeric(8,2)         null,
+   constraint PK_INGRESO primary key nonclustered (ID_ING_HISTORIAL)
+)
+go
+
+/*==============================================================*/
+/* Index: TIENE_MUCHOS_INGR_FK                                  */
+/*==============================================================*/
+create index TIENE_MUCHOS_INGR_FK on INGRESO (
+ID_HISTORIAL ASC
 )
 go
 
@@ -905,7 +1014,7 @@ go
 /* Table: PUESTO                                                */
 /*==============================================================*/
 create table PUESTO (
-   ID_PUESTO            int                  not null identity(1,1), 
+   ID_PUESTO            int                  not null identity(1,1),
    ID_DEPARTAMENTO      int                  not null,
    CODIGO_PUESTO        varchar(10)          not null,
    NOMBRE_PUESTO        varchar(60)          not null,
@@ -1000,7 +1109,7 @@ go
 /* Table: USUARIO                                               */
 /*==============================================================*/
 create table USUARIO (
-   ID_USUARIO           int                  not null identity(1,1), 
+   ID_USUARIO           int                  not null identity(1,1),
    ID_EMPLEADO          int                  null,
    ID_ROL               int                  null,
    EMAIL                varchar(60)          not null,

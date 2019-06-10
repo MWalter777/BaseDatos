@@ -21,7 +21,6 @@
         <a href="#" class="btn btn-info" onclick="imprimir('planilla')">
             Imprimir
         </a>
-        <a href="#" onclick="pagar()" class="btn btn-danger">Pagar planilla</a>
     </p>
     <div id="planilla">
         @if (ViewBag.planilla != null && ViewBag.detalle_planilla != null)
@@ -73,7 +72,7 @@
 
                     @foreach (var detalle in ViewBag.empleados)
                     {
-                        double total = (double) detalle.SALARIO_BASE;
+                        double total = (double)detalle.SALARIO_BASE;
                         <tr>
                             <td class="text-center">@detalle.CODIGO_EMPLEADO</td>
                             <td class="text-center">@detalle.PRIMER_NOMBRE</td>
@@ -89,7 +88,7 @@
                                     if (valor.ingreso.DELEY_INGRESO)
                                     {
                                         decimal com = valor.ingreso.INGRESO * valor.ingreso.COMISION;
-                                        total = total + (double) com;
+                                        total = total + (double)com;
                                         <td class="text-center">@com</td>
                                     }
                                     else
@@ -139,47 +138,16 @@
                             @{total_planilla = total_planilla + total;}
                             <td>@total</td>
                         </tr>
-                    }
+                                }
                     <tr>
                         <td colspan="@ViewBag.total_espacio" class="text-right"> Total </td>
                         <td>@total_planilla</td>
                     </tr>
                 </tbody>
             </table>
-        }
+                                }
     </div>
 </div>
-
-<div class="modal fade" id="pagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">La factura sera guardada y lista para papgar, pasara a estado desactivada</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @using (Html.BeginForm("Pagar", "Planillas", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                <form>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="Estado">Listo para pagar?</label>
-                            <label for="Estado" id="estado2"></label>
-                            <input type="text" class="form-control" id="id_planilla" name="id_planilla" value="@ViewBag.planilla.ID_PLANILLA" hidden="true">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" value="Save">Eliminar</button>
-                    </div>
-                </form>
-            }
-        </div>
-    </div>
-</div>
-
 
 <script type="text/javascript">
     function descargar(nombre) {
@@ -223,9 +191,6 @@
         document.body.innerHTML = originalContents;
     }
 
-    function pagar() {
-        $("#pagar").modal();
-    }
 
 </script>
 
