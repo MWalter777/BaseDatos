@@ -126,9 +126,19 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rOL).State = EntityState.Modified;  
+                db.Entry(rOL).State = EntityState.Modified;
                 db.SaveChanges();
 
+                //Busco registro para eliminar permisos anteriores
+                var registro = db.PERMITE.Where(p => p.ID_ROL == rOL.ID_ROL);
+                db.PERMITE.RemoveRange(registro);
+
+                foreach (var id in id_permiso)
+                {
+                    db.PERMITE.Add(new PERMITE { ID_ROL = rOL.ID_ROL, ID_PERMISO = id });
+                }
+
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(rOL);

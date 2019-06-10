@@ -1,0 +1,98 @@
+﻿@model IEnumerable<SAP.Models.CATALOGO_DESCUENTO>
+
+@{
+    ViewBag.Title = "Catálogo de descuentos";
+}
+
+<h2>Catálogo de descuentos</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo descuento", "Create")
+</p>
+<table class="table table-hover text-center">
+	<thead class="thead-dark">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.NOMBRE_DESCUENTO)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DELEY_DESCUENTO)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PORCENTAJE)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DESCUENTO)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.FECHA_INICIO)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.FECHA_FIN)
+			</th>
+			<th>
+				ESTADO
+			</th>
+			<th>Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.NOMBRE_DESCUENTO)
+			</td>
+
+			@if (item.DELEY_DESCUENTO)
+			{
+
+				<td>
+					De Ley
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.PORCENTAJE)
+				</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+			}
+			else
+			{
+				<td>De otro tipo</td>
+				<td>-</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DESCUENTO)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.FECHA_INICIO)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.FECHA_FIN)
+				</td>
+			}
+			@if (item.ACTIVO)
+			{
+				<td>
+					ACTIVO
+				</td>
+			}
+			else
+			{
+				<td>
+					INACTIVO
+				</td>
+			}
+
+			<td>
+				@Html.ActionLink("Editar", "Edit", new { id = item.ID_DESCUENTO }) |
+				@Html.ActionLink("Detalles", "Details", new { id = item.ID_DESCUENTO }) |
+				@Html.ActionLink("Eliminar", "Delete", new { id = item.ID_DESCUENTO })
+			</td>
+		</tr>
+		}
+	</tbody>
+
+
+
+</table>

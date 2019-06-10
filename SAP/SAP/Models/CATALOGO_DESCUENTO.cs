@@ -13,20 +13,27 @@ namespace SAP.Models
 
         [Required]
         [StringLength(75)]
+        [Display(Name = "Nombre")]
         public string NOMBRE_DESCUENTO { get; set; }
 
+        [Display(Name = "¿Descuento de Ley?")]
         public bool DELEY_DESCUENTO { get; set; }
 
         [Column(TypeName = "numeric")]
+        [Display(Name = "Porcentaje")]
         public decimal? PORCENTAJE { get; set; }
 
         [Column(TypeName = "numeric")]
+        [Display(Name = "Cantidad")]
         public decimal? DESCUENTO { get; set; }
 
+        [Display(Name = "Fecha de inicio")]
         public DateTime? FECHA_INICIO { get; set; }
 
+        [Display(Name = "Fecha de finalización")]
         public DateTime? FECHA_FIN { get; set; }
 
+        [Display(Name ="Activo")]
         public bool ACTIVO { get; set; }
     }
 }

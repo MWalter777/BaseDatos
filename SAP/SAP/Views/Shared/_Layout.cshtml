@@ -1,80 +1,80 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <title>@ViewBag.Title</title>
-    <!-- Main CSS-->
-    @Styles.Render("~/Content/css/main.css")
-    @Styles.Render("~/Content/css/font-awesome.min.css")
+
+	<title>@ViewBag.Title</title>
+	<!-- Main CSS-->
+	@Styles.Render("~/Content/css/main.css")
+	@Styles.Render("~/Content/font-awesome-4.7.0/css/font-awesome.min.css")
+	@Scripts.Render("~/Content/bootstrap-4/css/bootstrap.min.css")
 </head>
 <body class="app sidebar-mini rtl">
-    <!-- Navbar-->
-    <header class="app-header">
-        <a class="app-header__logo" href="/">Inicio</a>
+	<!-- Navbar-->
+	<header class="app-header">
+		<a class="app-header__logo" href="/">Inicio</a>
 
-        <ul class="app-nav">
-            @if (@Session["username"] != null)
-            {
-                <li><a class="app-nav__item" href="/Usuario/perfil">@Session["email"] <i class="fa fa-user fa-lg"> </i> @Session["username"]</a></li>
-                <li><a class="app-nav__item" href="/Usuario/logout"><i class="fa fa-user fa-lg"></i>Salir</a></li>
-            }
+		<ul class="app-nav">
+			@if (@Session["username"] != null)
+			{
+				<li><a class="app-nav__item" href="/Usuario/perfil">@Session["email"] <i class="fa fa-user fa-lg"> </i> @Session["username"]</a></li>
+				<li><a class="app-nav__item" href="/Usuario/logout"><i class="fa fa-user fa-lg"></i>Salir</a></li>
+			}
 
-            @if (@Session["username"] == null)
-            {
-                <li class="dropdown">
-                    <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i>Iniciar sesion</a>
-                    <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                        <li><a class="dropdown-item" href="/Usuario/login"><i class="fa fa-user fa-lg"></i> iniciar sesion</a></li>
-                        <li><a class="dropdown-item" href="/Usuario/create"><i class="fa fa-user fa-lg"></i>Registrarse</a></li>
-                    </ul>
-                </li>
-            }
-    </header>
-    <!-- Sidebar menu-->
-    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-    <aside class="app-sidebar">
-        <div class="app-sidebar__user">
-            <img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
-            <div>
-                @if (Session["username"] != null)
-                {
-                    <p class="app-sidebar__user-name">@Session["username"]</p>
-                    <p class="app-sidebar__user-designation">@Session["email"]</p>
-                }
-                else
-                {
-                    <p class="app-sidebar__user-name">Nombre</p>
-                    <p class="app-sidebar__user-designation">correo</p>
-                }
-            </div>
-        </div>
-        <ul class="app-menu" id="menu_mostrar_dinamico">
-        </ul>
-    </aside>
-    <main class="app-content">
-        <div class="container body-content">
-            @RenderBody()
-        </div>
-    </main>
-    <!-- Essential javascripts for application to work-->
-    @Scripts.Render("~/Scripts/js/jquery.js")
+			@if (@Session["username"] == null)
+			{
+				<li class="dropdown">
+					<a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i>Iniciar sesion</a>
+					<ul class="dropdown-menu settings-menu dropdown-menu-right">
+						<li><a class="dropdown-item" href="/Usuario/login"><i class="fa fa-user fa-lg"></i> iniciar sesion</a></li>
+						<li><a class="dropdown-item" href="/Usuario/create"><i class="fa fa-user fa-lg"></i>Registrarse</a></li>
+					</ul>
+				</li>
+			}
+	</header>
+	<!-- Sidebar menu-->
+	<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+	<aside class="app-sidebar">
+		<div class="app-sidebar__user">
+			@*<img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">*@
+			<div>
+				@if (Session["username"] != null)
+				{
+					<p class="app-sidebar__user-name">@Session["username"]</p>
+					<p class="app-sidebar__user-designation">@Session["email"]</p>
+				}
+				else
+				{
+					<p class="app-sidebar__user-name">Nombre</p>
+					<p class="app-sidebar__user-designation">correo</p>
+				}
+			</div>
+		</div>
+		<ul class="app-menu" id="menu_mostrar_dinamico"></ul>
+	</aside>
+	<main class="app-content">
+		<div class="container body-content">
+			@RenderBody()
+		</div>
+	</main>
+	<!-- Essential javascripts for application to work-->
+	@Scripts.Render("~/Scripts/js/jquery.js")
 
-    @Scripts.Render("~/Scripts/js/popper.min.js")
-    @Scripts.Render("~/Scripts/js/bootstrap.min.js")
-    @Scripts.Render("~/Scripts/js/main.js")
-    @Scripts.Render("~/Scripts/js/plugins/pace.min.js")
+	@Scripts.Render("~/Scripts/js/popper.min.js")
+	@Scripts.Render("~/Scripts/bootstrap-4/js/bootstrap.min.js")
+	@Scripts.Render("~/Scripts/js/main.js")
+	@Scripts.Render("~/Scripts/js/plugins/pace.min.js")
 
-    @Scripts.Render("~/Scripts/js/plugins/jquery.dataTables.min.js")
-    @Scripts.Render("~/Scripts/js/plugins/dataTables.bootstrap.min.js")
-    @Scripts.Render("~/Scripts/js/jspdf.min.js")
-    <script type="text/javascript">$('#sampleTable').DataTable(); $('#sampleTable2').DataTable();</script>
+	@Scripts.Render("~/Scripts/js/plugins/jquery.dataTables.min.js")
+	@Scripts.Render("~/Scripts/js/plugins/dataTables.bootstrap.min.js")
+	@Scripts.Render("~/Scripts/js/jspdf.min.js")
+	<script type="text/javascript">$('#sampleTable').DataTable(); $('#sampleTable2').DataTable();</script>
 
-    <!-- The javascript plugin to display page loading on top-->
-    <script type="text/javascript">
-        $('#menu_mostrar_dinamico').load("http://localhost:52228/Home/Servicio");
-    </script>
-    
-    @RenderSection("scripts", required: false)
+	<!-- The javascript plugin to display page loading on top-->
+	<script type="text/javascript">
+		$('#menu_mostrar_dinamico').load("http://localhost:52228/Home/Servicio");
+	</script>
+
+	@RenderSection("scripts", required: false)
 </body>
 </html>
 

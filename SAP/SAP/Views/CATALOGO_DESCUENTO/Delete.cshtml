@@ -1,0 +1,127 @@
+﻿@model SAP.Models.CATALOGO_DESCUENTO
+
+@{
+    ViewBag.Title = "Eliminar descuento";
+}
+
+<h2>Eliminar descuento</h2>
+
+<h3>¿Está seguro de eliminar este descuento?</h3>
+<div>
+    <hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.NOMBRE_DESCUENTO)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.NOMBRE_DESCUENTO)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.DELEY_DESCUENTO)
+		</dt>
+
+		@if (ViewBag.DeLey)
+		{
+			<dd>
+				De Ley
+			</dd>
+			<dt>
+				@Html.DisplayNameFor(model => model.PORCENTAJE)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.PORCENTAJE)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.DESCUENTO)
+			</dt>
+
+			<dd>
+				-
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.FECHA_INICIO)
+			</dt>
+
+			<dd>
+				-
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.FECHA_FIN)
+			</dt>
+
+			<dd>
+				-
+			</dd>
+		}
+		else
+		{
+			<dd>
+				De otro tipo
+			</dd>
+			<dt>
+				@Html.DisplayNameFor(model => model.PORCENTAJE)
+			</dt>
+
+			<dd>
+				-
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.DESCUENTO)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.DESCUENTO)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.FECHA_INICIO)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.FECHA_INICIO)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.FECHA_FIN)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.FECHA_FIN)
+			</dd>
+		}
+
+		<dt>
+			Estado
+		</dt>
+
+		@if (ViewBag.activo)
+		{
+			<dd>
+				ACTIVO
+			</dd>
+		}
+		else
+		{
+			<dd>
+				INACTIVO
+			</dd>
+		}
+
+	</dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar al catálogo de descuentos", "Index")
+        </div>
+    }
+</div>
