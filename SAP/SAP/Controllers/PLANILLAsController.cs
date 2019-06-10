@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SAP.Models;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
@@ -15,17 +16,22 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: PLANILLAs
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult Index()
         {
             return View(db.PLANILLA.ToList());
         }
 
+
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult PlanillaPorEmpleado()
         {
             ViewBag.empleados = db.EMPLEADO.ToList();
             return View();
         }
 
+
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult Verboleta(int? id)
         {
             if (id == null)
@@ -101,6 +107,7 @@ namespace SAP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "crear_planilla")]
         public ActionResult Save(string codigo)
         {
             if (!string.IsNullOrEmpty(codigo))
@@ -129,6 +136,7 @@ namespace SAP.Controllers
         }
 
         // GET: PLANILLAs/VerPlanilla/5
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult VerPlanilla(int? id)
         {
             if(id==null)
@@ -164,6 +172,7 @@ namespace SAP.Controllers
 
 
         // GET: PLANILLAs/Details/5
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult Details(int? id)
         {
             if (id == null)
