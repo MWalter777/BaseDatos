@@ -4,7 +4,7 @@ create procedure guardar_planilla
 as 
 begin try
 begin transaction 
-declare @ID_EMPLEADO int, @NOMBRE NCHAR(100), @SALARIO_BASE NUMERIC(8,2),@COMISION bit, @id_historia int
+declare @ID_EMPLEADO int, @NOMBRE NCHAR(100), @SALARIO_BASE NUMERIC(8,2),@COMISION bit, @id_historia int, @rent numeric(2,2)
 declare empleados cursor for SELECT e.ID_EMPLEADO, CONCAT(e.PRIMER_NOMBRE,' ', e.APELLIDO_PATERNO) as nombre, SALARIO_BASE, COMISION   FROM EMPLEADO e JOIN PUESTO p  on p.ID_PUESTO = e.ID_PUESTO JOIN DEPARTAMENTO d on d.ID_DEPARTAMENTO = p.ID_DEPARTAMENTO and ID_EMPRESA = @id_empresa
 
 open empleados
@@ -14,6 +14,9 @@ while (@@FETCH_STATUS = 0)
 begin
 	insert into historial(ID_PLANILLA, NOMBRE_EMPLEADO_HISTORIAL,TOTAL, CODIGO_EMPLEADO) VALUES (@id_planilla,@NOMBRE, @SALARIO_BASE, convert(varchar,@ID_EMPLEADO))
 	select @id_historia = ID_HISTORIAL from HISTORIAL where CODIGO_EMPLEADO = CONVERT(varchar,@ID_EMPLEADO) and ID_PLANILLA = @id_planilla
+
+	select @rent = ISNULL(SUM(PORCENTAJE_RENTA),0) from DESCUENTO_RENTA where @SALARIO_BASE BETWEEN MIN_RENTA AND MAX_RENTA
+	insert into DESCUENTO (ID_HISTORIAL,NOMBRE_DESCUENTO_HISTORIAL,DESCUENTO_HISTORIAL) values (@id_historia,'Renta',@rent*@SALARIO_BASE);
 
 	if(@COMISION=1)
 	begin

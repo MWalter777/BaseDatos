@@ -44,6 +44,13 @@ namespace SAP.Models
         public virtual DbSet<RANGO_COMISION> RANGO_COMISION { get; set; }
         public virtual DbSet<SALARIO_MINIMO> SALARIO_MINIMO { get; set; }
 
+
+        public virtual DbSet<DESCUENTO> DESCUENTO { get; set; }
+        public virtual DbSet<HISTORIAL> HISTORIAL { get; set; }
+        public virtual DbSet<INGRESO> INGRESO { get; set; }
+
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DEPARTAMENTO>()
@@ -380,6 +387,33 @@ namespace SAP.Models
 
             modelBuilder.Entity<SALARIO_MINIMO>()
                 .Property(e => e.MONTO_SALARIO_MINIMO)
+                .HasPrecision(8, 2);
+            modelBuilder.Entity<DESCUENTO>()
+    .Property(e => e.NOMBRE_DESCUENTO_HISTORIAL)
+    .IsUnicode(false);
+
+            modelBuilder.Entity<DESCUENTO>()
+                .Property(e => e.DESCUENTO_HISTORIAL)
+                .HasPrecision(8, 2);
+
+            modelBuilder.Entity<HISTORIAL>()
+                .Property(e => e.NOMBRE_EMPLEADO_HISTORIAL)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<HISTORIAL>()
+                .Property(e => e.TOTAL)
+                .HasPrecision(8, 2);
+
+            modelBuilder.Entity<HISTORIAL>()
+                .Property(e => e.CODIGO_EMPLEADO)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<INGRESO>()
+                .Property(e => e.NOMBRE_INGRESO_HISTORIAL)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<INGRESO>()
+                .Property(e => e.INGRESO_HISTORIAL)
                 .HasPrecision(8, 2);
         }
     }

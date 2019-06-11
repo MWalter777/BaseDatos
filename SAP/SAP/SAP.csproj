@@ -214,6 +214,7 @@
     <Compile Include="Models\CATALOGO_INGRESO.cs" />
     <Compile Include="Models\CENTRO_COSTO.cs" />
     <Compile Include="Models\DEPARTAMENTO.cs" />
+    <Compile Include="Models\DESCUENTO.cs" />
     <Compile Include="Models\DESCUENTO_EMPLEADO.cs" />
     <Compile Include="Models\DESCUENTO_RENTA.cs" />
     <Compile Include="Models\DETALLEPLANILLA.cs" />
@@ -222,6 +223,8 @@
     <Compile Include="Models\EMPRESA.cs" />
     <Compile Include="Models\ESTADO_CIVIL.cs" />
     <Compile Include="Models\GENERO.cs" />
+    <Compile Include="Models\HISTORIAL.cs" />
+    <Compile Include="Models\INGRESO.cs" />
     <Compile Include="Models\INGRESO_EMPLEADO.cs" />
     <Compile Include="Models\MENU.cs" />
     <Compile Include="Models\Model1.cs" />

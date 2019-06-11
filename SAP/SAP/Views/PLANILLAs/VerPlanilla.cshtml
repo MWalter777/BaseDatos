@@ -37,8 +37,8 @@
                         <th class="text-center">Codigo</th>
                         <th class="text-center">Empleado</th>
                         <th class="text-center">Salario base</th>
+                        <th class="text-center">Renta</th>
                         <th class="text-center">COMISION</th>
-
                         @foreach (var item_ingreso in ViewBag.catalogo_ingreso)
                         {
                             if (item_ingreso.ACTIVO)
@@ -78,7 +78,7 @@
                             <td class="text-center">@detalle.CODIGO_EMPLEADO</td>
                             <td class="text-center">@detalle.PRIMER_NOMBRE</td>
                             <td class="text-center">@detalle.SALARIO_BASE</td>
-
+                            <td class="text-center">La ranta ira aqui</td>
                             @{int conteo = 0;}
 
                             @foreach (var valor in detalle.ingreso_empleados)

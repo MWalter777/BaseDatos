@@ -19,7 +19,7 @@ namespace SAP.Controllers
 
         public ActionResult Index()
         {
-            return View(db.PLANILLA.ToList());
+            return View(db.PLANILLA.ToList().OrderByDescending(PLANILLA=>PLANILLA.ID_PLANILLA));
         }
 
 
@@ -122,7 +122,14 @@ namespace SAP.Controllers
                 {
                     PLANILLA planilla = new PLANILLA { ID_PLANILLA = 1, CODIGO_PLANILLA = codigo, FECHA = DateTime.Now, ACTIVO = true, TOTAL_DESCUENTOS = 0, TOTAL_INGRESOS = 0, TOTAL_PAGAR = 0 };
                     db.PLANILLA.Add(planilla);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.SaveChanges();
+                    }catch(Exception e)
+                    {
+                        ViewBag.error = "No puedes crear planillas con el mismo codigo de planilla";
+                        return View("Index", db.PLANILLA.ToList());
+                    }
                     IEnumerable<DESCUENTO_EMPLEADO> descuento = db.DESCUENTO_EMPLEADO.ToList().Where(DESCUENTO_EMPLEADO => DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO == true);
                     int id = db.PLANILLA.ToList().Where(PLANILLA => PLANILLA.CODIGO_PLANILLA.Equals(codigo)).First().ID_PLANILLA;
                     foreach (DESCUENTO_EMPLEADO d in descuento)
@@ -143,7 +150,7 @@ namespace SAP.Controllers
                 else
                 {
                     ViewBag.error = "No puedes crear planillas, por que hay alguna activa, primero tienes que cerrar planillas :v";
-                    return View("Index",db.PLANILLA.ToList());
+                    return View("Index",db.PLANILLA.ToList().OrderByDescending(PLANILLA => PLANILLA.ID_PLANILLA));
                 }
             }
             return RedirectToAction("Index");
@@ -177,7 +184,7 @@ namespace SAP.Controllers
                 int candidad_descuento = catalogo_descuento.Count();
                 ViewBag.cantidad_ingreso = cantidad_ingreso;
                 ViewBag.candidad_descuento = candidad_descuento;
-                ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 3;
+                ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 4;
                 ViewBag.empresa = empresa;
                 ViewBag.fecha_actual = DateTime.Now;
             }
@@ -207,30 +214,65 @@ namespace SAP.Controllers
                 {
                     if (planilla.ACTIVO)
                     {
-                        planilla.ACTIVO = false;
-                        db.Entry(planilla).State = System.Data.Entity.EntityState.Modified;
-                        db.SaveChanges();
-                        int id_empresa = 1;
-                        int id_pla = planilla.ID_PLANILLA;
-                        db.Database.ExecuteSqlCommand("exec guardar_planilla " + id_empresa + "," + id_pla);
-                        ViewBag.exito = "Planilla cerrada con exito";
-                        IEnumerable<DETALLEPLANILLA> detalle = db.DETALLEPLANILLA.Where(DETALLEPLANILLA => DETALLEPLANILLA.ID_PLANILLA == planilla.ID_PLANILLA);
-                        EMPRESA empresa = db.EMPRESA.Find(1); //Empresa numero 1, esto cambiara cuando kike haga la estructura organizativa
-                        IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA == 1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
-                        IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO);
-                        IEnumerable<CATALOGO_INGRESO> descontar = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO && CATALOGO_INGRESO.DELEY_INGRESO);
-                        IEnumerable<CATALOGO_DESCUENTO> catalogo_descuento = db.CATALOGO_DESCUENTO.Where(CATALOGO_DESCUENTO => CATALOGO_DESCUENTO.ACTIVO);
-                        ViewBag.detalle_planilla = detalle;
-                        ViewBag.catalogo_ingreso = catalogo_ingreso;
-                        ViewBag.catalogo_descuento = catalogo_descuento;
-                        ViewBag.empleados = empleados;
-                        int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
-                        int candidad_descuento = catalogo_descuento.Count();
-                        ViewBag.cantidad_ingreso = cantidad_ingreso;
-                        ViewBag.candidad_descuento = candidad_descuento;
-                        ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 3;
-                        ViewBag.empresa = empresa;
-                        ViewBag.fecha_actual = DateTime.Now;
+                        try {
+                            planilla.ACTIVO = false;
+                            int id_empresa = 1;
+                            int id_pla = planilla.ID_PLANILLA;
+                            db.Database.ExecuteSqlCommand("exec guardar_planilla " + id_empresa + "," + id_pla);
+                            IEnumerable<HISTORIAL> historia = db.HISTORIAL.Where(HISTORIAL => HISTORIAL.ID_PLANILLA == planilla.ID_PLANILLA);
+                            decimal totalingreso = 0;
+                            decimal totaldescuento = 0;
+                            foreach (HISTORIAL h in historia)
+                            {
+                                totalingreso += (decimal)h.TOTAL;
+                                foreach (INGRESO i in h.ingreso)
+                                {
+                                    if (i.INGRESO_HISTORIAL != null)
+                                    {
+                                        totalingreso += (decimal)i.INGRESO_HISTORIAL;
+                                    }
+                                }
+                                foreach (DESCUENTO d in h.descuento)
+                                {
+                                    if (d.DESCUENTO_HISTORIAL != null)
+                                    {
+                                        totaldescuento += (decimal)d.DESCUENTO_HISTORIAL;
+                                    }
+                                }
+
+                            }
+                            planilla.TOTAL_DESCUENTOS = totaldescuento;
+                            planilla.TOTAL_INGRESOS = totalingreso;
+                            planilla.TOTAL_PAGAR = totalingreso - totaldescuento;
+                            db.Entry(planilla).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+
+                            ViewBag.exito = "Planilla cerrada con exito";
+                            IEnumerable<DETALLEPLANILLA> detalle = db.DETALLEPLANILLA.Where(DETALLEPLANILLA => DETALLEPLANILLA.ID_PLANILLA == planilla.ID_PLANILLA);
+                            EMPRESA empresa = db.EMPRESA.Find(1); //Empresa numero 1, esto cambiara cuando kike haga la estructura organizativa
+                            IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA == 1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
+                            IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO);
+                            IEnumerable<CATALOGO_INGRESO> descontar = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO && CATALOGO_INGRESO.DELEY_INGRESO);
+                            IEnumerable<CATALOGO_DESCUENTO> catalogo_descuento = db.CATALOGO_DESCUENTO.Where(CATALOGO_DESCUENTO => CATALOGO_DESCUENTO.ACTIVO);
+                            ViewBag.detalle_planilla = detalle;
+                            ViewBag.catalogo_ingreso = catalogo_ingreso;
+                            ViewBag.catalogo_descuento = catalogo_descuento;
+                            ViewBag.empleados = empleados;
+                            int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
+                            int candidad_descuento = catalogo_descuento.Count();
+                            ViewBag.cantidad_ingreso = cantidad_ingreso;
+                            ViewBag.candidad_descuento = candidad_descuento;
+                            ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 3;
+                            ViewBag.empresa = empresa;
+                            ViewBag.fecha_actual = DateTime.Now;
+                            return RedirectToAction("/");
+                        }
+                        catch(Exception e)
+                        {
+                            ViewBag.error = "Error, seguramente no has ejecutado el procedimiento almacenado, como no te va a dar error alv :v";
+                            ViewBag.planilla = planilla;
+                            return View("Planilla_desactivada");
+                        }
                     }
                     else
                     {
