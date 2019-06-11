@@ -23,7 +23,7 @@
         </a>
     </p>
     <div id="planilla">
-        @if (ViewBag.planilla != null && ViewBag.detalle_planilla != null)
+        @if (ViewBag.planilla != null)
         {
             <h2 class="text-center" id="ocultar">@ViewBag.empresa.NOMBRE_EMPRESA</h2>
             <h3 class="text-center" id="ocultar">@ViewBag.empresa.CORREO_EMPRESA</h3>
@@ -33,36 +33,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="text-center">Codigo</th>
                         <th class="text-center">Empleado</th>
                         <th class="text-center">Salario base</th>
-                        <th class="text-center">COMISION</th>
-
-                        @foreach (var item_ingreso in ViewBag.catalogo_ingreso)
+                        <th class="text-center">Otros ingresos</th>
+                        @foreach (var item_descuento in ViewBag.historial_cabecera_descuento)
                         {
-                            if (item_ingreso.ACTIVO)
-                            {
-                                if (item_ingreso.DELEY_INGRESO)
-                                {
-
-                                }
-                                else
-                                {
-                                    <th class="text-center">
-                                        @item_ingreso.NOMBRE_INGRESO
-                                    </th>
-                                }
-                            }
-                        }
-
-                        @foreach (var item_descuento in ViewBag.catalogo_descuento)
-                        {
-                            if (item_descuento.ACTIVO)
-                            {
-                                <th class="text-center">
-                                    @item_descuento.NOMBRE_DESCUENTO
-                                </th>
-                            }
+                            <th class="text-center">
+                                @item_descuento
+                            </th>
                         }
                         <th class="text-center">Total</th>
                     </tr>
@@ -70,62 +48,37 @@
                 <tbody>
                     @{double total_planilla = 0;}
 
-                    @foreach (var detalle in ViewBag.empleados)
+                    @foreach (var detalle in ViewBag.historial)
                     {
-                        double total = (double)detalle.SALARIO_BASE;
+                        double total = (double)detalle.TOTAL;
                         <tr>
-                            <td class="text-center">@detalle.CODIGO_EMPLEADO</td>
-                            <td class="text-center">@detalle.PRIMER_NOMBRE</td>
-                            <td class="text-center">@detalle.SALARIO_BASE</td>
+                            <td class="text-center">@detalle.NOMBRE_EMPLEADO_HISTORIAL</td>
+                            <td class="text-center">@detalle.TOTAL</td>
+
+                            @{double tot_empleado = 0;}
+
+                            @foreach (var valor in detalle.ingreso)
+                            {
+                                if (valor.INGRESO_HISTORIAL!=null)
+                                {
+                                    total = total + (double)@valor.INGRESO_HISTORIAL;
+                                    tot_empleado = tot_empleado + (double)@valor.INGRESO_HISTORIAL; 
+                                }
+                            }
+                            <td class="text-center">@tot_empleado</td>
 
                             @{int conteo = 0;}
-
-                            @foreach (var valor in detalle.ingreso_empleados)
+                            @foreach (var valor in detalle.descuento)
                             {
                                 conteo = conteo + 1;
-                                if (valor.HABILITAR_INGRESO)
+                                if (valor.DESCUENTO_HISTORIAL != null)
                                 {
-                                    if (valor.ingreso.DELEY_INGRESO)
-                                    {
-                                        decimal com = valor.ingreso.INGRESO * valor.ingreso.COMISION;
-                                        total = total + (double)com;
-                                        <td class="text-center">@com</td>
-                                    }
-                                    else
-                                    {
-                                        total = total + (double)@valor.ingreso.INGRESO;
-                                        <td class="text-center">@valor.ingreso.INGRESO</td>
-                                    }
+                                    total = total - (double)@valor.DESCUENTO_HISTORIAL;
+                                    <td class="text-center">@valor.DESCUENTO_HISTORIAL</td>
                                 }
-                            }
-                            @if (conteo < ViewBag.cantidad_ingreso)
-                            {
-                                for (int i = 0; i < (ViewBag.cantidad_ingreso - conteo); i++)
+                                else
                                 {
-                                    <td></td>
-                                }
-                            }
-
-                            @{conteo = 0;}
-                            @foreach (var valor in detalle.descuento_empleados)
-                            {
-                                conteo = conteo + 1;
-                                if (valor.HABILITAR_DESCUENTO)
-                                {
-                                    if (valor.descuento.ACTIVO)
-                                    {
-                                        if (valor.descuento.DELEY_DESCUENTO)
-                                        {
-                                            decimal desc = detalle.SALARIO_BASE * valor.descuento.PORCENTAJE;
-                                            <td class="text-center">@desc</td>
-                                            total = total - (double)desc;
-                                        }
-                                        else
-                                        {
-                                            <td class="text-center">@valor.descuento.DESCUENTO</td>
-                                            total = total - (double)@valor.descuento.DESCUENTO;
-                                        }
-                                    }
+                                    <td class="text-center"></td>
                                 }
                             }
                             @if (conteo < ViewBag.cantidad_descuento)

@@ -190,9 +190,38 @@ namespace SAP.Controllers
             }
             else
             {
-                ViewBag.error = "La planilla ya no esta activa";
-                ViewBag.planilla = planilla;
-                return View("Planilla_desactivada");
+                IEnumerable<String> historial_cabecera_ingreso = null;
+                IEnumerable<String> historial_cabecera_descuento = null;
+                try
+                {
+                    historial_cabecera_ingreso = db.Database.SqlQuery<String>(@"select DISTINCT(NOMBRE_INGRESO_HISTORIAL) from HISTORIAL h join ingreso i on i.ID_HISTORIAL = h.ID_HISTORIAL and ID_PLANILLA = " + planilla.ID_PLANILLA);
+                    historial_cabecera_descuento = db.Database.SqlQuery<String>(@"select DISTINCT(NOMBRE_DESCUENTO_HISTORIAL) from HISTORIAL h join DESCUENTO d on d.ID_HISTORIAL = h.ID_HISTORIAL and ID_PLANILLA = " + planilla.ID_PLANILLA);
+                }
+                catch(Exception e)
+                {
+                    
+                }
+                if (historial_cabecera_ingreso != null && historial_cabecera_descuento!=null)
+                {
+                    IEnumerable<HISTORIAL> historial = db.HISTORIAL.Where(HISTORIAL => HISTORIAL.ID_PLANILLA == planilla.ID_PLANILLA);
+                    ViewBag.historial_cabecera_descuento = historial_cabecera_descuento;
+                    ViewBag.historial_cabecera_ingreso = historial_cabecera_ingreso;
+                    ViewBag.historial = historial;
+                    ViewBag.error = "La planilla ya no esta activa";
+                    ViewBag.empresa = db.EMPRESA.Where(EMPRESA => EMPRESA.ID_EMPRESA == 1).First();
+                    ViewBag.cantidad_ingreso = historial_cabecera_ingreso.Count();
+                    ViewBag.cantidad_descuento = historial_cabecera_descuento.Count();
+                    ViewBag.planilla = planilla;
+                    ViewBag.total_espacio = historial_cabecera_descuento.Count() + 3;
+                    ViewBag.fecha_actual = DateTime.Now;
+                    return View("Planilla_desactivada");
+                }
+                else
+                {
+                    ViewBag.error = "La planilla ya no esta activa y no tiene datos";
+                    ViewBag.planilla = null;
+                    return View("Planilla_desactivada");
+                }
             }
             ViewBag.planilla = planilla;
             return View();
