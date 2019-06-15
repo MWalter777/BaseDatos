@@ -73,6 +73,8 @@ namespace SAP.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.deLey = cATALOGO_DESCUENTO.DELEY_DESCUENTO;
+            ViewBag.activo = cATALOGO_DESCUENTO.ACTIVO;
             return View(cATALOGO_DESCUENTO);
         }
 
