@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SAP.Models.EMPRESA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>EMPRESAS</h2>
+@if (ViewBag.error != null)
+{
+    <h2 class="text-center alert-danger">@ViewBag.error</h2>
+}
+
+<p>
+    @Html.ActionLink("Nueva Empresa", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            NOMBRE DE LA EMPRESA
+        </th>
+        <th>
+            DIRECCIÓN
+        </th>
+        <th>
+            REPRESENTANTE
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOMBRE_EMPRESA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIRECCION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.REPRESENTANTE)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID_EMPRESA }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.ID_EMPRESA }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_EMPRESA })
+            </td>
+        </tr>
+    }
+
+</table>
+

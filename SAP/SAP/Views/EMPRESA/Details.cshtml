@@ -1,0 +1,42 @@
+﻿@model SAP.Models.EMPRESA
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>PAÍS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            NOMBRE DE LA EMPRESA
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_EMPRESA)
+        </dd>
+
+        <dt>
+            DIRECCIÓN
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIRECCION)
+        </dd>
+        <dt>
+            REPRESENTANTE
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REPRESENTANTE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_EMPRESA }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>
+
