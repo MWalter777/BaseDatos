@@ -295,25 +295,6 @@ namespace SAP.Controllers
                             planilla.TOTAL_PAGAR = totalingreso - totaldescuento;
                             db.Entry(planilla).State = System.Data.Entity.EntityState.Modified;
                             db.SaveChanges();
-
-                            ViewBag.exito = "Planilla cerrada con exito";
-                            IEnumerable<DETALLEPLANILLA> detalle = db.DETALLEPLANILLA.Where(DETALLEPLANILLA => DETALLEPLANILLA.ID_PLANILLA == planilla.ID_PLANILLA);
-                            EMPRESA empresa = db.EMPRESA.Find(1); //Empresa numero 1, esto cambiara cuando kike haga la estructura organizativa
-                            IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA == 1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
-                            IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO);
-                            IEnumerable<CATALOGO_INGRESO> descontar = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO && CATALOGO_INGRESO.DELEY_INGRESO);
-                            IEnumerable<CATALOGO_DESCUENTO> catalogo_descuento = db.CATALOGO_DESCUENTO.Where(CATALOGO_DESCUENTO => CATALOGO_DESCUENTO.ACTIVO);
-                            ViewBag.detalle_planilla = detalle;
-                            ViewBag.catalogo_ingreso = catalogo_ingreso;
-                            ViewBag.catalogo_descuento = catalogo_descuento;
-                            ViewBag.empleados = empleados;
-                            int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
-                            int candidad_descuento = catalogo_descuento.Count();
-                            ViewBag.cantidad_ingreso = cantidad_ingreso;
-                            ViewBag.candidad_descuento = candidad_descuento;
-                            ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 3;
-                            ViewBag.empresa = empresa;
-                            ViewBag.fecha_actual = DateTime.Now;
                             return RedirectToAction("/");
                         }
                         catch(Exception e)
