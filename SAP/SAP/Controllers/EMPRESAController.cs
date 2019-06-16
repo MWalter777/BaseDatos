@@ -16,14 +16,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: EMPRESA
-        //[MyAuthorize(Roles = "index_empresa")]
+        [MyAuthorize(Roles = "ver_empresa")]
         public ActionResult Index()
         {
             return View(db.EMPRESA.ToList());
         }
 
         // GET: EMPRESA/Details/5
-        //[MyAuthorize(Roles = "index_empresa")]
+        [MyAuthorize(Roles = "ver_empresa")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -62,7 +62,7 @@ namespace SAP.Controllers
         }
 
         // GET: EMPRESA/Edit/5
-        //[MyAuthorize(Roles = "editar_empresa")]
+        [MyAuthorize(Roles = "editar_empresa")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,7 +78,7 @@ namespace SAP.Controllers
         }
 
         // POST: EMPRESA/Edit/5
-        //[MyAuthorize(Roles = "editar_empresa")]
+        [MyAuthorize(Roles = "editar_empresa")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_EMPRESA,NOMBRE_EMPRESA,DIRECCION,REPRESENTANTE,NIT_EMPRESA,NIC,TELEFONO_EMPRESA,PAGINA_WEB,CORREO_EMPRESA,PAGE")] EMPRESA empresa)

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SAP.Models.DEPARTAMENTO>
+
+@{
+    ViewBag.Title = "DEPARTAMENTOS";
+}
+
+    <div class="tile">
+        <h2 class="text-center">Departamentos</h2>
+
+        @if (ViewBag.error != null)
+        {
+            <h2 class="text-center alert-danger">ViewBag.error</h2>
+        }
+        <p>
+            @Html.ActionLink("Nuevo Departamento", "Create")
+        </p>
+        <table class="table" id="sampleTable">
+            <thead>
+                <tr>
+                    <th>
+                        Departamento padre
+                    </th>
+                    <th>
+                        Departamento
+                    </th>
+                    <th>
+                        Empresa
+                    </th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DEPARTAMENTO2.NOMBRE_DEPARTAMENTO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NOMBRE_DEPARTAMENTO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EMPRESA.NOMBRE_EMPRESA)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.ID_DEPARTAMENTO }, htmlAttributes: new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_DEPARTAMENTO }, htmlAttributes: new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>

@@ -10,9 +10,6 @@
     <h2 class="text-center alert-danger">@ViewBag.error</h2>
 }
 
-<p>
-    @Html.ActionLink("Nueva Empresa", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -41,8 +38,6 @@
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.ID_EMPRESA }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.ID_EMPRESA }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_EMPRESA })
             </td>
         </tr>
     }

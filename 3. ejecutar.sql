@@ -70,6 +70,19 @@ insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (44,'
 insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (45,'ver_planilla','ver_planilla');
 insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (46,'crear_planilla','crear_planilla');
 
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (47,'index_departamento','Index de los departamentos');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (48,'crear_departamento','crear departamento');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (49,'editar_departamento','Editar departamento');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (50,'eliminar_rol','eliminar rol');
+
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (51,'index_puesto','Index de los puestos');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (52,'crear_puesto','crear puesto');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (53,'editar_puesto','Editar puesto');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (54,'eliminar_puesto','eliminar puesto');
+
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (55,'ver_empresa','ver empresa');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (56,'editar_empresa','configurar empresa');
+
 
 
 SET IDENTITY_INSERT permiso off
@@ -135,6 +148,20 @@ insert into permite (id_rol,id_permiso) values(1,44);
 
 insert into permite (id_rol,id_permiso) values(1,45);
 insert into permite (id_rol,id_permiso) values(1,46);
+
+insert into permite (id_rol,id_permiso) values(1,47);
+insert into permite (id_rol,id_permiso) values(1,48);
+insert into permite (id_rol,id_permiso) values(1,49);
+insert into permite (id_rol,id_permiso) values(1,50);
+
+insert into permite (id_rol,id_permiso) values(1,51);
+insert into permite (id_rol,id_permiso) values(1,52);
+insert into permite (id_rol,id_permiso) values(1,53);
+insert into permite (id_rol,id_permiso) values(1,54);
+
+
+insert into permite (id_rol,id_permiso) values(1,55);
+insert into permite (id_rol,id_permiso) values(1,56);
 
 
 

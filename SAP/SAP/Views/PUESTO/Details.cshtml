@@ -1,0 +1,43 @@
+﻿@model SAP.Models.PUESTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>DETALLES DE</h2>
+
+<div>
+    <h4>PUESTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            NOMBRE DEL PUESTO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_PUESTO)
+        </dd>
+
+        <dt>
+            CÓDIGO DEL PUESTO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CODIGO_PUESTO)
+        </dd>
+
+        <dt>
+            DEPARTAMENTO AL QUE PERTENECE EL PUESTO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEPARTAMENTO.NOMBRE_DEPARTAMENTO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_PUESTO }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>
+

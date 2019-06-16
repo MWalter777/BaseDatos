@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SAP.Models.PUESTO>
+
+@{
+    ViewBag.Title = "Index";
+}
+    <div class="tile">
+        <h2>PUESTOS</h2>
+        @if (ViewBag.error != null)
+        {
+            <h2 class="text-center alert-danger">@ViewBag.error</h2>
+        }
+        <p>
+            @Html.ActionLink("Nuevo Puesto", "Create")
+        </p>
+        <table class="table" id="sampleTable">
+            <tr>
+                <th>
+                    NOMBRE DEL PUESTO
+                </th>
+                <th>
+                    CÓDIGO DEL PUESTO
+                </th>
+                <th>
+                    DEPARTAMENTO
+                </th>
+                <th>
+                    SALARIO MÍNIMO
+                </th>
+                <th>
+                    SALARIO MÁXIMO
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NOMBRE_PUESTO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CODIGO_PUESTO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DEPARTAMENTO.NOMBRE_DEPARTAMENTO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SALARIO_MINIMO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SALARIO_MAXIMO)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_PUESTO }, htmlAttributes: new { @class = "btn btn-primary" }) ||
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_PUESTO }, htmlAttributes: new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>

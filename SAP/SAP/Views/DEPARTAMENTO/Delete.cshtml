@@ -1,0 +1,47 @@
+﻿@model SAP.Models.DEPARTAMENTO
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar Departamento</h2>
+
+<h3>Está seguro que desea eliminar?</h3>
+<div>
+    <h4>DEPARTAMENTO</h4>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            DEPARTAMENTO PADRE
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEPARTAMENTO2.NOMBRE_DEPARTAMENTO)
+        </dd>
+
+        <dt>
+            DEPARTAMENTO A ELIMINAR
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_DEPARTAMENTO)
+        </dd>
+
+        
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>
