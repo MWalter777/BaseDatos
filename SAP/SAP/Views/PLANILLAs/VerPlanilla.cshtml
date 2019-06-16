@@ -56,14 +56,11 @@
                             }
                         }
 
-                        @foreach (var item_descuento in ViewBag.catalogo_descuento)
+                        @foreach (var item_descuento in ViewBag.cabecera_descuento)
                         {
-                            if (item_descuento.ACTIVO)
-                            {
-                                <th class="text-center">
-                                    @item_descuento.NOMBRE_DESCUENTO
-                                </th>
-                            }
+                            <th class="text-center">
+                                @item_descuento
+                            </th>
                         }
                         <th class="text-center">Total</th>
                     </tr>
@@ -78,7 +75,7 @@
                             <td class="text-center">@detalle.CODIGO_EMPLEADO</td>
                             <td class="text-center">@detalle.PRIMER_NOMBRE</td>
                             <td class="text-center">@detalle.SALARIO_BASE</td>
-                            <td class="text-center">La ranta ira aqui</td>
+                            <td class="text-center">La renta ira aqui</td>
                             @{int conteo = 0;}
 
                             @foreach (var valor in detalle.ingreso_empleados)
@@ -107,33 +104,59 @@
                                 }
                             }
 
-                            @{conteo = 0;}
-                            @foreach (var valor in detalle.descuento_empleados)
+                            @{int nohay = 0;}
+                            @{int control = 0;}
+                            @foreach (var item_descuento in ViewBag.cabecera_descuento)
                             {
-                                conteo = conteo + 1;
-                                if (valor.HABILITAR_DESCUENTO)
+                                nohay = 0;
+                                control = 0;
+                                foreach (var valor in detalle.descuento_empleados)
                                 {
-                                    if (valor.descuento.ACTIVO)
+                                    control = control + 1;
+                                    if (item_descuento == valor.descuento.NOMBRE_DESCUENTO)
                                     {
-                                        if (valor.descuento.DELEY_DESCUENTO)
+                                        if (valor.HABILITAR_DESCUENTO)
                                         {
-                                            decimal desc = detalle.SALARIO_BASE * valor.descuento.PORCENTAJE;
-                                            <td class="text-center">@desc</td>
-                                            total = total - (double)desc;
+                                            if (valor.descuento.ACTIVO)
+                                            {
+                                                if (valor.descuento.DELEY_DESCUENTO)
+                                                {
+                                                    decimal desc = detalle.SALARIO_BASE * valor.descuento.PORCENTAJE;
+                                                    <td class="text-center">@desc</td>
+                                                    total = total - (double)desc;
+                                                }
+                                                else
+                                                {
+                                                    <td class="text-center">@valor.descuento.DESCUENTO</td>
+                                                    total = total - (double)@valor.descuento.DESCUENTO;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                nohay = nohay + 1;
+                                            }
                                         }
                                         else
                                         {
-                                            <td class="text-center">@valor.descuento.DESCUENTO</td>
-                                            total = total - (double)@valor.descuento.DESCUENTO;
+                                            nohay = nohay + 1;
                                         }
                                     }
+                                    else
+                                    {
+                                        nohay = nohay + 1;
+                                    }
+                                }
+                                if (control == nohay)
+                                {
+                                    <td></td>
                                 }
                             }
+                             
                             @if (conteo < ViewBag.cantidad_descuento)
                             {
                                 for (int i = 0; i < (ViewBag.cantidad_descuento - conteo); i++)
                                 {
-                                    <td></td>
+                                    <td class="text-center">Inactivo para el empleado</td>
                                 }
                             }
                             @{total_planilla = total_planilla + total;}

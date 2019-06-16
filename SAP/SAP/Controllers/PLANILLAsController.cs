@@ -170,23 +170,43 @@ namespace SAP.Controllers
             }
             if (planilla.ACTIVO)
             {
-                IEnumerable<DETALLEPLANILLA> detalle = db.DETALLEPLANILLA.Where(DETALLEPLANILLA => DETALLEPLANILLA.ID_PLANILLA == planilla.ID_PLANILLA);
-                EMPRESA empresa = db.EMPRESA.Find(1); //Empresa numero 1, esto cambiara cuando kike haga la estructura organizativa
-                IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA == 1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
-                IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO);
-                IEnumerable<CATALOGO_INGRESO> descontar = db.CATALOGO_INGRESO.Where(CATALOGO_INGRESO => CATALOGO_INGRESO.ACTIVO && CATALOGO_INGRESO.DELEY_INGRESO);
-                IEnumerable<CATALOGO_DESCUENTO> catalogo_descuento = db.CATALOGO_DESCUENTO.Where(CATALOGO_DESCUENTO => CATALOGO_DESCUENTO.ACTIVO);
-                ViewBag.detalle_planilla = detalle;
-                ViewBag.catalogo_ingreso = catalogo_ingreso;
-                ViewBag.catalogo_descuento = catalogo_descuento;
-                ViewBag.empleados = empleados;
-                int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
-                int candidad_descuento = catalogo_descuento.Count();
-                ViewBag.cantidad_ingreso = cantidad_ingreso;
-                ViewBag.candidad_descuento = candidad_descuento;
-                ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 4;
-                ViewBag.empresa = empresa;
-                ViewBag.fecha_actual = DateTime.Now;
+                IEnumerable<String> cabecera_ingreso = null;
+                IEnumerable<String> cabecera_descuento = null;
+                try
+                {
+                    cabecera_descuento = db.Database.SqlQuery<String>(@"select distinct(NOMBRE_DESCUENTO) from CATALOGO_DESCUENTO c join DESCUENTO_EMPLEADO d on d.ID_DESCUENTO = c.ID_DESCUENTO and c.ACTIVO=1 and d.HABILITAR_DESCUENTO=1");
+                    cabecera_ingreso = db.Database.SqlQuery<String>(@"select distinct(NOMBRE_INGRESO) from CATALOGO_INGRESO c join INGRESO_EMPLEADO i on  i.ID_INGRESO = c.ID_INGRESO and c.ACTIVO=1 and i.HABILITAR_INGRESO=1");
+                }
+                catch (Exception e)
+                {
+
+                }
+                if(cabecera_ingreso!=null && cabecera_descuento != null)
+                {
+                    IEnumerable<DETALLEPLANILLA> detalle = db.DETALLEPLANILLA.Where(DETALLEPLANILLA => DETALLEPLANILLA.ID_PLANILLA == planilla.ID_PLANILLA);
+                    EMPRESA empresa = db.EMPRESA.Find(1); //Empresa numero 1, esto cambiara cuando kike haga la estructura organizativa
+                    IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA == 1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
+                    IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.Database.SqlQuery<CATALOGO_INGRESO>(@"select c.ID_INGRESO,c.NOMBRE_INGRESO, c.DELEY_INGRESO,c.INGRESO,c.ACTIVO,c.COMISION from CATALOGO_INGRESO c join INGRESO_EMPLEADO i on  i.ID_INGRESO = c.ID_INGRESO and c.ACTIVO=1 and i.HABILITAR_INGRESO=1");
+                    IEnumerable<CATALOGO_INGRESO> descontar = db.Database.SqlQuery<CATALOGO_INGRESO>(@"select c.ID_INGRESO,c.NOMBRE_INGRESO, c.DELEY_INGRESO,c.INGRESO,c.ACTIVO,c.COMISION from CATALOGO_INGRESO c join INGRESO_EMPLEADO i on  i.ID_INGRESO = c.ID_INGRESO and c.ACTIVO = 1 and i.HABILITAR_INGRESO = 1 and c.DELEY_INGRESO = 1");
+                    ViewBag.detalle_planilla = detalle;
+                    ViewBag.catalogo_ingreso = catalogo_ingreso;
+                    ViewBag.cabecera_descuento = cabecera_descuento;
+                    ViewBag.empleados = empleados;
+                    int cantidad_ingreso = catalogo_ingreso.Count() - descontar.Count() + 1;
+                    int candidad_descuento = cabecera_descuento.Count();
+                    ViewBag.cantidad_ingreso = cantidad_ingreso;
+                    ViewBag.candidad_descuento = candidad_descuento;
+                    ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 4;
+                    ViewBag.empresa = empresa;
+                    ViewBag.fecha_actual = DateTime.Now;
+                }
+                else
+                {
+                    ViewBag.error = "No se puede generar planilla, consulte con su administrador";
+                    ViewBag.planilla = null;
+                    return View();
+                }
+
             }
             else
             {

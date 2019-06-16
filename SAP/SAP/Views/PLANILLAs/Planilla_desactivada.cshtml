@@ -66,24 +66,36 @@
                                 }
                             }
                             <td class="text-center">@tot_empleado</td>
-
                             @{int conteo = 0;}
-                            @foreach (var valor in detalle.descuento)
+                            @{int nohay = 0;}
+                            @{int control = 0;}
+                            @foreach (var item_descuento in ViewBag.historial_cabecera_descuento)
                             {
-                                conteo = conteo + 1;
-                                if (valor.DESCUENTO_HISTORIAL != null)
+                                nohay = 0;
+                                control = 0;
+                                conteo = 0;
+                                foreach (var valor in detalle.descuento)
                                 {
-                                    total = total - (double)@valor.DESCUENTO_HISTORIAL;
-                                    <td class="text-center">@valor.DESCUENTO_HISTORIAL</td>
+                                    control = control + 1;
+                                    conteo = conteo + 1;
+                                    if (item_descuento == valor.NOMBRE_DESCUENTO_HISTORIAL)
+                                    {
+                                        if (valor.DESCUENTO_HISTORIAL != null)
+                                        {
+                                            total = total - (double)@valor.DESCUENTO_HISTORIAL;
+                                            <td class="text-center">@valor.DESCUENTO_HISTORIAL</td>
+                                        }
+                                        else
+                                        {
+                                            nohay = nohay + 1;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        nohay = nohay + 1;
+                                    }
                                 }
-                                else
-                                {
-                                    <td class="text-center"></td>
-                                }
-                            }
-                            @if (conteo < ViewBag.cantidad_descuento)
-                            {
-                                for (int i = 0; i < (ViewBag.cantidad_descuento - conteo); i++)
+                                if (nohay == control)
                                 {
                                     <td></td>
                                 }
