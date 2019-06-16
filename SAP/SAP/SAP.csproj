@@ -47,7 +47,6 @@
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -192,6 +191,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CATALOGO_DESCUENTOController.cs" />
+    <Compile Include="Controllers\DEPARTAMENTOController.cs" />
+    <Compile Include="Controllers\EMPRESAController.cs" />
     <Compile Include="Controllers\ESTADO_CIVILController.cs" />
     <Compile Include="Controllers\GENEROsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Controllers\PERMISOesController.cs" />
     <Compile Include="Controllers\PLANILLAsController.cs" />
     <Compile Include="Controllers\PROFESIONController.cs" />
+    <Compile Include="Controllers\PUESTOController.cs" />
     <Compile Include="Controllers\REGIONController.cs" />
     <Compile Include="Controllers\ROLsController.cs" />
     <Compile Include="Controllers\SUB_REGIONController.cs" />
@@ -411,6 +413,21 @@
     <Content Include="Views\CATALOGO_DESCUENTO\Edit.cshtml" />
     <Content Include="Views\CATALOGO_DESCUENTO\Index.cshtml" />
     <Content Include="Views\PLANILLAs\Planilla_desactivada.cshtml" />
+    <Content Include="Views\EMPRESA\Create.cshtml" />
+    <Content Include="Views\EMPRESA\Delete.cshtml" />
+    <Content Include="Views\EMPRESA\Details.cshtml" />
+    <Content Include="Views\EMPRESA\Edit.cshtml" />
+    <Content Include="Views\EMPRESA\Index.cshtml" />
+    <Content Include="Views\DEPARTAMENTO\Create.cshtml" />
+    <Content Include="Views\DEPARTAMENTO\Delete.cshtml" />
+    <Content Include="Views\DEPARTAMENTO\Details.cshtml" />
+    <Content Include="Views\DEPARTAMENTO\Edit.cshtml" />
+    <Content Include="Views\DEPARTAMENTO\Index.cshtml" />
+    <Content Include="Views\PUESTO\Create.cshtml" />
+    <Content Include="Views\PUESTO\Delete.cshtml" />
+    <Content Include="Views\PUESTO\Details.cshtml" />
+    <Content Include="Views\PUESTO\Edit.cshtml" />
+    <Content Include="Views\PUESTO\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
