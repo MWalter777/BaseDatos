@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SAP.Models.INGRESO_EMPLEADO>
+
+@{
+    ViewBag.Title = "Ingreso empleado";
+}
+
+<h2>Catálogo de ingresos</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Create")
+</p>
+<div class="tile">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                   INGRESO
+                </th>
+                <th>
+                    EMPLEADO
+                </th>
+                <th>
+                    HABILITAR INGRESO
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @ViewBag.PAR_INGRESO[item.ID_INGRESO]
+                </td>
+                <td>
+                    @ViewBag.PAR_EMPLEADO[item.ID_EMPLEADO]
+                </td>
+                @if (item.HABILITAR_INGRESO)
+                {
+                    <td>
+                        Habilitado
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Inhabilitado
+                    </td>
+                }
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.ID_INGRESO_EMPLEADO }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.ID_INGRESO_EMPLEADO }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_INGRESO_EMPLEADO })
+                </td>
+            </tr>
+            }
+        </tbody>
+
+
+
+    </table>
+</div>

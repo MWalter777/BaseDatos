@@ -1,0 +1,55 @@
+﻿@model SAP.Models.INGRESO_EMPLEADO
+
+@{
+    ViewBag.Title = "Detalles ingreso empleado";
+}
+
+
+<h3>Detalles</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            EMPLEADO
+        </dt>
+
+        <dd>
+            @ViewBag.EMPLEADO_INFO.APELLIDO_PATERNO  @ViewBag.EMPLEADO_INFO.APELLIDO_MATERNO ,
+            @ViewBag.EMPLEADO_INFO.PRIMER_NOMBRE @ViewBag.EMPLEADO_INFO.SEGUNDO_NOMBRE
+        </dd>
+
+        <dt>
+            CATALOGO INGRESO
+        </dt>
+
+        <dd>
+            @ViewBag.CATALOGO_INGRESO_INFO.NOMBRE_INGRESO ( @ViewBag.CATALOGO_INGRESO_INFO.INGRESO )
+        </dd>
+
+        <dt>
+            HABILITADO
+        </dt>
+
+        @if (ViewBag.HABILITAR_INGRESO)
+        {
+            <dd>INGRESO HABILITADO</dd>
+        }
+        else
+        {
+            <dd>INGRESO NO HABILITADO</dd>
+
+        }
+
+
+    </dl>
+</div>
+<p>
+   
+
+    <div class="form-actions no-color">
+        @Html.ActionLink("Editar", "Edit")|
+        @Html.ActionLink("Regresar", "Index")
+    </div>
+    
+</p>
