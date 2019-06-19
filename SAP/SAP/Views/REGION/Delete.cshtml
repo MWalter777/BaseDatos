@@ -1,21 +1,20 @@
 ﻿@model SAP.Models.REGION
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar región";
 }
 
-<h2>Eliminar</h2>
+<h2>Eliminar región</h2>
 @if (ViewBag.error != null)
 {
     <h2 class="text-center alert-danger">@ViewBag.error</h2>
 }
-<h3>Está seguro de eliminar la región?</h3>
+<h3>¿Está seguro de eliminar la región?</h3>
 <div>
-    <h4>REGIÓN</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            NOMBRE DE REGIÓN
+            Nombre de región
         </dt>
 
         <dd>
@@ -23,7 +22,7 @@
         </dd>
 
         <dt>
-            CÓDIGO DE REGIÓN
+            Código de región
         </dt>
 
         <dd>
@@ -37,8 +36,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Regresar", "Index")
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar al listado de regiones", "Index", null, new { @class = "btn btn-secondary" })
         </div>
     }
 </div>

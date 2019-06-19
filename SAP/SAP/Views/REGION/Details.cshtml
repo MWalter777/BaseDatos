@@ -1,17 +1,16 @@
 ﻿@model SAP.Models.REGION
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles de región";
 }
 
-<h2>DETALLES DE</h2>
+<h2>Detalles de región</h2>
 
 <div>
-    <h4>REGIÓN</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            NOMBRE DE REGIÓN
+            Nombre de región
         </dt>
 
         <dd>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            CÓDIGO DE REGIÓN
+            Código de región
         </dt>
 
         <dd>
@@ -27,7 +26,7 @@
         </dd>
 
         <dt>
-            PAÍS
+            País
         </dt>
 
         <dd>
@@ -35,7 +34,7 @@
         </dd>
 
         <dt>
-            CÓDIGO DE PAÍS
+            Código de país
         </dt>
 
         <dd>
@@ -45,7 +44,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_REGION }) |
-    @Html.ActionLink("Regresar", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_REGION }, new { @class = "btn btn-warning"}) |
+    @Html.ActionLink("Regresar al listado de regiones", "Index", null, new { @class = "btn btn-secondary"})
 </p>
 
