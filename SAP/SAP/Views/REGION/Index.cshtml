@@ -1,56 +1,56 @@
 ﻿@model IEnumerable<SAP.Models.REGION>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listado de regiones";
 }
 
-<h2>REGIONES</h2>
-@if (ViewBag.error != null)
-{
-    <h2 class="text-center alert-danger">@ViewBag.error</h2>
-}
-<p>
-    @Html.ActionLink("Nueva Región", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            NOMBRE DE REGIÓN
-        </th>
-        <th>
-            CÓDIGO DE REGIÓN
-        </th>
-        <th>
-            PAÍS
-        </th>
-        <th>
-            CÓDIGO DE PAÍS
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NOMBRE_REGION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CODIGO_REGION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PAIS.NOMBRE_PAIS)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PAIS.CODIGO_PAIS)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.ID_REGION }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.ID_REGION }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_REGION })
-            </td>
-        </tr>
-    }
-
-</table>
+<div class="tile">
+	<h2>Listado de regiones</h2>
+	@if (ViewBag.error != null)
+	{
+		<h2 class="text-center alert-danger">@ViewBag.error</h2>
+	}
+	<p>
+		@Html.ActionLink("Crear Región", "Create", null, new { @class = "btn btn-success" })
+	</p>
+	<table class="table">
+		<tr>
+			<th>
+				Nombre de región
+			</th>
+			<th>
+				Código de región
+			</th>
+			<th>
+				País
+			</th>
+			<th>
+				Código de país
+			</th>
+			<th></th>
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.NOMBRE_REGION)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CODIGO_REGION)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.PAIS.NOMBRE_PAIS)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.PAIS.CODIGO_PAIS)
+				</td>
+				<td>
+					@Html.ActionLink("Editar", "Edit", new { id = item.ID_REGION }, new { @class = "btn btn-warning" }) |
+					@Html.ActionLink("Detalles", "Details", new { id = item.ID_REGION }, new { @class = "btn btn-info" }) |
+					@Html.ActionLink("Eliminar", "Delete", new { id = item.ID_REGION }, new { @class = "btn btn-danger" })
+				</td>
+			</tr>
+		}
+	</table>
+</div>
 

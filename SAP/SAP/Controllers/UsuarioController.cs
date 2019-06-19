@@ -51,6 +51,7 @@ namespace SAP.Controllers
                             user.EMAIL = email;
                             db.Entry(user).State = System.Data.Entity.EntityState.Modified;
                             db.SaveChanges();
+                            ViewBag.exito = "Usuario modificado con exito";
                         }
                         else
                         {
@@ -58,6 +59,7 @@ namespace SAP.Controllers
                             user.EMAIL = email;
                             db.Entry(user).State = System.Data.Entity.EntityState.Modified;
                             db.SaveChanges();
+                            ViewBag.exito = "Se modifico todo menos la contraseña";
                         }
                     }
                     else

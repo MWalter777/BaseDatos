@@ -1,0 +1,48 @@
+﻿@model SAP.Models.RANGO_COMISION
+
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<div class="tile">
+    <h2 class="text-center">Detalle de rango</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
+
+    <div>
+        <h4>Detalle de usuario</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MIN_COMISION)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MIN_COMISION)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MAX_COMISION)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MAX_COMISION)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PORCENTAJE_POR_COMISION)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PORCENTAJE_POR_COMISION)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID_RANGO }, htmlAttributes: new { @class = "btn btn-secondary" }) |
+        <a href="/rango_comision/" class="btn btn-info">Regresar</a>
+    </p>
+</div>

@@ -12,7 +12,7 @@
     }
 
     <p>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crear">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#crear">
             Nuevo estado
         </button>
     </p>
@@ -33,7 +33,7 @@
                         @Html.DisplayFor(modelItem => item.NOMBRE_ESTADO_CIVIL)
                     </td>
                     <td>
-                        <a href="#" onclick="mostrar(@item.ID_ESTADO_CIVIL,'@item.NOMBRE_ESTADO_CIVIL')" class="btn btn-primary">Editar</a>
+                        <a href="#" onclick="mostrar(@item.ID_ESTADO_CIVIL,'@item.NOMBRE_ESTADO_CIVIL')" class="btn btn-warning">Editar</a>
                         <a href="#" onclick="eliminar(@item.ID_ESTADO_CIVIL,'@item.NOMBRE_ESTADO_CIVIL')" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>

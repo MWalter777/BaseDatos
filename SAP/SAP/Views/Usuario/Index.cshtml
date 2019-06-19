@@ -2,54 +2,53 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Usuarios";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <div class="tile">
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_EMPLEADO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_ROL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EMAIL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HABILITADO)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <table class="table" id="sampleTable">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ID_EMPLEADO)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ID_ROL)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EMAIL)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HABILITADO)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID_USUARIO }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID_USUARIO }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID_USUARIO })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID_EMPLEADO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID_ROL)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EMAIL)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HABILITADO)
+                </th>
+                <th></th>
             </tr>
-        }
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID_EMPLEADO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID_ROL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMAIL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HABILITADO)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_USUARIO }, htmlAttributes: new { @class = "btn btn-warning" }) |
+                        @Html.ActionLink("Detalle", "Details", new { id = item.ID_USUARIO }, htmlAttributes: new { @class = "btn btn-info" }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_USUARIO }, htmlAttributes: new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
 
     </table>
 

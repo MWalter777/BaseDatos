@@ -193,21 +193,31 @@
     <Compile Include="Controllers\CATALOGO_DESCUENTOController.cs" />
     <Compile Include="Controllers\CENTRO_COSTOController.cs" />
     <Compile Include="Controllers\DEPARTAMENTOController.cs" />
+
     <Compile Include="Controllers\DIRECCIONController.cs" />
+
+    <Compile Include="Controllers\DESCUENTO_RENTAController.cs" />
+    <Compile Include="Controllers\EMPLEADOesController.cs" />
+
     <Compile Include="Controllers\EMPRESAController.cs" />
+    <Compile Include="Controllers\CATALOGO_INGRESOController.cs" />
     <Compile Include="Controllers\ESTADO_CIVILController.cs" />
     <Compile Include="Controllers\GENEROsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\INGRESO_EMPLEADOController.cs" />
     <Compile Include="Controllers\MENUROLController.cs" />
     <Compile Include="Controllers\MENUsController.cs" />
     <Compile Include="Controllers\NoValidoController.cs" />
     <Compile Include="Controllers\PAISController.cs" />
+    <Compile Include="Controllers\PERIODICIDAD_ANUALController.cs" />
     <Compile Include="Controllers\PERMISOesController.cs" />
     <Compile Include="Controllers\PLANILLAsController.cs" />
     <Compile Include="Controllers\PROFESIONController.cs" />
     <Compile Include="Controllers\PUESTOController.cs" />
+    <Compile Include="Controllers\RANGO_COMISIONController.cs" />
     <Compile Include="Controllers\REGIONController.cs" />
     <Compile Include="Controllers\ROLsController.cs" />
+    <Compile Include="Controllers\SALARIO_MINIMOController.cs" />
     <Compile Include="Controllers\SUB_REGIONController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -275,8 +285,6 @@
     <Content Include="Scripts\bootstrap-4\js\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap-4\js\bootstrap.js" />
     <Content Include="Scripts\bootstrap-4\js\bootstrap.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
@@ -415,6 +423,22 @@
     <Content Include="Views\CATALOGO_DESCUENTO\Edit.cshtml" />
     <Content Include="Views\CATALOGO_DESCUENTO\Index.cshtml" />
     <Content Include="Views\PLANILLAs\Planilla_desactivada.cshtml" />
+    <Content Include="Views\SALARIO_MINIMO\Index.cshtml" />
+    <Content Include="Views\SALARIO_MINIMO\Edit.cshtml" />
+    <Content Include="Views\PERIODICIDAD_ANUAL\Index.cshtml" />
+    <Content Include="Views\PERIODICIDAD_ANUAL\Edit.cshtml" />
+    <Content Include="Views\PERIODICIDAD_ANUAL\Create.cshtml" />
+    <Content Include="Views\PERIODICIDAD_ANUAL\Delete.cshtml" />
+    <Content Include="Views\CATALOGO_INGRESO\Index.cshtml" />
+    <Content Include="Views\CATALOGO_INGRESO\Details.cshtml" />
+    <Content Include="Views\CATALOGO_INGRESO\Edit.cshtml" />
+    <Content Include="Views\CATALOGO_INGRESO\Create.cshtml" />
+    <Content Include="Views\CATALOGO_INGRESO\Delete.cshtml" />
+    <Content Include="Views\INGRESO_EMPLEADO\Index.cshtml" />
+    <Content Include="Views\INGRESO_EMPLEADO\Details.cshtml" />
+    <Content Include="Views\INGRESO_EMPLEADO\Delete.cshtml" />
+    <Content Include="Views\INGRESO_EMPLEADO\Edit.cshtml" />
+    <Content Include="Views\INGRESO_EMPLEADO\Create.cshtml" />
     <Content Include="Views\EMPRESA\Create.cshtml" />
     <Content Include="Views\EMPRESA\Delete.cshtml" />
     <Content Include="Views\EMPRESA\Details.cshtml" />
@@ -430,6 +454,7 @@
     <Content Include="Views\PUESTO\Details.cshtml" />
     <Content Include="Views\PUESTO\Edit.cshtml" />
     <Content Include="Views\PUESTO\Index.cshtml" />
+
     <Content Include="Views\CENTRO_COSTO\Create.cshtml" />
     <Content Include="Views\CENTRO_COSTO\Delete.cshtml" />
     <Content Include="Views\CENTRO_COSTO\Details.cshtml" />
@@ -440,6 +465,23 @@
     <Content Include="Views\DIRECCION\Details.cshtml" />
     <Content Include="Views\DIRECCION\Edit.cshtml" />
     <Content Include="Views\DIRECCION\Index.cshtml" />
+
+    <Content Include="Views\DESCUENTO_RENTA\Create.cshtml" />
+    <Content Include="Views\DESCUENTO_RENTA\Delete.cshtml" />
+    <Content Include="Views\DESCUENTO_RENTA\Details.cshtml" />
+    <Content Include="Views\DESCUENTO_RENTA\Edit.cshtml" />
+    <Content Include="Views\DESCUENTO_RENTA\Index.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Create.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Delete.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Details.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Edit.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Index.cshtml" />
+    <Content Include="Views\EMPLEADOes\Create.cshtml" />
+    <Content Include="Views\EMPLEADOes\Delete.cshtml" />
+    <Content Include="Views\EMPLEADOes\Details.cshtml" />
+    <Content Include="Views\EMPLEADOes\Edit.cshtml" />
+    <Content Include="Views\EMPLEADOes\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

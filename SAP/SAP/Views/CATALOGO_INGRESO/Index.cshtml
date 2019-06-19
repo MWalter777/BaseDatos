@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SAP.Models.CATALOGO_INGRESO>
+
+@{
+    ViewBag.Title = "Catálogo de ingresos";
+}
+
+<h2>Catálogo de ingresos</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo ingreso", "Create")
+</p>
+<div class="tile">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NOMBRE_INGRESO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DELEY_INGRESO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.INGRESO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ACTIVO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.COMISION)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE_INGRESO)
+                </td>
+
+                @if (item.DELEY_INGRESO)
+                {
+                    <td>De Ley</td>
+                }
+                else
+                {
+                    <td>De otro tipo</td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.INGRESO)
+                </td>
+                @if (item.ACTIVO)
+                {
+                    <td>ACTIVO</td>
+                }
+                else
+                {
+                    <td>INACTIVO</td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.COMISION)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.ID_INGRESO }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.ID_INGRESO }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_INGRESO })
+                </td>
+            </tr>
+            }
+        </tbody>
+
+
+
+    </table>
+</div>

@@ -1,0 +1,75 @@
+﻿@model SAP.Models.CATALOGO_INGRESO
+
+@{
+    ViewBag.Title = "Detalles del ingreso";
+}
+
+<h2>Detalles del ingreso</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_INGRESO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_INGRESO)
+        </dd>
+
+        <dt>
+           Tipo
+        </dt>
+
+        @if (ViewBag.DeLey)
+        {
+            <dd>De Ley</dd>
+        }
+        else
+        {
+            <dd>De otro tipo</dd>
+
+        }
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INGRESO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INGRESO)
+        </dd>
+
+
+
+        <dt>
+            Estado
+        </dt>
+
+        @if (ViewBag.activo)
+        {
+            <dd>
+                ACTIVO
+            </dd>
+        }
+        else
+        {
+            <dd>
+                INACTIVO
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COMISION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMISION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_INGRESO }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

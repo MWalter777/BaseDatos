@@ -1,0 +1,49 @@
+﻿@model SAP.Models.RANGO_COMISION
+
+@{
+    ViewBag.Title = "Eliinar rango de comision";
+}
+
+<div class="tile">
+    <h2 class="text-center">Seguro quieres eliminar?</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MIN_COMISION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MIN_COMISION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAX_COMISION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAX_COMISION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PORCENTAJE_POR_COMISION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PORCENTAJE_POR_COMISION)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a href="/rango_comision" class="btn btn-info">Regresar</a>
+        </div>
+    }
+</div>

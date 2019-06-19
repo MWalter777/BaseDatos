@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SAP.Models.SALARIO_MINIMO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>SALARIO MINIMO</h2>
+
+<div class="tile">
+    <table class="table">
+        <tr>
+            <th>
+                MONTO
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MONTO_SALARIO_MINIMO)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.ID_SALARIO_MINIMO })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
