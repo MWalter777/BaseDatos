@@ -28,9 +28,11 @@ namespace SAP.Models
         public decimal? DESCUENTO { get; set; }
 
         [Display(Name = "Fecha de inicio")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FECHA_INICIO { get; set; }
 
         [Display(Name = "Fecha de finalización")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FECHA_FIN { get; set; }
 
         [Display(Name ="Activo")]
