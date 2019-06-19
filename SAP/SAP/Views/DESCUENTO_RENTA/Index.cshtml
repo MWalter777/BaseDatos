@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SAP.Models.DESCUENTO_RENTA>
+
+@{
+    ViewBag.Title = "Listado de descuentos de Renta";
+}
+
+<div class="tile">
+	<h2>Listado de descuentos de Renta</h2>
+
+	<p>
+		@Html.ActionLink("Crear nuevo", "Create",null, new { @class = "btn btn-success"})
+	</p>
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.MIN_RENTA)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.MAX_RENTA)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PORCENTAJE_RENTA)
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.MIN_RENTA)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.MAX_RENTA)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.PORCENTAJE_RENTA)
+				</td>
+				<td>
+					@Html.ActionLink("Editar", "Edit", new { id = item.ID_DESCUENTO_RENTA }, new { @class = "btn btn-secondary" }) |
+					@Html.ActionLink("Detalles", "Details", new { id = item.ID_DESCUENTO_RENTA }, new { @class = "btn btn-info" }) |
+					@Html.ActionLink("Eliminar", "Delete", new { id = item.ID_DESCUENTO_RENTA }, new { @class = "btn btn-danger" })
+				</td>
+			</tr>
+		}
+	</table>
+</div>
+
+

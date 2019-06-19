@@ -188,6 +188,8 @@ namespace SAP.Controllers
                     IEnumerable<EMPLEADO> empleados = db.EMPLEADO.Where(EMPLEADO => EMPLEADO.puesto.DEPARTAMENTO.EMPRESA.ID_EMPRESA == 1); //solo los empleados de la empresa 1 para cuando kike haga la estructura organizativa
                     IEnumerable<CATALOGO_INGRESO> catalogo_ingreso = db.Database.SqlQuery<CATALOGO_INGRESO>(@"select c.ID_INGRESO,c.NOMBRE_INGRESO, c.DELEY_INGRESO,c.INGRESO,c.ACTIVO,c.COMISION from CATALOGO_INGRESO c join INGRESO_EMPLEADO i on  i.ID_INGRESO = c.ID_INGRESO and c.ACTIVO=1 and i.HABILITAR_INGRESO=1");
                     IEnumerable<CATALOGO_INGRESO> descontar = db.Database.SqlQuery<CATALOGO_INGRESO>(@"select c.ID_INGRESO,c.NOMBRE_INGRESO, c.DELEY_INGRESO,c.INGRESO,c.ACTIVO,c.COMISION from CATALOGO_INGRESO c join INGRESO_EMPLEADO i on  i.ID_INGRESO = c.ID_INGRESO and c.ACTIVO = 1 and i.HABILITAR_INGRESO = 1 and c.DELEY_INGRESO = 1");
+                    IEnumerable<DESCUENTO_RENTA> renta = db.DESCUENTO_RENTA.ToList().OrderBy(m=>m.MIN_RENTA);
+
                     ViewBag.detalle_planilla = detalle;
                     ViewBag.catalogo_ingreso = catalogo_ingreso;
                     ViewBag.cabecera_descuento = cabecera_descuento;
@@ -199,6 +201,8 @@ namespace SAP.Controllers
                     ViewBag.total_espacio = cantidad_ingreso + candidad_descuento + 4;
                     ViewBag.empresa = empresa;
                     ViewBag.fecha_actual = DateTime.Now;
+
+                    ViewBag.renta = renta;
                 }
                 else
                 {

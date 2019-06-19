@@ -1,0 +1,43 @@
+﻿@model SAP.Models.DESCUENTO_RENTA
+
+@{
+    ViewBag.Title = "Detalles de descuento de Renta";
+}
+
+<div class="tile">
+	<h2>Detalles de descuento de Renta</h2>
+
+	<div>
+		<hr />
+		<dl class="dl-horizontal">
+			<dt>
+				@Html.DisplayNameFor(model => model.MIN_RENTA)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.MIN_RENTA)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.MAX_RENTA)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.MAX_RENTA)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.PORCENTAJE_RENTA)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.PORCENTAJE_RENTA)
+			</dd>
+
+		</dl>
+	</div>
+	<p>
+		@Html.ActionLink("Editar", "Edit", new { id = Model.ID_DESCUENTO_RENTA }, new { @class = "btn btn-primary"}) |
+		@Html.ActionLink("Regresar al listado de renta", "Index", null, new { @class = "btn btn-secondary"})
+	</p>
+</div>
