@@ -31,10 +31,27 @@ begin
 				BEGIN
 					
 					select @total=@salario_base
+
+					declare @renta numeric(8,2)=0
+					select @renta=@salario_base
+
 					declare @comisionvalor numeric(8,2)=0
+					declare @porcentaje_renta numeric(8,2)=null
+					select top 1 @porcentaje_renta= porcentaje_renta from DESCUENTO_RENTA where @renta > MIN_RENTA and @renta <= MAX_RENTA
+					if(@porcentaje_renta is not null)
+						begin
+								
+							select @renta=@renta*@porcentaje_renta
+						end
+					else
+						begin
+							select @renta=0
+						end
+					select @total=@total-@renta
+
 					declare @deley_descuento bit, @descuento numeric(8,2), @porcentaje numeric(8,2)
 					declare cursor_descuento cursor for select cd.DELEY_DESCUENTO, cd.DESCUENTO, cd.PORCENTAJE from DESCUENTO_EMPLEADO demp 
-					join CATALOGO_DESCUENTO cd on demp.ID_DESCUENTO=cd.ID_DESCUENTO where ID_EMPLEADO=@id_empleado and HABILITAR_DESCUENTO=1
+					join CATALOGO_DESCUENTO cd on demp.ID_DESCUENTO=cd.ID_DESCUENTO where ID_EMPLEADO=@id_empleado and HABILITAR_DESCUENTO=1 and ACTIVO=1
 					
 					OPEN cursor_descuento
 					FETCH FROM cursor_descuento into @deley_descuento, @descuento, @porcentaje
@@ -57,7 +74,7 @@ begin
 
 					declare @deley_ingreso bit, @ingreso numeric(8,2)
 					declare cursor_ingreso cursor for select ci.DELEY_INGRESO, ci.INGRESO from INGRESO_EMPLEADO din
-					join CATALOGO_INGRESO ci on din.ID_INGRESO=ci.ID_INGRESO where ID_EMPLEADO=@id_empleado
+					join CATALOGO_INGRESO ci on din.ID_INGRESO=ci.ID_INGRESO where ID_EMPLEADO=@id_empleado and HABILITAR_INGRESO=1 and ACTIVO=1
 
 					OPEN cursor_ingreso
 					FETCH FROM cursor_ingreso into @deley_ingreso, @ingreso
@@ -73,8 +90,8 @@ begin
 								begin
 									if(@comision is not null and @comision=1)
 										begin
-											declare @porcentaje_por_comision numeric(8,2)
-											select top 1 @porcentaje_por_comision= porcentaje_por_comision from RANGO_COMISION where @ingreso >= MIN_COMISION and @ingreso <= MAX_COMISION
+											declare @porcentaje_por_comision numeric(8,2)=null
+											select top 1 @porcentaje_por_comision= porcentaje_por_comision from RANGO_COMISION where @ingreso > MIN_COMISION and @ingreso <= MAX_COMISION
 											if(@porcentaje_por_comision is not null)
 												begin
 													select @comisionvalor=@comisionvalor+(@ingreso*@porcentaje_por_comision)
