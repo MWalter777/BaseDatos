@@ -1,0 +1,83 @@
+﻿@model SAP.Models.CATALOGO_INGRESO
+
+@{
+    ViewBag.Title = "Eliminar ingreso";
+}
+
+
+<h3>¿Está seguro de eliminar este ingreso del catalogo?</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_INGRESO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_INGRESO)
+        </dd>
+
+        <dt>
+            Tipo
+        </dt>
+
+        @if (ViewBag.DeLey)
+        {
+            <dd>De Ley</dd>
+        }
+        else
+        {
+            <dd>De otro tipo</dd>
+
+        }
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INGRESO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INGRESO)
+        </dd>
+
+
+
+        <dt>
+            Estado
+        </dt>
+
+        @if (ViewBag.activo)
+        {
+            <dd>
+                ACTIVO
+            </dd>
+        }
+        else
+        {
+            <dd>
+                INACTIVO
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COMISION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMISION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</p>

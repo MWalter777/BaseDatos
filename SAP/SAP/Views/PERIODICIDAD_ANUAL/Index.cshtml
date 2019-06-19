@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SAP.Models.PERIODICIDAD_ANUAL>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>PERIODICIDADES ANUALES</h2>
+@if (ViewBag.error != null)
+{
+    <h2 class="text-center alert-danger">@ViewBag.error</h2>
+}
+<p>
+    @Html.ActionLink("Nueva Periodicidad", "Create")
+</p>
+
+<div class="tile">
+    <table class="table">
+        <tr>
+            <th>
+                Codigo
+            </th>
+            <th>
+                Año
+            </th>
+            <th>
+                Tipo
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID_PERIODICIDAD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ANIO_PERIODICIDAD)
+                </td>
+                <td>
+                    @if (item.MENSUAL)
+                    {
+                        @:<p>Mensual</p>
+                    }
+                    else
+                    {
+                        <p>Quincenal</p>
+                    }
+
+
+
+                </td>
+                <td>
+                    <!-- @Html.ActionLink("Editar", "Edit", new { id = item.ID_PERIODICIDAD }) | -->
+                    <!-- @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_PERIODICIDAD }) -->
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
