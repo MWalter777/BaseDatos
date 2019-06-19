@@ -59,7 +59,7 @@ namespace SAP.Controllers
             if (ModelState.IsValid)
             {
                 centro_costo.ANIO = anio;
-                centro_costo.SALDO = centro_costo.MONTO_ASIGNADO;
+                centro_costo.SALDO = 0;
                 IEnumerable<CENTRO_COSTO> planillas = db.CENTRO_COSTO.Where(CENTRO_COSTO => CENTRO_COSTO.ID_DEPARTAMENTO==centro_costo.ID_DEPARTAMENTO);
                     if (planillas.Count() > 0)
                     {
