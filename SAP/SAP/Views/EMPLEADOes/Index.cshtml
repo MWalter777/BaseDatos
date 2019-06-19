@@ -1,0 +1,153 @@
+﻿@model IEnumerable<SAP.Models.EMPLEADO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.puesto.CODIGO_PUESTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_DIRECCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMP_ID_EMPLEADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_GENERO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_PROFESION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_ESTADO_CIVIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CODIGO_EMPLEADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APELLIDO_MATERNO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APELLIDO_PATERNO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRIMER_NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SEGUNDO_NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_NACIMIENTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DUI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PASAPORTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NIT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISSS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NUP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SALARIO_BASE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CORREO_PERSONAL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CORREO_INSTITUCIONAL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COMISION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.puesto.CODIGO_PUESTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_DIRECCION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMP_ID_EMPLEADO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_GENERO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_PROFESION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_ESTADO_CIVIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODIGO_EMPLEADO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APELLIDO_MATERNO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APELLIDO_PATERNO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRIMER_NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SEGUNDO_NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA_NACIMIENTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DUI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PASAPORTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NIT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISSS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NUP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SALARIO_BASE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CORREO_PERSONAL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CORREO_INSTITUCIONAL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COMISION)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_EMPLEADO }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_EMPLEADO }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_EMPLEADO })
+        </td>
+    </tr>
+}
+
+</table>

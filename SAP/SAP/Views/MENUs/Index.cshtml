@@ -13,7 +13,7 @@
     }
 
     <p>
-        @Html.ActionLink("Nuevo menu", "Create")
+        <a href="/Menus/create" class="btn btn-success">Nuevo menu</a>
     </p>
     <table class="table" id="sampleTable">
         <thead>
@@ -45,7 +45,7 @@
                         @Html.DisplayFor(modelItem => item.URL)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_MENU }, htmlAttributes: new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_MENU }, htmlAttributes: new { @class = "btn btn-warning" }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_MENU }, htmlAttributes: new { @class = "btn btn-danger" })
                     </td>
                 </tr>

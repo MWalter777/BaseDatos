@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SAP.Models.PLANILLA>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Planillas";
 }
 
 <div class="tile">
@@ -12,7 +12,7 @@
     }
 
     <p>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crear">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#crear">
             Nueva planilla
         </button>
     </p>
@@ -64,7 +64,7 @@
                         @Html.DisplayFor(modelItem => item.ACTIVO)
                     </td>
                     <td>
-                        <a href="/Planillas/verplanilla/@item.ID_PLANILLA" class="btn btn-primary">ver planilla</a>
+                        <a href="/Planillas/verplanilla/@item.ID_PLANILLA" class="btn btn-info">ver planilla</a>
                     </td>
                 </tr>
             }

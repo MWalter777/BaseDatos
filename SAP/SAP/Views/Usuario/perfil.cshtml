@@ -5,9 +5,13 @@
 
 <div class="tile">
     <h2>Mi perfil: @Session["username"] </h2>
-    @if (ViewBag.error!=null)
+    @if (ViewBag.error != null)
     {
         <h2 class="alert-danger">@ViewBag.error</h2>
+    }
+    @if (ViewBag.exito != null)
+    {
+        <h2 class="alert-success">@ViewBag.exito</h2>
     }
         @using (Html.BeginForm())
         {

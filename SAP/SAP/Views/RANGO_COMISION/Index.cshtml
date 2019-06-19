@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SAP.Models.RANGO_COMISION>
+
+@{
+    ViewBag.Title = "Rango comision";
+}
+
+<div class="tile">
+    <h2 class="text-center">Comisiones</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
+
+    <p>
+        <a href="/rango_comision/create" class="btn btn-success">
+            Nuevo rango de comision
+        </a>
+    </p>
+    <table class="table" id="sampleTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MIN_COMISION)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MAX_COMISION)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PORCENTAJE_POR_COMISION)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MIN_COMISION)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MAX_COMISION)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PORCENTAJE_POR_COMISION)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID_RANGO }, htmlAttributes: new { @class = "btn btn-warning" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID_RANGO }, htmlAttributes: new { @class = "btn btn-info" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID_RANGO }, htmlAttributes: new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

@@ -193,6 +193,7 @@
     <Compile Include="Controllers\CATALOGO_DESCUENTOController.cs" />
     <Compile Include="Controllers\DEPARTAMENTOController.cs" />
     <Compile Include="Controllers\DESCUENTO_RENTAController.cs" />
+    <Compile Include="Controllers\EMPLEADOesController.cs" />
     <Compile Include="Controllers\EMPRESAController.cs" />
     <Compile Include="Controllers\CATALOGO_INGRESOController.cs" />
     <Compile Include="Controllers\ESTADO_CIVILController.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Controllers\PLANILLAsController.cs" />
     <Compile Include="Controllers\PROFESIONController.cs" />
     <Compile Include="Controllers\PUESTOController.cs" />
+    <Compile Include="Controllers\RANGO_COMISIONController.cs" />
     <Compile Include="Controllers\REGIONController.cs" />
     <Compile Include="Controllers\ROLsController.cs" />
     <Compile Include="Controllers\SALARIO_MINIMOController.cs" />
@@ -452,6 +454,16 @@
     <Content Include="Views\DESCUENTO_RENTA\Details.cshtml" />
     <Content Include="Views\DESCUENTO_RENTA\Edit.cshtml" />
     <Content Include="Views\DESCUENTO_RENTA\Index.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Create.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Delete.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Details.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Edit.cshtml" />
+    <Content Include="Views\RANGO_COMISION\Index.cshtml" />
+    <Content Include="Views\EMPLEADOes\Create.cshtml" />
+    <Content Include="Views\EMPLEADOes\Delete.cshtml" />
+    <Content Include="Views\EMPLEADOes\Details.cshtml" />
+    <Content Include="Views\EMPLEADOes\Edit.cshtml" />
+    <Content Include="Views\EMPLEADOes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
