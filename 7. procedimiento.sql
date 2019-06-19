@@ -1,4 +1,4 @@
-create procedure guardar_planilla
+create or alter procedure guardar_planilla
 @id_empresa int, 
 @id_planilla int
 as 
@@ -19,24 +19,24 @@ begin
 	insert into DESCUENTO (ID_HISTORIAL,NOMBRE_DESCUENTO_HISTORIAL,DESCUENTO_HISTORIAL) values (@id_historia,'Renta',@rent*@SALARIO_BASE);
 
 	if(@COMISION=1)
-	begin
-		insert into INGRESO (ID_HISTORIAL,NOMBRE_INGRESO_HISTORIAL,INGRESO_HISTORIAL) 
-			select @id_historia as ID_HISTORIAL,ca.NOMBRE_INGRESO, case ca.DELEY_INGRESO when 1 then 
-			ca.INGRESO*ca.COMISION
-			else 
-			ca.INGRESO
-			end as ingreso_historial from CATALOGO_INGRESO as ca join INGRESO_EMPLEADO as i on ca.ID_INGRESO = i.ID_EMPLEADO where i.ID_EMPLEADO = @ID_EMPLEADO and ca.ACTIVO = 1
-	end
+		begin
+			insert into INGRESO (ID_HISTORIAL,NOMBRE_INGRESO_HISTORIAL,INGRESO_HISTORIAL) 
+				select @id_historia as ID_HISTORIAL,ca.NOMBRE_INGRESO, case ca.DELEY_INGRESO when 1 then 
+				ca.INGRESO*ca.COMISION
+				else 
+				ca.INGRESO
+				end as ingreso_historial from CATALOGO_INGRESO as ca join INGRESO_EMPLEADO as i on ca.ID_INGRESO = i.ID_INGRESO where i.ID_EMPLEADO = @ID_EMPLEADO and ca.ACTIVO = 1 and i.HABILITAR_INGRESO = 1
+		end
 	else
-	begin
-		insert into INGRESO (ID_HISTORIAL,NOMBRE_INGRESO_HISTORIAL,INGRESO_HISTORIAL) 
-			select @id_historia as ID_HISTORIAL,ca.NOMBRE_INGRESO, case ca.DELEY_INGRESO when 1 then 
-			null
-			else 
-			ca.INGRESO
-			end as ingreso_historial from CATALOGO_INGRESO as ca join INGRESO_EMPLEADO as i on ca.ID_INGRESO = i.ID_EMPLEADO where i.ID_EMPLEADO = @ID_EMPLEADO and ca.ACTIVO = 1
-	end
-
+		begin
+			insert into INGRESO (ID_HISTORIAL,NOMBRE_INGRESO_HISTORIAL,INGRESO_HISTORIAL) 
+				select @id_historia as ID_HISTORIAL,ca.NOMBRE_INGRESO, case ca.DELEY_INGRESO when 1 then 
+				0.0
+				else 
+				ca.INGRESO
+				end as ingreso_historial from CATALOGO_INGRESO as ca join INGRESO_EMPLEADO as i on ca.ID_INGRESO = i.ID_INGRESO where i.ID_EMPLEADO = @ID_EMPLEADO and ca.ACTIVO = 1 and i.HABILITAR_INGRESO = 1
+		end
+	
 
 	insert into DESCUENTO  (ID_HISTORIAL,NOMBRE_DESCUENTO_HISTORIAL,DESCUENTO_HISTORIAL)
 		select @id_historia as ID_HISTORIAL, ca_des.NOMBRE_DESCUENTO, case ca_des.DELEY_DESCUENTO
@@ -61,6 +61,9 @@ end try
 begin catch
 rollback transaction
 end catch
+
+
+
 
 
 

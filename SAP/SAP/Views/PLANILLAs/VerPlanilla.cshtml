@@ -91,23 +91,33 @@
 								@{int conteo = 0;}
 
 								@foreach (var valor in detalle.ingreso_empleados)
-								{
-									conteo = conteo + 1;
-									if (valor.HABILITAR_INGRESO)
-									{
-										if (valor.ingreso.DELEY_INGRESO)
-										{
-											decimal com = valor.ingreso.INGRESO * valor.ingreso.COMISION;
-											total = total + (double)com;
-											<td class="text-center">@string.Format("{0:0.00}", com)</td>
-										}
-										else
-										{
-											total = total + (double)@valor.ingreso.INGRESO;
-											<td class="text-center">@string.Format("{0:0.00}", valor.ingreso.INGRESO)</td>
-										}
-									}
-								}
+                                {
+                                    conteo = conteo + 1;
+                                    if (valor.HABILITAR_INGRESO)
+                                    {
+                                        if (valor.ingreso.ACTIVO)
+                                        {
+                                            if (valor.ingreso.DELEY_INGRESO)
+                                            {
+                                                if (detalle.COMISION)
+                                                {
+                                                    decimal com = valor.ingreso.INGRESO * valor.ingreso.COMISION;
+                                                    total = total + (double)com;
+                                                    <td class="text-center">@string.Format("{0:0.00}", com)</td>
+                                                }
+                                                else
+                                                {
+                                                    <td></td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                total = total + (double)@valor.ingreso.INGRESO;
+                                                <td class="text-center">@string.Format("{0:0.00}", valor.ingreso.INGRESO)</td>
+                                            }
+                                        }
+                                    }
+                                }
 								@if (conteo < ViewBag.cantidad_ingreso)
 								{
 									for (int i = 0; i < (ViewBag.cantidad_ingreso - conteo); i++)

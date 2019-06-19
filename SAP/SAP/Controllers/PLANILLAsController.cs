@@ -51,12 +51,31 @@ namespace SAP.Controllers
             }
             ViewBag.empleado = empleado;
             ViewBag.descuento = db.DESCUENTO_EMPLEADO.Where(DESCUENTO_EMPLEADO => DESCUENTO_EMPLEADO.ID_EMPLEADO == empleado.ID_EMPLEADO && DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO && DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO && DESCUENTO_EMPLEADO.descuento.ACTIVO);
-            ViewBag.ingreso = db.INGRESO_EMPLEADO.Where(INGRESO_EMPLEADO => INGRESO_EMPLEADO.ID_EMPLEADO == empleado.ID_EMPLEADO && INGRESO_EMPLEADO.HABILITAR_INGRESO && INGRESO_EMPLEADO.ingreso.ACTIVO);
+            ViewBag.ingreso = db.INGRESO_EMPLEADO.Where(INGRESO_EMPLEADO => INGRESO_EMPLEADO.ID_EMPLEADO == empleado.ID_EMPLEADO && INGRESO_EMPLEADO.HABILITAR_INGRESO==true && INGRESO_EMPLEADO.ingreso.ACTIVO==true);
 
             decimal total = empleado.SALARIO_BASE;
             decimal comision = 0;
+            decimal renta = empleado.SALARIO_BASE;
+            DESCUENTO_RENTA renta_descuento = null;
+            try
+            {
+                renta_descuento = db.DESCUENTO_RENTA.Where(DESCUENTO_RENTA => renta > (decimal)DESCUENTO_RENTA.MIN_RENTA && renta <= DESCUENTO_RENTA.MAX_RENTA).First();
+            }
+            catch (Exception)
+            {
 
-            foreach (INGRESO_EMPLEADO i in ViewBag.ingreso)
+            }
+
+            if (renta_descuento != null)
+            {
+                renta = renta * renta_descuento.PORCENTAJE_RENTA;
+            }
+            else{
+                renta = 0;
+            }
+            ViewBag.renta = renta;
+            total = total - renta;
+            foreach (INGRESO_EMPLEADO i in empleado.ingreso_empleados)
             {
                 if (!i.ingreso.DELEY_INGRESO)
                 {
@@ -66,7 +85,7 @@ namespace SAP.Controllers
                 {
                     if (empleado.COMISION != null && empleado.COMISION == true)
                     {
-                        RANGO_COMISION rango = db.RANGO_COMISION.Where(RANGO_COMISION => i.ingreso.INGRESO >= RANGO_COMISION.MIN_COMISION && i.ingreso.INGRESO <= RANGO_COMISION.MAX_COMISION).First();
+                        RANGO_COMISION rango = db.RANGO_COMISION.Where(RANGO_COMISION => i.ingreso.INGRESO > RANGO_COMISION.MIN_COMISION && i.ingreso.INGRESO <= RANGO_COMISION.MAX_COMISION).First();
                         if (rango != null)
                         {
                             comision = comision + (decimal)(i.ingreso.INGRESO * rango.PORCENTAJE_POR_COMISION);
