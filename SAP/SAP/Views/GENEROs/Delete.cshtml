@@ -1,34 +1,31 @@
 ﻿@model SAP.Models.GENERO
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar género";
 }
 
-<h2>Eliminar</h2>
+<div class="tile">
+	<h2>Eliminar género</h2>
+	<h3>¿Está seguro de eliminar este género?</h3>
+	<div>
+		<hr />
+		<dl class="dl-horizontal">
+			<dt>
+				Nombre de género
+			</dt>
+			<dd>
+				@Html.DisplayFor(model => model.NOMBRE_GENERO)
+			</dd>
+		</dl>
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
 
-<h3>Está seguro de eliminar el Género?</h3>
-<div>
-    <h4>GÉNERO</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            NOMBRE DE GÉNERO
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE_GENERO)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Regresar", "Index")
-        </div>
-    }
+			<div class="form-actions no-color">
+				<input type="submit" value="Eliminar" class="btn btn-danger" /> |
+				@Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-secondary" })
+			</div>
+		}
+	</div>
 </div>
 

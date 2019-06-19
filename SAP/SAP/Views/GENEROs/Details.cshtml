@@ -1,27 +1,25 @@
 ﻿@model SAP.Models.GENERO
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles de género";
 }
 
-<h2>Detalles</h2>
-
-<div>
-    <h4>GÉNERO</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            NOMBRE DE GÉNERO
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE_GENERO)
-        </dd>
-
-    </dl>
+<div class="tile">
+	<h2>Detalles de género</h2>
+	<div>
+		<hr />
+		<dl class="dl-horizontal">
+			<dt>
+				Nombre del género
+			</dt>
+			<dd>
+				@Html.DisplayFor(model => model.NOMBRE_GENERO)
+			</dd>
+		</dl>
+	</div>
+	<p>
+		@Html.ActionLink("Editar", "Edit", new { id = Model.ID_GENERO }, new { @class = "btn btn-warning"}) |
+		@Html.ActionLink("Regresar al listado de Géneros", "Index", null, new { @class = "btn btn-secondary"})
+	</p>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_GENERO }) |
-    @Html.ActionLink("Regresar", "Index")
-</p>
 

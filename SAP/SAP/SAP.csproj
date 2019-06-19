@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CATALOGO_DESCUENTOController.cs" />
     <Compile Include="Controllers\DEPARTAMENTOController.cs" />
+    <Compile Include="Controllers\DESCUENTO_RENTAController.cs" />
     <Compile Include="Controllers\EMPRESAController.cs" />
     <Compile Include="Controllers\CATALOGO_INGRESOController.cs" />
     <Compile Include="Controllers\ESTADO_CIVILController.cs" />
@@ -448,6 +449,11 @@
     <Content Include="Views\PUESTO\Details.cshtml" />
     <Content Include="Views\PUESTO\Edit.cshtml" />
     <Content Include="Views\PUESTO\Index.cshtml" />
+    <Content Include="Views\DESCUENTO_RENTA\Create.cshtml" />
+    <Content Include="Views\DESCUENTO_RENTA\Delete.cshtml" />
+    <Content Include="Views\DESCUENTO_RENTA\Details.cshtml" />
+    <Content Include="Views\DESCUENTO_RENTA\Edit.cshtml" />
+    <Content Include="Views\DESCUENTO_RENTA\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

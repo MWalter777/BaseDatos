@@ -1,38 +1,34 @@
 ﻿@model SAP.Models.GENERO
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear género";
 }
 
-<h2>Nuevo</h2>
+<div class="tile">
+	<h2>Crear género</h2>
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>GÉNERO</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
-
-        <div class="form-group">
-            NOMBRE DE GÉNERO
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NOMBRE_GENERO, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NOMBRE_GENERO, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Regresar", "Index")
+		<div class="form-horizontal">
+			<hr />
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group">
+				@Html.LabelFor(model => model.NOMBRE_GENERO, "Nombre del género", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.NOMBRE_GENERO, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.NOMBRE_GENERO, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Crear" class="btn btn-primary" />
+				</div>
+			</div>
+		</div>
+	}
+	<div>
+		@Html.ActionLink("Regresar al listado de géneros", "Index", null, new { @class = "btn btn-secondary" })
+	</div>
 </div>
 
