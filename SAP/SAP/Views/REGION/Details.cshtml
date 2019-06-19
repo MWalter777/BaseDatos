@@ -4,47 +4,39 @@
     ViewBag.Title = "Detalles de región";
 }
 
-<h2>Detalles de región</h2>
-
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nombre de región
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE_REGION)
-        </dd>
-
-        <dt>
-            Código de región
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CODIGO_REGION)
-        </dd>
-
-        <dt>
-            País
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PAIS.NOMBRE_PAIS)
-        </dd>
-
-        <dt>
-            Código de país
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PAIS.CODIGO_PAIS)
-        </dd>
-
-    </dl>
+<div class="tile">
+	<h2>Detalles de región</h2>
+	<div>
+		<hr />
+		<dl class="dl-horizontal">
+			<dt>
+				Nombre de región
+			</dt>
+			<dd>
+				@Html.DisplayFor(model => model.NOMBRE_REGION)
+			</dd>
+			<dt>
+				Código de región
+			</dt>
+			<dd>
+				@Html.DisplayFor(model => model.CODIGO_REGION)
+			</dd>
+			<dt>
+				País
+			</dt>
+			<dd>
+				@Html.DisplayFor(model => model.PAIS.NOMBRE_PAIS)
+			</dd>
+			<dt>
+				Código de país
+			</dt>
+			<dd>
+				@Html.DisplayFor(model => model.PAIS.CODIGO_PAIS)
+			</dd>
+		</dl>
+	</div>
+	<p>
+		@Html.ActionLink("Editar", "Edit", new { id = Model.ID_REGION }, new { @class = "btn btn-warning" }) |
+		@Html.ActionLink("Regresar al listado de regiones", "Index", null, new { @class = "btn btn-secondary" })
+	</p>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_REGION }, new { @class = "btn btn-warning"}) |
-    @Html.ActionLink("Regresar al listado de regiones", "Index", null, new { @class = "btn btn-secondary"})
-</p>
-

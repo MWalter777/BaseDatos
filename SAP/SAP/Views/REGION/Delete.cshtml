@@ -4,41 +4,38 @@
     ViewBag.Title = "Eliminar región";
 }
 
-<h2>Eliminar región</h2>
-@if (ViewBag.error != null)
-{
-    <h2 class="text-center alert-danger">@ViewBag.error</h2>
-}
-<h3>¿Está seguro de eliminar la región?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nombre de región
-        </dt>
+<div class="tile">
+	<h2>Eliminar región</h2>
+	@if (ViewBag.error != null)
+	{
+		<h2 class="text-center alert-danger">@ViewBag.error</h2>
+	}
+	<h3>¿Está seguro de eliminar la región?</h3>
+	<div>
+		<hr />
+		<dl class="dl-horizontal">
+			<dt>
+				Nombre de región
+			</dt>
+			<dd>
+				@Html.DisplayFor(model => model.NOMBRE_REGION)
+			</dd>
+			<dt>
+				Código de región
+			</dt>
+			<dd>
+				@Html.DisplayFor(model => model.CODIGO_REGION)
+			</dd>
+		</dl>
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE_REGION)
-        </dd>
-
-        <dt>
-            Código de región
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CODIGO_REGION)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            @Html.ActionLink("Regresar al listado de regiones", "Index", null, new { @class = "btn btn-secondary" })
-        </div>
-    }
+			<div class="form-actions no-color">
+				<input type="submit" value="Eliminar" class="btn btn-danger" /> |
+				@Html.ActionLink("Regresar al listado de regiones", "Index", null, new { @class = "btn btn-secondary" })
+			</div>
+		}
+	</div>
 </div>
 
