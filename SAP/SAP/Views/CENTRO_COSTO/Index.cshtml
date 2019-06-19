@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SAP.Models.CENTRO_COSTO>
+
+@{
+    ViewBag.Title = "Index";
+}
+    <div class="tile">
+        <h2>CENTRO DE COSTOS</h2>
+        @if (ViewBag.error != null)
+        {
+            <h2 class="text-center alert-danger">@ViewBag.error</h2>
+        }
+        <p>
+            @Html.ActionLink("Nuevo Centro de Costo", "Create")
+        </p>
+        <table class="table" id="sampleTable">
+            <tr>
+
+                <th>
+                    DEPARTAMENTO
+                </th>
+                <th>
+                    AÑO CALENDARIO
+                </th>
+                <th>
+                    MONTO ASIGNADO
+                </th>
+                <th>
+                    SALDO
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DEPARTAMENTO.NOMBRE_DEPARTAMENTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ANIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MONTO_ASIGNADO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SALDO)
+            </td>
+            <td>
+                @Html.ActionLink("Detalles", "Details", new { id = item.ID_CENTRO_COSTO }, htmlAttributes: new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+            }
+
+        </table>
+    </div>

@@ -1,0 +1,31 @@
+﻿@model SAP.Models.DIRECCION
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+@if (ViewBag.error != null)
+{
+    <h2 class="text-center alert-danger">@ViewBag.error</h2>
+}
+<h3>Está seguro de eliminar la dirección?</h3>
+<div>
+    <h4>DIRECCION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>
+

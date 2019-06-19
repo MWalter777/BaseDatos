@@ -191,7 +191,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CATALOGO_DESCUENTOController.cs" />
+    <Compile Include="Controllers\CENTRO_COSTOController.cs" />
     <Compile Include="Controllers\DEPARTAMENTOController.cs" />
+    <Compile Include="Controllers\DIRECCIONController.cs" />
     <Compile Include="Controllers\EMPRESAController.cs" />
     <Compile Include="Controllers\ESTADO_CIVILController.cs" />
     <Compile Include="Controllers\GENEROsController.cs" />
@@ -428,6 +430,16 @@
     <Content Include="Views\PUESTO\Details.cshtml" />
     <Content Include="Views\PUESTO\Edit.cshtml" />
     <Content Include="Views\PUESTO\Index.cshtml" />
+    <Content Include="Views\CENTRO_COSTO\Create.cshtml" />
+    <Content Include="Views\CENTRO_COSTO\Delete.cshtml" />
+    <Content Include="Views\CENTRO_COSTO\Details.cshtml" />
+    <Content Include="Views\CENTRO_COSTO\Edit.cshtml" />
+    <Content Include="Views\CENTRO_COSTO\Index.cshtml" />
+    <Content Include="Views\DIRECCION\Create.cshtml" />
+    <Content Include="Views\DIRECCION\Delete.cshtml" />
+    <Content Include="Views\DIRECCION\Details.cshtml" />
+    <Content Include="Views\DIRECCION\Edit.cshtml" />
+    <Content Include="Views\DIRECCION\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

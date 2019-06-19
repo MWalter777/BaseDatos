@@ -18,5 +18,7 @@ namespace SAP.Models
         public decimal MONTO_ASIGNADO { get; set; }
 
         public decimal SALDO { get; set; }
+
+        public virtual DEPARTAMENTO DEPARTAMENTO { get; set; }
     }
 }

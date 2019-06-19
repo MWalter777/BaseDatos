@@ -1,0 +1,101 @@
+﻿@model SAP.Models.DIRECCION
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Actualizar</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="tile">
+    <h4>DIRECCIÓN</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID_DIRECCION)
+
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Barrio</label>
+            @Html.EditorFor(model => model.BARRIO, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BARRIO, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Colonia</label>
+            @Html.EditorFor(model => model.COLONIA, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.COLONIA, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Cantón</label>
+            @Html.EditorFor(model => model.CANTON, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CANTON, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Caserío</label>
+            @Html.EditorFor(model => model.CASERIO, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CASERIO, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Calle</label>
+            @Html.EditorFor(model => model.CALLE, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CALLE, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Avenida</label>
+            @Html.EditorFor(model => model.AVENIDA, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AVENIDA, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Pasaje</label>
+            @Html.EditorFor(model => model.PASAJE, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PASAJE, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Residencial</label>
+            @Html.EditorFor(model => model.RESIDENCIAL, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RESIDENCIAL, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Número de Casa</label>
+            @Html.EditorFor(model => model.NUMERO_CASA, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NUMERO_CASA, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <label class="col-md-3">Sub región</label>
+            @Html.DropDownList("ID_SUB_REGION", "Seleccione el Pais")
+            @Html.ValidationMessageFor(model => model.ID_SUB_REGION, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="col-md-offset-2 col-md-8">
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>
+

@@ -1,0 +1,43 @@
+﻿@model SAP.Models.CENTRO_COSTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>DETALLES DE</h2>
+
+<div>
+    <h4>PUESTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            ID CENTRO COSTO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_CENTRO_COSTO)
+        </dd>
+
+        <dt>
+            MONTO ASIGNADO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MONTO_ASIGNADO)
+        </dd>
+
+        <dt>
+            SALDO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SALDO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_CENTRO_COSTO }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>
+
