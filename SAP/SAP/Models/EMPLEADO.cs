@@ -23,13 +23,28 @@ namespace SAP.Models
 
         public int ID_DIRECCION { get; set; }
 
+        [ForeignKey("ID_DIRECCION")]
+        public virtual DIRECCION direccion { get; set; }
+
         public int? EMP_ID_EMPLEADO { get; set; }
+
+        [ForeignKey("EMP_ID_EMPLEADO")]
+        public virtual EMPLEADO jefe { get; set; }
 
         public int ID_GENERO { get; set; }
 
+        [ForeignKey("ID_GENERO")]
+        public virtual GENERO genero { get; set; }
+
         public int? ID_PROFESION { get; set; }
 
+        [ForeignKey("ID_PROFESION")]
+        public virtual PROFESION profesion { get; set; }
+
         public int ID_ESTADO_CIVIL { get; set; }
+
+        [ForeignKey("ID_ESTADO_CIVIL")]
+        public virtual ESTADO_CIVIL estado_civil { get; set; }
 
         public int ID_PUESTO { get; set; }
 

@@ -17,7 +17,7 @@ namespace SAP.Controllers
         // GET: EMPLEADOes
         public ActionResult Index()
         {
-            var eMPLEADO = db.EMPLEADO.Include(e => e.puesto);
+            var eMPLEADO = db.EMPLEADO.Include(e => e.direccion).Include(e => e.estado_civil).Include(e => e.genero).Include(e => e.jefe).Include(e => e.profesion).Include(e => e.puesto);
             return View(eMPLEADO.ToList());
         }
 
@@ -39,6 +39,11 @@ namespace SAP.Controllers
         // GET: EMPLEADOes/Create
         public ActionResult Create()
         {
+            ViewBag.ID_DIRECCION = new SelectList(db.DIRECCION, "ID_DIRECCION", "BARRIO");
+            ViewBag.ID_ESTADO_CIVIL = new SelectList(db.ESTADO_CIVIL, "ID_ESTADO_CIVIL", "NOMBRE_ESTADO_CIVIL");
+            ViewBag.ID_GENERO = new SelectList(db.GENERO, "ID_GENERO", "NOMBRE_GENERO");
+            ViewBag.EMP_ID_EMPLEADO = new SelectList(db.EMPLEADO, "ID_EMPLEADO", "CODIGO_EMPLEADO");
+            ViewBag.ID_PROFESION = new SelectList(db.PROFESION, "ID_PROFESION", "NOMBRE_PROFESION");
             ViewBag.ID_PUESTO = new SelectList(db.PUESTO, "ID_PUESTO", "CODIGO_PUESTO");
             return View();
         }
@@ -57,6 +62,11 @@ namespace SAP.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ID_DIRECCION = new SelectList(db.DIRECCION, "ID_DIRECCION", "BARRIO", eMPLEADO.ID_DIRECCION);
+            ViewBag.ID_ESTADO_CIVIL = new SelectList(db.ESTADO_CIVIL, "ID_ESTADO_CIVIL", "NOMBRE_ESTADO_CIVIL", eMPLEADO.ID_ESTADO_CIVIL);
+            ViewBag.ID_GENERO = new SelectList(db.GENERO, "ID_GENERO", "NOMBRE_GENERO", eMPLEADO.ID_GENERO);
+            ViewBag.EMP_ID_EMPLEADO = new SelectList(db.EMPLEADO, "ID_EMPLEADO", "CODIGO_EMPLEADO", eMPLEADO.EMP_ID_EMPLEADO);
+            ViewBag.ID_PROFESION = new SelectList(db.PROFESION, "ID_PROFESION", "NOMBRE_PROFESION", eMPLEADO.ID_PROFESION);
             ViewBag.ID_PUESTO = new SelectList(db.PUESTO, "ID_PUESTO", "CODIGO_PUESTO", eMPLEADO.ID_PUESTO);
             return View(eMPLEADO);
         }
@@ -73,6 +83,11 @@ namespace SAP.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ID_DIRECCION = new SelectList(db.DIRECCION, "ID_DIRECCION", "BARRIO", eMPLEADO.ID_DIRECCION);
+            ViewBag.ID_ESTADO_CIVIL = new SelectList(db.ESTADO_CIVIL, "ID_ESTADO_CIVIL", "NOMBRE_ESTADO_CIVIL", eMPLEADO.ID_ESTADO_CIVIL);
+            ViewBag.ID_GENERO = new SelectList(db.GENERO, "ID_GENERO", "NOMBRE_GENERO", eMPLEADO.ID_GENERO);
+            ViewBag.EMP_ID_EMPLEADO = new SelectList(db.EMPLEADO, "ID_EMPLEADO", "CODIGO_EMPLEADO", eMPLEADO.EMP_ID_EMPLEADO);
+            ViewBag.ID_PROFESION = new SelectList(db.PROFESION, "ID_PROFESION", "NOMBRE_PROFESION", eMPLEADO.ID_PROFESION);
             ViewBag.ID_PUESTO = new SelectList(db.PUESTO, "ID_PUESTO", "CODIGO_PUESTO", eMPLEADO.ID_PUESTO);
             return View(eMPLEADO);
         }
@@ -90,6 +105,11 @@ namespace SAP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ID_DIRECCION = new SelectList(db.DIRECCION, "ID_DIRECCION", "BARRIO", eMPLEADO.ID_DIRECCION);
+            ViewBag.ID_ESTADO_CIVIL = new SelectList(db.ESTADO_CIVIL, "ID_ESTADO_CIVIL", "NOMBRE_ESTADO_CIVIL", eMPLEADO.ID_ESTADO_CIVIL);
+            ViewBag.ID_GENERO = new SelectList(db.GENERO, "ID_GENERO", "NOMBRE_GENERO", eMPLEADO.ID_GENERO);
+            ViewBag.EMP_ID_EMPLEADO = new SelectList(db.EMPLEADO, "ID_EMPLEADO", "CODIGO_EMPLEADO", eMPLEADO.EMP_ID_EMPLEADO);
+            ViewBag.ID_PROFESION = new SelectList(db.PROFESION, "ID_PROFESION", "NOMBRE_PROFESION", eMPLEADO.ID_PROFESION);
             ViewBag.ID_PUESTO = new SelectList(db.PUESTO, "ID_PUESTO", "CODIGO_PUESTO", eMPLEADO.ID_PUESTO);
             return View(eMPLEADO);
         }
