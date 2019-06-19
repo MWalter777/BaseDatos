@@ -35,9 +35,9 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th class="text-center">Codigo</th>
+							<th class="text-center">Código</th>
 							<th class="text-center">Empleado</th>
-							<th class="text-center">Salario base</th>
+							<th class="text-center">Salario Base</th>
 							<th class="text-center">Renta</th>
 							<th class="text-center">Comisión</th>
 							@foreach (var item_ingreso in ViewBag.catalogo_ingreso)
@@ -50,7 +50,7 @@
 									}
 									else
 									{
-										<th class="text-center">
+										<th class="text-center text-capitalize">
 											@item_ingreso.NOMBRE_INGRESO
 										</th>
 									}
@@ -59,7 +59,7 @@
 
 							@foreach (var item_descuento in ViewBag.cabecera_descuento)
 							{
-								<th class="text-center">
+								<th class="text-center text-capitalize">
 									@item_descuento
 								</th>
 							}
@@ -79,6 +79,7 @@
 								if (detalle.SALARIO_BASE > renta.MIN_RENTA && detalle.SALARIO_BASE < renta.MAX_RENTA)
 								{
 									suma_renta = (double)detalle.SALARIO_BASE * (double)renta.PORCENTAJE_RENTA;
+									total = total - suma_renta;
 								}
 							}
 
@@ -98,12 +99,12 @@
 										{
 											decimal com = valor.ingreso.INGRESO * valor.ingreso.COMISION;
 											total = total + (double)com;
-											<td class="text-center">@com</td>
+											<td class="text-center">@string.Format("{0:0.00}", com)</td>
 										}
 										else
 										{
 											total = total + (double)@valor.ingreso.INGRESO;
-											<td class="text-center">@valor.ingreso.INGRESO</td>
+											<td class="text-center">@string.Format("{0:0.00}", valor.ingreso.INGRESO)</td>
 										}
 									}
 								}
@@ -111,7 +112,7 @@
 								{
 									for (int i = 0; i < (ViewBag.cantidad_ingreso - conteo); i++)
 									{
-										<td></td>
+										<td class="text-center">0</td>
 									}
 								}
 
@@ -133,12 +134,12 @@
 													if (valor.descuento.DELEY_DESCUENTO)
 													{
 														decimal desc = detalle.SALARIO_BASE * valor.descuento.PORCENTAJE;
-														<td class="text-center">@desc</td>
+														<td class="text-center">@string.Format("{0:0.00}", desc)</td>
 														total = total - (double)desc;
 													}
 													else
 													{
-														<td class="text-center">@valor.descuento.DESCUENTO</td>
+														<td class="text-center">@string.Format("{0:0.00}", valor.descuento.DESCUENTO)</td>
 														total = total - (double)@valor.descuento.DESCUENTO;
 													}
 												}
@@ -171,12 +172,12 @@
 									}
 								}
 								@{total_planilla = total_planilla + total;}
-								<td>@total</td>
+								<td class="text-center">@string.Format("{0:0.00}", total)</td>
 							</tr>
 						}
 						<tr>
-							<td colspan="@ViewBag.total_espacio" class="text-right"> Total </td>
-							<td>@total_planilla</td>
+							<td colspan="@ViewBag.total_espacio" class="text-right font-weight-bold">TOTAL</td>
+							<td class="text-center">@string.Format("{0:0.00}", total_planilla)</td>
 						</tr>
 					</tbody>
 				</table>
