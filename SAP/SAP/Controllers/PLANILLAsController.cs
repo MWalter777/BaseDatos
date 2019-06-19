@@ -38,11 +38,6 @@ namespace SAP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLANILLA planilla = db.PLANILLA.Find(id);
-            if (planilla == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             EMPLEADO empleado = db.EMPLEADO.Find(id);
             if (empleado == null)
             {
@@ -55,8 +50,8 @@ namespace SAP.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ViewBag.empleado = empleado;
-            ViewBag.descuento = db.DESCUENTO_EMPLEADO.Where(DESCUENTO_EMPLEADO => DESCUENTO_EMPLEADO.ID_EMPLEADO == empleado.ID_EMPLEADO && DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO);
-            ViewBag.ingreso = db.INGRESO_EMPLEADO.Where(INGRESO_EMPLEADO => INGRESO_EMPLEADO.ID_EMPLEADO == empleado.ID_EMPLEADO);
+            ViewBag.descuento = db.DESCUENTO_EMPLEADO.Where(DESCUENTO_EMPLEADO => DESCUENTO_EMPLEADO.ID_EMPLEADO == empleado.ID_EMPLEADO && DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO && DESCUENTO_EMPLEADO.HABILITAR_DESCUENTO && DESCUENTO_EMPLEADO.descuento.ACTIVO);
+            ViewBag.ingreso = db.INGRESO_EMPLEADO.Where(INGRESO_EMPLEADO => INGRESO_EMPLEADO.ID_EMPLEADO == empleado.ID_EMPLEADO && INGRESO_EMPLEADO.HABILITAR_INGRESO && INGRESO_EMPLEADO.ingreso.ACTIVO);
 
             decimal total = empleado.SALARIO_BASE;
             decimal comision = 0;
@@ -106,7 +101,6 @@ namespace SAP.Controllers
             ViewBag.comision = comision;
             ViewBag.tipo_pago = tipo_pago;
             ViewBag.total = total;
-            ViewBag.planilla = planilla;            
             return View();
         }
 
