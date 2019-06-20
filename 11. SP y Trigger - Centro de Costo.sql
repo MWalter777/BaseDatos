@@ -115,7 +115,7 @@ begin
 			declare @saldo numeric(8,2)
 			select @saldo=saldo from CENTRO_COSTO where ID_CENTRO_COSTO=@id_centro_costo
 			--select @total2=@total2+@total
-			update CENTRO_COSTO set SALDO=@total2 WHERE ID_CENTRO_COSTO=@id_centro_costo and ANIO=@anio
+			update CENTRO_COSTO set SALDO=@saldo+@total2 WHERE ID_CENTRO_COSTO=@id_centro_costo and ANIO=@anio
 			FETCH NEXT FROM cursor_centro_costo into @id_centro_costo
 		END
 		close cursor_centro_costo;

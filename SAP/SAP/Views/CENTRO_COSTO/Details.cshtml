@@ -9,38 +9,79 @@
 <div>
     <h4>CENTRO DE COSTO</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            ID CENTRO COSTO
-        </dt>
+    <table class="table" id="sampleTable">
+        <tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.ID_CENTRO_COSTO)
-        </dd>
+            <th>
+                DEPARTAMENTO
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.DEPARTAMENTO.NOMBRE_DEPARTAMENTO)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                AÑO CALENDARIO
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.ANIO)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                PRESUPUESTO
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.MONTO_ASIGNADO)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                DESCUENTO
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.SALDO)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                CANTIDAD ACTUAL
+            </th>
 
-        <dt>
-            MONTO ASIGNADO
-        </dt>
+            @{double total = 0;}
+            @{total = (double)Model.MONTO_ASIGNADO - (double)Model.SALDO;}
+            @if (total >= 0)
+            {
+                <td class="text-center">@string.Format("{0:0.00}", total)</td>
+            }
+            else
+            {
+                <td class="text-center">@string.Format("{0:0.00}", 0)</td>
+                <div class="alert alert-danger">Cantidad Actual menor a 0, presupuesto insuficiente del departamento: @Html.DisplayFor(model => model.DEPARTAMENTO.NOMBRE_DEPARTAMENTO) para cubrir pagos de planilla</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MONTO_ASIGNADO)
-        </dd>
+            }
+        </tr>
+        <tr>
+            <th>
+                CANTIDAD SIN PAGAR
+            </th>
 
-        <dt>
-            DESCUENTO
-        </dt>
+            @{total = (double)Model.SALDO - (double)Model.MONTO_ASIGNADO;}
+            @if (total >= 0)
+            {
+                <td class="text-center" style="color:red;">@string.Format("{0:0.00}", total)</td>
+            }
+            else
+            {
+                <td class="text-center" style="color:red;">@string.Format("{0:0.00}", 0)</td>
 
-        <dd>
-            @Html.DisplayFor(model => model.SALDO)
-        </dd>
-        <dt>
-            TOTAL
-        </dt>
-        <dd>
-            
-        </dd>
 
-    </dl>
+            }
+        </tr>
+
+
+    </table>
+
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.ID_CENTRO_COSTO }) |
