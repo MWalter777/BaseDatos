@@ -1,145 +1,187 @@
 ﻿@model SAP.Models.EMPLEADO
 
 @{
-    ViewBag.Title = "Detalles de empleado";
+    ViewBag.Title = "Details";
 }
+
+<h2>Details</h2>
+
+
 <div class="tile">
-    <h2 class="text-center">Empleado: @Model.APELLIDO_PATERNO @Model.PRIMER_NOMBRE </h2>
-    @if (ViewBag.error != null)
-    {
-        <h2 class="text-center alert-danger">@ViewBag.error</h2>
-    }
+    <h4>EMPLEADO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.direccion.BARRIO)
+        </dt>
 
-    @if (ViewBag.exito != null)
-    {
-        <h2 class="text-center alert-info">@ViewBag.exito</h2>
-    }
+        <dd>
+            @Html.DisplayFor(model => model.direccion.BARRIO)
+        </dd>
 
-    <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                <label class="col-md-3">Direccion</label>
-                <label class="col-md-7">@Model.direccion.COLONIA, @Model.direccion.BARRIO,@Model.direccion.CANTON, @Model.direccion.CASERIO</label>
-            </dt>
-            <dt>
-                <label class="col-md-3">Estado civil</label>
-                <label class="col-md-7">@Html.DisplayFor(model => model.estado_civil.NOMBRE_ESTADO_CIVIL)</label>
-            </dt>
-            <dd>
-                <label class="col-md-3">Genero</label>
-                <label class="col-md-7">@Html.DisplayFor(model => model.genero.NOMBRE_GENERO)</label>
-            </dd>
-            <dd>
-                <label class="col-md-3">Jefe: </label>
-                @if (Model.jefe != null)
-                {
-                    <label class="col-md-7">@Html.DisplayFor(model => model.jefe.APELLIDO_PATERNO), @Html.DisplayFor(model => model.jefe.PRIMER_NOMBRE)</label>
-                }
-                else
-                {
-                    <label class="col-md-7">Es jefe</label>
-                }
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.estado_civil.NOMBRE_ESTADO_CIVIL)
+        </dt>
 
-            <dd>
-                <label class="col-md-3">Profesion</label>
-                @if (Model.profesion != null)
-                {
-                    <label class="col-md-7">@Html.DisplayFor(model => model.profesion.NOMBRE_PROFESION)</label>
-                }
-                else
-                {
-                    <label class="col-md-3">No tiene</label>
-                }
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.estado_civil.NOMBRE_ESTADO_CIVIL)
+        </dd>
 
-            <dd>
-                <label class="col-md-3">Puesto: </label>
-                <label class="col-md-2">@Html.DisplayFor(model => model.puesto.NOMBRE_PUESTO)</label>
-                <label class="col-md-2">Departamento: </label>
-                <label class="col-md-2">@Html.DisplayFor(model => model.puesto.DEPARTAMENTO.NOMBRE_DEPARTAMENTO)</label>
-            </dd>
-            <dd>
-                <label class="col-md-3">Codigo: </label>
-                <label class="col-md-2">@Html.DisplayFor(model => model.CODIGO_EMPLEADO)</label>
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.genero.NOMBRE_GENERO)
+        </dt>
 
-            <dd>
-                <label class="col-md-3">Nombre: </label>
-                <label class="col-md-7">
-                    @Html.DisplayFor(model => model.APELLIDO_PATERNO)
-                    @Html.DisplayFor(model => model.APELLIDO_MATERNO),
-                    @Html.DisplayFor(model => model.PRIMER_NOMBRE)
-                    @Html.DisplayFor(model => model.SEGUNDO_NOMBRE)
-                </label>
-            </dd>
-            <dd>
-                <label class="col-md-3">Fecha de nacimiento: </label>
-                <label class="col-md-3">@Html.DisplayFor(model => model.FECHA_NACIMIENTO)</label>
-            </dd>
-            <dd>
-                <label class="col-md-3">DUI:</label>
-                <label class="col-md-3">@Html.DisplayFor(model => model.DUI)</label>
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.genero.NOMBRE_GENERO)
+        </dd>
 
-            <dd>
-                <label class="col-md-3">Pasaporte:</label>
-                <label class="col-md-3">@Html.DisplayFor(model => model.PASAPORTE)</label>
-            </dd>
-            <dd>
-                <label class="col-md-3">Pasaporte:</label>
-                <label class="col-md-7">@Html.DisplayFor(model => model.NIT)</label>
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.jefe.CODIGO_EMPLEADO)
+        </dt>
 
-            <dd>
-                <label class="col-md-3">Seguro Social:</label>
-                <label class="col-md-7">@Html.DisplayFor(model => model.ISSS)</label>
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.jefe.CODIGO_EMPLEADO)
+        </dd>
 
-            <dd>
-                <label class="col-md-3">NUP:</label>
-                <label class="col-md-7">@Html.DisplayFor(model => model.NUP)</label>
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.profesion.NOMBRE_PROFESION)
+        </dt>
 
-            <dd>
-                <label class="col-md-3">Salario base:</label>
-                <label class="col-md-7">@Html.DisplayFor(model => model.SALARIO_BASE)</label>
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.profesion.NOMBRE_PROFESION)
+        </dd>
 
-            <dd>
-                <label class="col-md-3">Correo personal:</label>
-                <label class="col-md-7">@Html.DisplayFor(model => model.CORREO_PERSONAL)</label>
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.puesto.CODIGO_PUESTO)
+        </dt>
 
-            <dd>
-                <label class="col-md-3">Correo institucional:</label>
-                <label class="col-md-7">@Html.DisplayFor(model => model.CORREO_INSTITUCIONAL)</label>
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.puesto.CODIGO_PUESTO)
+        </dd>
 
-            <dd>
-                <label class="col-md-3">¿Tiene comision?</label>
-                @if (Model.COMISION != null)
-                {
-                    if (Model.COMISION==true)
-                    {
-                        <label class="col-md-3">SI</label>
-                    }
-                    else
-                    {
-                        <label class="col-md-3">NO</label>
-                    }
-                }
-                else
-                {
-                    <label class="col-md-3">NO</label>
-                }
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CODIGO_EMPLEADO)
+        </dt>
 
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-warning" }) |
-        <a href="/empleadoes/" class="btn btn-info">Regresar</a>
-    </p>
+        <dd>
+            @Html.DisplayFor(model => model.CODIGO_EMPLEADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APELLIDO_MATERNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APELLIDO_MATERNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APELLIDO_PATERNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APELLIDO_PATERNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRIMER_NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRIMER_NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEGUNDO_NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEGUNDO_NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_NACIMIENTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_NACIMIENTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DUI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DUI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASAPORTE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASAPORTE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NIT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NIT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISSS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISSS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NUP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SALARIO_BASE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SALARIO_BASE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CORREO_PERSONAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CORREO_PERSONAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CORREO_INSTITUCIONAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CORREO_INSTITUCIONAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COMISION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMISION)
+        </dd>
+
+    </dl>
 </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_EMPLEADO }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

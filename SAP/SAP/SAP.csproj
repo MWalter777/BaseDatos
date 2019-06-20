@@ -474,12 +474,12 @@
     <Content Include="Views\RANGO_COMISION\Details.cshtml" />
     <Content Include="Views\RANGO_COMISION\Edit.cshtml" />
     <Content Include="Views\RANGO_COMISION\Index.cshtml" />
+    <Content Include="Views\Error\_ErrorPage.cshtml" />
     <Content Include="Views\EMPLEADOes\Create.cshtml" />
     <Content Include="Views\EMPLEADOes\Delete.cshtml" />
     <Content Include="Views\EMPLEADOes\Details.cshtml" />
     <Content Include="Views\EMPLEADOes\Edit.cshtml" />
     <Content Include="Views\EMPLEADOes\Index.cshtml" />
-    <Content Include="Views\Error\_ErrorPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

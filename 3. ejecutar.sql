@@ -133,6 +133,16 @@ insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (94,'
 insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (95,'index_salario_minimo','Index del rango de comisiones');
 insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (96,'editar_salario_minimo','Editar rango de comision');
 
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (97,'index_empleado','Index de los empleados');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (98,'crear_empleado','Crear un nuevo empleado');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (99,'editar_empleado','Editar un empleado');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (100,'eliminar_empleado','Eliminar un empleado');
+
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (101,'index_direccion','Index de direcciones');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (102,'crear_direccion','creacion de direcciones');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (103,'editar_direccion','editar direcciones');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (104,'eliminar_direccion','elimiar direcciones');
+
 
 
 SET IDENTITY_INSERT permiso off
@@ -264,6 +274,15 @@ insert into permite (id_rol,id_permiso) values(1,95);
 insert into permite (id_rol,id_permiso) values(1,96);
 insert into permite (id_rol,id_permiso) values(1,95);
 insert into permite (id_rol,id_permiso) values(1,96);
+
+insert into permite (id_rol,id_permiso) values(1,97);
+insert into permite (id_rol,id_permiso) values(1,98);
+insert into permite (id_rol,id_permiso) values(1,99);
+insert into permite (id_rol,id_permiso) values(1,100);
+insert into permite (id_rol,id_permiso) values(1,101);
+insert into permite (id_rol,id_permiso) values(1,102);
+insert into permite (id_rol,id_permiso) values(1,103)
+insert into permite (id_rol,id_permiso) values(1,104);
 SET IDENTITY_INSERT usuario ON
 
 insert into usuario (id_usuario,id_empleado,id_rol,USERNAME,email,password,habilitado) values(1,null,1,'BAD115','superusuariosap777@gmail.com','3GseFNXe8JBJ+WiHMprogrWwX4U=',1);
