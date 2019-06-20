@@ -16,14 +16,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: PLANILLAs
-
+        [MyAuthorize(Roles = "index_planilla")]
         public ActionResult Index()
         {
             return View(db.PLANILLA.ToList().OrderByDescending(PLANILLA=>PLANILLA.ID_PLANILLA));
         }
 
 
-
+        [MyAuthorize(Roles = "index_planilla")]
         public ActionResult PlanillaPorEmpleado()
         {
             ViewBag.empleados = db.EMPLEADO.ToList();
@@ -31,7 +31,7 @@ namespace SAP.Controllers
         }
 
 
-
+        [MyAuthorize(Roles = "ver_boleta_pago")]
         public ActionResult Verboleta(int? id)
         {
             if (id == null)
@@ -125,7 +125,7 @@ namespace SAP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        [MyAuthorize(Roles = "guardar_planilla")]
         public ActionResult Save(string codigo)
         {
             if (!string.IsNullOrEmpty(codigo))
@@ -170,6 +170,7 @@ namespace SAP.Controllers
         }
 
         // GET: PLANILLAs/VerPlanilla/5
+        [MyAuthorize(Roles = "ver_planilla")]
         public ActionResult VerPlanilla(int? id)
         {
             if(id==null)
@@ -267,6 +268,7 @@ namespace SAP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "pagar_planilla")]
         public ActionResult Pagar(String id_planilla)
         {
             if (!string.IsNullOrEmpty(id_planilla)) {
@@ -356,6 +358,7 @@ namespace SAP.Controllers
         }
 
         // GET: PLANILLAs/Create
+        [MyAuthorize(Roles = "crear_planilla")]
         public ActionResult Create()
         {
             return View();
@@ -366,6 +369,7 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "crear_planilla")]
         public ActionResult Create([Bind(Include = "ID_PLANILLA,FECHA,CODIGO_PLANILLA,TOTAL_INGRESOS,TOTAL_DESCUENTOS,TOTAL_PAGAR,ACTIVO")] PLANILLA pLANILLA)
         {
             if (ModelState.IsValid)
@@ -379,6 +383,7 @@ namespace SAP.Controllers
         }
 
         // GET: PLANILLAs/Edit/5
+        [MyAuthorize(Roles = "editar_planilla")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -398,6 +403,7 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "editar_planilla")]
         public ActionResult Edit([Bind(Include = "ID_PLANILLA,FECHA,CODIGO_PLANILLA,TOTAL_INGRESOS,TOTAL_DESCUENTOS,TOTAL_PAGAR,ACTIVO")] PLANILLA pLANILLA)
         {
             if (ModelState.IsValid)
@@ -410,6 +416,7 @@ namespace SAP.Controllers
         }
 
         // GET: PLANILLAs/Delete/5
+        [MyAuthorize(Roles = "eliminar_planilla")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -427,6 +434,7 @@ namespace SAP.Controllers
         // POST: PLANILLAs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "eliminar_planilla")]
         public ActionResult DeleteConfirmed(int id)
         {
             PLANILLA pLANILLA = db.PLANILLA.Find(id);

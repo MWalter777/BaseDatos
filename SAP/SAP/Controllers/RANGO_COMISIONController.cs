@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SAP.Models;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
@@ -15,12 +16,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: RANGO_COMISION
+        [MyAuthorize(Roles = "index_rango_comision")]
         public ActionResult Index()
         {
             return View(db.RANGO_COMISION.ToList());
         }
 
         // GET: RANGO_COMISION/Details/5
+        [MyAuthorize(Roles = "index_rango_comision")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace SAP.Controllers
         }
 
         // GET: RANGO_COMISION/Create
+        [MyAuthorize(Roles = "crear_rango_comision")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +50,7 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "crear_rango_comision")]
         public ActionResult Create([Bind(Include = "ID_RANGO,MIN_COMISION,MAX_COMISION,PORCENTAJE_POR_COMISION")] RANGO_COMISION rANGO_COMISION)
         {
             if (ModelState.IsValid)
@@ -59,6 +64,7 @@ namespace SAP.Controllers
         }
 
         // GET: RANGO_COMISION/Edit/5
+        [MyAuthorize(Roles = "editar_rango_comision")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +84,7 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "editar_rango_comision")]
         public ActionResult Edit([Bind(Include = "ID_RANGO,MIN_COMISION,MAX_COMISION,PORCENTAJE_POR_COMISION")] RANGO_COMISION rANGO_COMISION)
         {
             if (ModelState.IsValid)
@@ -90,6 +97,7 @@ namespace SAP.Controllers
         }
 
         // GET: RANGO_COMISION/Delete/5
+        [MyAuthorize(Roles = "eliminar_rango_comision")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +115,7 @@ namespace SAP.Controllers
         // POST: RANGO_COMISION/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "eliminar_rango_comision")]
         public ActionResult DeleteConfirmed(int id)
         {
             RANGO_COMISION rANGO_COMISION = db.RANGO_COMISION.Find(id);

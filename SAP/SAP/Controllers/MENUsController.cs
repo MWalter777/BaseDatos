@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SAP.Models;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
@@ -15,6 +16,7 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: MENUs
+        [MyAuthorize(Roles = "index_menu")]
         public ActionResult Index()
         {
             var mENU = db.MENU.Include(m => m.MENU2);
@@ -22,6 +24,7 @@ namespace SAP.Controllers
         }
 
         // GET: MENUs/Details/5
+        [MyAuthorize(Roles = "index_menu")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +40,7 @@ namespace SAP.Controllers
         }
 
         // GET: MENUs/Create
+        [MyAuthorize(Roles = "crear_menu")]
         public ActionResult Create()
         {
 
@@ -50,6 +54,7 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "crear_menu")]
         public ActionResult Create([Bind(Include = "ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL")] MENU mENU)
         {
             if (ModelState.IsValid)
@@ -64,6 +69,7 @@ namespace SAP.Controllers
         }
 
         // GET: MENUs/Edit/5
+        [MyAuthorize(Roles = "editar_menu")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +92,7 @@ namespace SAP.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "editar_menu")]
         public ActionResult Edit([Bind(Include = "ID_MENU,MEN_ID_MENU,NOMBRE_MENU,URL")] MENU mENU, int men_id_menu1)
         {
             if (ModelState.IsValid)
@@ -105,6 +112,7 @@ namespace SAP.Controllers
         }
 
         // GET: MENUs/Delete/5
+        [MyAuthorize(Roles = "eliminar_menu")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -122,6 +130,7 @@ namespace SAP.Controllers
         // POST: MENUs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "eliminar_menu")]
         public ActionResult DeleteConfirmed(int id)
         {
             try

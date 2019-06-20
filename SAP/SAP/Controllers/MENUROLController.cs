@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
@@ -13,12 +14,13 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: MENUROL
+        [MyAuthorize(Roles = "index_menurol")]
         public ActionResult Index()
         {
             ViewBag.roles = db.ROL.ToList();
             return View();
         }
-
+        [MyAuthorize(Roles = "crear_menurol")]
         public ActionResult Agregar(int? id)
         {
             if (id == null)
@@ -52,6 +54,7 @@ namespace SAP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "crear_menurol")]
         public ActionResult Save(string id_rol, String id_menu)
         {
             if (string.IsNullOrEmpty(id_rol) || string.IsNullOrEmpty(id_menu))
@@ -74,6 +77,7 @@ namespace SAP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "eliminar_menurol")]
         public ActionResult Delete(string id_rol, String id_menu)
         {
             if (string.IsNullOrEmpty(id_rol) || string.IsNullOrEmpty(id_menu))

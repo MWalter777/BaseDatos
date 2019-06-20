@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SAP.Models;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
@@ -15,12 +16,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: CATALOGO_DESCUENTO
+        [MyAuthorize(Roles = "index_descuento")]
         public ActionResult Index()
         {
             return View(db.CATALOGO_DESCUENTO.ToList());
         }
 
         // GET: CATALOGO_DESCUENTO/Details/5
+        [MyAuthorize(Roles = "index_descuento")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +42,7 @@ namespace SAP.Controllers
         }
 
         // GET: CATALOGO_DESCUENTO/Create
+        [MyAuthorize(Roles = "crear_descuento")]
         public ActionResult Create()
         {
             return View();
@@ -49,6 +53,7 @@ namespace SAP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "crear_descuento")]
         public ActionResult Create([Bind(Include = "ID_DESCUENTO,NOMBRE_DESCUENTO,DELEY_DESCUENTO,PORCENTAJE,DESCUENTO,FECHA_INICIO,FECHA_FIN,ACTIVO")] CATALOGO_DESCUENTO cATALOGO_DESCUENTO)
         {
             if (ModelState.IsValid)
@@ -62,6 +67,7 @@ namespace SAP.Controllers
         }
 
         // GET: CATALOGO_DESCUENTO/Edit/5
+        [MyAuthorize(Roles = "editar_descuento")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,6 +89,7 @@ namespace SAP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "editar_descuento")]
         public ActionResult Edit([Bind(Include = "ID_DESCUENTO,NOMBRE_DESCUENTO,DELEY_DESCUENTO,PORCENTAJE,DESCUENTO,FECHA_INICIO,FECHA_FIN,ACTIVO")] CATALOGO_DESCUENTO cATALOGO_DESCUENTO)
         {
             if (ModelState.IsValid)
@@ -95,6 +102,7 @@ namespace SAP.Controllers
         }
 
         // GET: CATALOGO_DESCUENTO/Delete/5
+        [MyAuthorize(Roles = "eliminar_descuento")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

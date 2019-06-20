@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SAP.Models;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
@@ -15,12 +16,14 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: DESCUENTO_RENTA
+        [MyAuthorize(Roles = "index_renta")]
         public ActionResult Index()
         {
             return View(db.DESCUENTO_RENTA.ToList());
         }
 
         // GET: DESCUENTO_RENTA/Details/5
+        [MyAuthorize(Roles = "index_renta")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace SAP.Controllers
         }
 
         // GET: DESCUENTO_RENTA/Create
+        [MyAuthorize(Roles = "crear_renta")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +50,7 @@ namespace SAP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "crear_renta")]
         public ActionResult Create([Bind(Include = "ID_DESCUENTO_RENTA,MIN_RENTA,MAX_RENTA,PORCENTAJE_RENTA")] DESCUENTO_RENTA dESCUENTO_RENTA)
         {
             if (ModelState.IsValid)
@@ -59,6 +64,7 @@ namespace SAP.Controllers
         }
 
         // GET: DESCUENTO_RENTA/Edit/5
+        [MyAuthorize(Roles = "editar_renta")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +84,7 @@ namespace SAP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "editar_renta")]
         public ActionResult Edit([Bind(Include = "ID_DESCUENTO_RENTA,MIN_RENTA,MAX_RENTA,PORCENTAJE_RENTA")] DESCUENTO_RENTA dESCUENTO_RENTA)
         {
             if (ModelState.IsValid)
@@ -90,6 +97,7 @@ namespace SAP.Controllers
         }
 
         // GET: DESCUENTO_RENTA/Delete/5
+        [MyAuthorize(Roles = "eliminar_renta")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +115,7 @@ namespace SAP.Controllers
         // POST: DESCUENTO_RENTA/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [MyAuthorize(Roles = "eliminar_renta")]
         public ActionResult DeleteConfirmed(int id)
         {
             DESCUENTO_RENTA dESCUENTO_RENTA = db.DESCUENTO_RENTA.Find(id);

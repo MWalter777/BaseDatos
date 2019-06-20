@@ -17,7 +17,7 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: SUB_REGION
-        //[MyAuthorize(Roles = "index_sub_region")]
+        [MyAuthorize(Roles = "index_direccion")]
         public ActionResult Index()
         {
             var direcciones = db.DIRECCION.Include(c => c.SUB_REGION);
@@ -26,7 +26,7 @@ namespace SAP.Controllers
         }
 
         // GET: SUB_REGION/Details/5
-        //[MyAuthorize(Roles = "index_sub_region")]
+        [MyAuthorize(Roles = "index_direccion")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,7 +42,7 @@ namespace SAP.Controllers
         }
 
         // GET: SUB_REGION/Create
-        //[MyAuthorize(Roles = "crear_sub_region")]
+        [MyAuthorize(Roles = "crear_direccion")]
         public ActionResult Create()
         {
             PopulateSUB_REGIONDropDownList();
@@ -50,7 +50,7 @@ namespace SAP.Controllers
         }
 
         // POST: SUB_REGION/Create
-        //[MyAuthorize(Roles = "crear_sub_region")]
+        [MyAuthorize(Roles = "crear_direccion")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_DIRECCION, ID_SUB_REGION, BARRIO, COLONIA, CANTON, CASERIO, CALLE, AVENIDA, PASAJE, RESIDENCIAL, NUMERO_CASA")] DIRECCION direccion)
@@ -66,7 +66,7 @@ namespace SAP.Controllers
         }
 
         // GET: SUB_REGION/Edit/5
-        //[MyAuthorize(Roles = "editar_sub_region")]
+        [MyAuthorize(Roles = "editar_direccion")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,7 +83,7 @@ namespace SAP.Controllers
         }
 
         // POST: SUB_REGION/Edit/5
-        //[MyAuthorize(Roles = "editar_sub_region")]
+        [MyAuthorize(Roles = "editar_direccion")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
@@ -120,7 +120,7 @@ namespace SAP.Controllers
         }
 
         // GET: SUB_REGION/Delete/5
-        //[MyAuthorize(Roles = "eliminar_sub_region")]
+        [MyAuthorize(Roles = "eliminar_direccion")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,7 +136,7 @@ namespace SAP.Controllers
         }
 
         // POST: SUB_REGION/Delete/5
-        //[MyAuthorize(Roles = "eliminar_sub_region")]
+        [MyAuthorize(Roles = "eliminar_direccion")] 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

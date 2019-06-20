@@ -17,6 +17,7 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: CENTRO_COSTO
+        [MyAuthorize(Roles = "index_centro_costo")]
         public ActionResult Index()
         {
             
@@ -26,6 +27,7 @@ namespace SAP.Controllers
         }
 
         // GET: CENTRO_COSTO/Details/5
+        [MyAuthorize(Roles = "index_centro_costo")]
         public ActionResult Details(int id)
         {
             if (id == null)
@@ -45,6 +47,7 @@ namespace SAP.Controllers
         }
 
         // GET: CENTRO_COSTO/Create
+        [MyAuthorize(Roles = "create_centro_costo")]
         public ActionResult Create()
         {
             PopulateDEPARTAMENTODropDownList();
@@ -52,6 +55,7 @@ namespace SAP.Controllers
         }
 
         // POST: CENTRO_COSTO/Create
+        [MyAuthorize(Roles = "create_centro_costo")]
         [HttpPost]
         public ActionResult Create([Bind(Include = "ID_CENTRO_COSTO,ID_DEPARTAMENTO,ANIO,MONTO_ASIGNADO,SALDO")] CENTRO_COSTO centro_costo)
         {
@@ -79,6 +83,7 @@ namespace SAP.Controllers
         }
 
         // GET: CENTRO_COSTO/Edit/5
+        [MyAuthorize(Roles = "editar_centro_costo")]
         public ActionResult Edit(int id)
         {
             return View();
@@ -86,6 +91,7 @@ namespace SAP.Controllers
 
         // POST: CENTRO_COSTO/Edit/5
         [HttpPost]
+        [MyAuthorize(Roles = "editar_centro_costo")]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -101,6 +107,7 @@ namespace SAP.Controllers
         }
 
         // GET: CENTRO_COSTO/Delete/5
+        [MyAuthorize(Roles = "eliminar_centro_costo")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -108,6 +115,7 @@ namespace SAP.Controllers
 
         // POST: CENTRO_COSTO/Delete/5
         [HttpPost]
+        [MyAuthorize(Roles = "eliminar_centro_costo")]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

@@ -193,14 +193,12 @@
     <Compile Include="Controllers\CATALOGO_DESCUENTOController.cs" />
     <Compile Include="Controllers\CENTRO_COSTOController.cs" />
     <Compile Include="Controllers\DEPARTAMENTOController.cs" />
-
     <Compile Include="Controllers\DIRECCIONController.cs" />
-
     <Compile Include="Controllers\DESCUENTO_RENTAController.cs" />
     <Compile Include="Controllers\EMPLEADOesController.cs" />
-
     <Compile Include="Controllers\EMPRESAController.cs" />
     <Compile Include="Controllers\CATALOGO_INGRESOController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ESTADO_CIVILController.cs" />
     <Compile Include="Controllers\GENEROsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -454,7 +452,6 @@
     <Content Include="Views\PUESTO\Details.cshtml" />
     <Content Include="Views\PUESTO\Edit.cshtml" />
     <Content Include="Views\PUESTO\Index.cshtml" />
-
     <Content Include="Views\CENTRO_COSTO\Create.cshtml" />
     <Content Include="Views\CENTRO_COSTO\Delete.cshtml" />
     <Content Include="Views\CENTRO_COSTO\Details.cshtml" />
@@ -465,7 +462,6 @@
     <Content Include="Views\DIRECCION\Details.cshtml" />
     <Content Include="Views\DIRECCION\Edit.cshtml" />
     <Content Include="Views\DIRECCION\Index.cshtml" />
-
     <Content Include="Views\DESCUENTO_RENTA\Create.cshtml" />
     <Content Include="Views\DESCUENTO_RENTA\Delete.cshtml" />
     <Content Include="Views\DESCUENTO_RENTA\Details.cshtml" />
@@ -481,7 +477,8 @@
     <Content Include="Views\EMPLEADOes\Details.cshtml" />
     <Content Include="Views\EMPLEADOes\Edit.cshtml" />
     <Content Include="Views\EMPLEADOes\Index.cshtml" />
-
+    <Content Include="Views\Shared\_ErrorLayout.cshtml" />
+    <Content Include="Views\Error\_ErrorPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
