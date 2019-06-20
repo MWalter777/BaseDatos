@@ -57,9 +57,23 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.PUESTO.Add(puesto);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (puesto.SALARIO_MAXIMO < puesto.SALARIO_MINIMO)
+                {
+                    ViewBag.error = "El valor del salario máximo no puede ser menor al salario mínimo";
+                    return View("Index", db.PUESTO.ToList());
+                }
+                if (puesto.SALARIO_MAXIMO < 0 || puesto.SALARIO_MINIMO < 0)
+                {
+                        ViewBag.error = "El valor del salario máximo o mínimo no pueden ser negativos";
+                        return View("Index", db.PUESTO.ToList());
+                }
+                else
+                {
+                    db.PUESTO.Add(puesto);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             PopulateDEPARTAMENTODropDownList(puesto.ID_DEPARTAMENTO);
             return View(puesto);
