@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SAP.Models;
+using SAP.Models;
+using SAP.Security;
 
 namespace SAP.Controllers
 {
@@ -15,6 +17,7 @@ namespace SAP.Controllers
         private Model1 db = new Model1();
 
         // GET: EMPLEADOes
+        [MyAuthorize(Roles = "index_empleado")]
         public ActionResult Index()
         {
             var eMPLEADO = db.EMPLEADO.Include(e => e.direccion).Include(e => e.estado_civil).Include(e => e.genero).Include(e => e.jefe).Include(e => e.profesion).Include(e => e.puesto);
@@ -22,6 +25,7 @@ namespace SAP.Controllers
         }
 
         // GET: EMPLEADOes/Details/5
+        [MyAuthorize(Roles = "index_empleado")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +41,7 @@ namespace SAP.Controllers
         }
 
         // GET: EMPLEADOes/Create
+        [MyAuthorize(Roles = "crear_empleado")]
         public ActionResult Create()
         {
             ViewBag.ID_DIRECCION = new SelectList(db.DIRECCION, "ID_DIRECCION", "BARRIO");
@@ -51,6 +56,7 @@ namespace SAP.Controllers
         // POST: EMPLEADOes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [MyAuthorize(Roles = "crear_empleado")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_EMPLEADO,ID_DIRECCION,EMP_ID_EMPLEADO,ID_GENERO,ID_PROFESION,ID_ESTADO_CIVIL,ID_PUESTO,CODIGO_EMPLEADO,APELLIDO_MATERNO,APELLIDO_PATERNO,PRIMER_NOMBRE,SEGUNDO_NOMBRE,FECHA_NACIMIENTO,DUI,PASAPORTE,NIT,ISSS,NUP,SALARIO_BASE,CORREO_PERSONAL,CORREO_INSTITUCIONAL,COMISION")] EMPLEADO eMPLEADO)
@@ -72,6 +78,7 @@ namespace SAP.Controllers
         }
 
         // GET: EMPLEADOes/Edit/5
+        [MyAuthorize(Roles = "editar_empleado")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +102,7 @@ namespace SAP.Controllers
         // POST: EMPLEADOes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [MyAuthorize(Roles = "editar_empleado")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_EMPLEADO,ID_DIRECCION,EMP_ID_EMPLEADO,ID_GENERO,ID_PROFESION,ID_ESTADO_CIVIL,ID_PUESTO,CODIGO_EMPLEADO,APELLIDO_MATERNO,APELLIDO_PATERNO,PRIMER_NOMBRE,SEGUNDO_NOMBRE,FECHA_NACIMIENTO,DUI,PASAPORTE,NIT,ISSS,NUP,SALARIO_BASE,CORREO_PERSONAL,CORREO_INSTITUCIONAL,COMISION")] EMPLEADO eMPLEADO)
@@ -115,6 +123,7 @@ namespace SAP.Controllers
         }
 
         // GET: EMPLEADOes/Delete/5
+        [MyAuthorize(Roles = "eliminar_empleado")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -130,6 +139,7 @@ namespace SAP.Controllers
         }
 
         // POST: EMPLEADOes/Delete/5
+        [MyAuthorize(Roles = "eliminar_empleado")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

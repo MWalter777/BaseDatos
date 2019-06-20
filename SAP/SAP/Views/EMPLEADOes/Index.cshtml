@@ -4,7 +4,7 @@
     ViewBag.Title = "Empleados";
 }
 <div class="tile">
-    <h2 class="text-center">Comisiones</h2>
+    <h2 class="text-center">Gestion de Empleados</h2>
     @if (ViewBag.error != null)
     {
         <h2 class="text-center alert-danger">@ViewBag.error</h2>
@@ -15,62 +15,65 @@
             Nuevo empleado
         </a>
     </p>
-    <table class="table" id="sampleTable">
-        <thead>
-            <tr>
-                <th>
-                    Apellido
-                </th>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Direccion
-                </th>
-                <th>
-                    Puesto
-                </th>
-                <th>
-                    Genero
-                </th>
-                <th>
-                    Correo personal
-                </th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive">
+        <table class="table" id="sampleTable">
+            <thead class="thead-light">
                 <tr>
-                    <td>
-                        @item.APELLIDO_PATERNO @item.APELLIDO_MATERNO
-                    </td>
-                    <td>
-                        @item.PRIMER_NOMBRE @item.SEGUNDO_NOMBRE
-                    </td>
-                    <td>
-                        @item.direccion.CANTON, @item.direccion.BARRIO
-                    </td>
-                    <td>
-                        @item.puesto.NOMBRE_PUESTO
-                    </td>
-                    <td>
-                        @item.genero.NOMBRE_GENERO
-                    </td>
-                    <td>
-                        @item.CORREO_PERSONAL
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-warning" }) |
-                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-info" }) |
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-danger" })
-                    </td>
+                    <th>
+                        Apellido
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Direccion
+                    </th>
+                    <th>
+                        Puesto
+                    </th>
+                    <th>
+                        Genero
+                    </th>
+                    <th>
+                        Correo personal
+                    </th>
+                    <th>Acciones</th>
                 </tr>
-            }
-        </tbody>
+            </thead>
 
-    </table>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.APELLIDO_PATERNO @item.APELLIDO_MATERNO
+                        </td>
+                        <td>
+                            @item.PRIMER_NOMBRE @item.SEGUNDO_NOMBRE
+                        </td>
+                        <td>
+                            @item.direccion.CANTON, @item.direccion.BARRIO
+                        </td>
+                        <td>
+                            @item.puesto.NOMBRE_PUESTO
+                        </td>
+                        <td>
+                            @item.genero.NOMBRE_GENERO
+                        </td>
+                        <td>
+                            @item.CORREO_PERSONAL
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-sm btn-warning" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-sm btn-info" })
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-sm btn-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+    
 </div>
