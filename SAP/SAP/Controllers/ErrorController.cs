@@ -25,7 +25,7 @@ namespace SAP.Controllers
 
                 default:
                     ViewBag.Title = "Página no encontrada";
-                    ViewBag.Description = "Algo salio muy mal :( ..";
+                    ViewBag.Description = "Algo salio muy mal :( .." + error;
                     break;
             }
 

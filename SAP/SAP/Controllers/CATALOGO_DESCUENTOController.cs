@@ -94,9 +94,33 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cATALOGO_DESCUENTO).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (cATALOGO_DESCUENTO.FECHA_FIN != null && cATALOGO_DESCUENTO.FECHA_INICIO != null)
+                {
+                    var opcion1 = DateTime.Compare((DateTime) cATALOGO_DESCUENTO.FECHA_INICIO, (DateTime) cATALOGO_DESCUENTO.FECHA_FIN);
+                    var opcion2 = DateTime.Compare((DateTime)cATALOGO_DESCUENTO.FECHA_FIN, DateTime.Now);
+
+                    if (opcion1 < 0)
+                    {
+                        if (opcion2 > 0)
+                        {
+                            db.Entry(cATALOGO_DESCUENTO).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            ViewBag.error = "La fecha de fin debe ser mayor a la fecha actual";
+                            return View(cATALOGO_DESCUENTO);
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.error = "La fecha de inicio debe ser menor a la fecha final";
+                        return View(cATALOGO_DESCUENTO);
+                    }
+                }
+
+                
             }
             return View(cATALOGO_DESCUENTO);
         }

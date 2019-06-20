@@ -14,7 +14,7 @@
     }
 
     <p>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crear">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#crear">
             Nuevo permiso
         </button>
     </p>
@@ -41,7 +41,7 @@
                         @Html.DisplayFor(modelItem => item.DESCRIPCION_PERMISO)
                     </td>
                     <td>
-                        <a href="#" onclick="mostrar(@item.ID_PERMISO,'@item.NOMBRE_PERMISO','@item.DESCRIPCION_PERMISO')" class="btn btn-primary">Editar</a>
+                        <a href="#" onclick="mostrar(@item.ID_PERMISO,'@item.NOMBRE_PERMISO','@item.DESCRIPCION_PERMISO')" class="btn btn-warning">Editar</a>
                         <a href="#" onclick="eliminar(@item.ID_PERMISO,'@item.NOMBRE_PERMISO')" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>

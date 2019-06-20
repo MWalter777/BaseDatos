@@ -10,22 +10,27 @@ begin
 
 	declare @fecha_fin datetime
 	declare @fecha_actual datetime2
+	declare @activo_planilla bit
 	select @fecha_actual = SYSDATETIME();
+	select @activo_planilla = activo from inserted
 
 	open cursor_descuentos
 	fetch next from cursor_descuentos into @fecha_fin
 
-	while @@FETCH_STATUS = 0
+	if @activo_planilla = 0
 	begin
-		if @fecha_actual >= @fecha_fin and @fecha_fin is not null
+		while @@FETCH_STATUS = 0
 		begin
-			update CATALOGO_DESCUENTO
-			set ACTIVO = 0
-			where current of cursor_descuentos;
+			if @fecha_actual >= @fecha_fin and @fecha_fin is not null
+			begin
+				update CATALOGO_DESCUENTO
+				set ACTIVO = 0
+				where current of cursor_descuentos;
+			end
+			fetch next from cursor_descuentos into @fecha_fin
 		end
-		fetch next from cursor_descuentos into @fecha_fin
 	end
-
+	
 	close cursor_descuentos;
 	deallocate cursor_descuentos;
 end

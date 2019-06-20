@@ -34,7 +34,7 @@
 		<div class="form-group" id="create_porcentaje">
 			@Html.LabelFor(model => model.PORCENTAJE, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.EditorFor(model => model.PORCENTAJE, new { htmlAttributes = new { @class = "form-control" , @disabled = true} })
+				@Html.EditorFor(model => model.PORCENTAJE, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
 				@Html.ValidationMessageFor(model => model.PORCENTAJE, "", new { @class = "text-danger" })
 			</div>
 		</div>
@@ -50,7 +50,13 @@
 		<div class="form-group" id="create_fechainicio">
 			@Html.LabelFor(model => model.FECHA_INICIO, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.TextBoxFor(model => model.FECHA_INICIO, new { @type = "date", @class = "form-control datepicker" })
+				@Html.TextBoxFor(model => model.FECHA_INICIO,
+				   new
+					   {
+						   @type = "text",
+						   @class = "form-control datepicker2"
+					   }
+				   )
 				@*@Html.EditorFor(model => model.FECHA_INICIO, new { htmlAttributes = new { @class = "form-control" } })*@
 				@Html.ValidationMessageFor(model => model.FECHA_INICIO, "", new { @class = "text-danger" })
 			</div>
@@ -59,7 +65,13 @@
 		<div class="form-group" id="create_fechafin">
 			@Html.LabelFor(model => model.FECHA_FIN, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.TextBoxFor(model => model.FECHA_FIN, new { @type = "date", @class = "form-control datepicker" })
+				@Html.TextBoxFor(model => model.FECHA_FIN,
+				   new
+					   {
+						   @type = "text",
+						   @class = "form-control datepicker2"
+					   }
+				   )
 				@*@Html.EditorFor(model => model.FECHA_FIN, new { htmlAttributes = new { @class = "form-control" } })*@
 				@Html.ValidationMessageFor(model => model.FECHA_FIN, "", new { @class = "text-danger" })
 			</div>
@@ -86,3 +98,23 @@
 <div>
 	@Html.ActionLink("Regresar al catálogo de descuentos", "Index")
 </div>
+
+@section Scripts{
+	<script>
+		$(document).ready(function () {
+			$("#FECHA_INICIO").datepicker({
+				dateFormat: 'dd/mm/yy'
+			});
+			$("#FECHA_INICIO").click(function () {
+				$("#FECHA_INICIO").datepicker('show');
+			})
+
+			$("#FECHA_FIN").datepicker({
+				dateFormat: 'dd/mm/yy'
+			});
+			$("#FECHA_FIN").click(function () {
+				$("#FECHA_FIN").datepicker('show');
+			})
+		});
+	</script>
+}
