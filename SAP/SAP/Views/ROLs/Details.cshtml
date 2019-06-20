@@ -47,6 +47,6 @@
 	</div>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_ROL }) |
-    @Html.ActionLink("Regresar al Listado", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_ROL }, new { @class = "btn btn-warning" }) |
+    @Html.ActionLink("Regresar al Listado", "Index", null, new { @class = "btn btn-secondary" })
 </p>

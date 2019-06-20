@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<SAP.Models.ROL>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listado de roles";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Crear nuevo rol", "Create")
-</p>
 <div class="tile">
+	<h2>Listado de Roles</h2>
+
+	<p>
+		@Html.ActionLink("Crear nuevo rol", "Create", null, new { @class = "btn btn-success"})
+	</p>
 	<table class="table">
 		<tr>
 			<th>
@@ -20,7 +20,6 @@
 			</th>
 			<th>Acciones</th>
 		</tr>
-
 		@foreach (var item in Model)
 		{
 			<tr>
@@ -31,12 +30,11 @@
 					@Html.DisplayFor(modelItem => item.DESCRIPCION_ROL)
 				</td>
 				<td>
-					@Html.ActionLink("Editar", "Edit", new { id = item.ID_ROL }) |
-					@Html.ActionLink("Detalles", "Details", new { id = item.ID_ROL }) |
-					@Html.ActionLink("Eliminar", "Delete", new { id = item.ID_ROL })
+					@Html.ActionLink("Editar", "Edit", new { id = item.ID_ROL }, new { @class = "btn btn-warning"}) |
+					@Html.ActionLink("Detalles", "Details", new { id = item.ID_ROL }, new { @class = "btn btn-info" }) |
+					@Html.ActionLink("Eliminar", "Delete", new { id = item.ID_ROL }, new { @class = "btn btn-danger" })
 				</td>
 			</tr>
 		}
-
 	</table>
 </div>
