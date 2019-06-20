@@ -70,7 +70,12 @@ namespace SAP.Controllers
                         ViewBag.error = "Ya existe un centro de costos de este año para este departamento";
                         return View("Index", db.CENTRO_COSTO.ToList());
                     }
-                    else
+                    if (centro_costo.MONTO_ASIGNADO < 0)
+                    {
+                        ViewBag.error = "El presupuesto no puede ser negativo";
+                        return View("Index", db.CENTRO_COSTO.ToList());
+                    }
+                else
                     {
                     db.CENTRO_COSTO.Add(centro_costo);
                     db.SaveChanges();
