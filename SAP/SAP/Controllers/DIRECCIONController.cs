@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using SAP.Models;
 using SAP.Security;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 
 namespace SAP.Controllers
 {
@@ -41,11 +42,28 @@ namespace SAP.Controllers
             return View(sub_region);
         }
 
+        // Metodo Ajax para recuperar Regiones
+        public JsonResult getRegiones(int idPais = 0)
+        {
+            var idPaisParameter = new SqlParameter("@idPais", idPais);
+            var listaRegiones = db.Database.SqlQuery<REGION>("getRegiones @idPais", idPaisParameter);
+            return Json(listaRegiones, JsonRequestBehavior.AllowGet);
+        }
+
+        // Metodo Ajax para recuperar SUB Regiones
+        public JsonResult getSubRegiones(int idRegion = 0)
+        {
+            var idRegionParameter = new SqlParameter("@idRegion", idRegion);
+            var listaSubRegiones = db.Database.SqlQuery<SUB_REGION>("getSubRegiones @idRegion", idRegionParameter);
+            return Json(listaSubRegiones, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: SUB_REGION/Create
         [MyAuthorize(Roles = "crear_direccion")]
         public ActionResult Create()
         {
             PopulateSUB_REGIONDropDownList();
+            ViewBag.PAISES = db.PAIS.ToList();
             return View();
         }
 
@@ -61,6 +79,8 @@ namespace SAP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.errorSubRegion = "Error";
+            ViewBag.PAISES = db.PAIS.ToList();
             PopulateSUB_REGIONDropDownList(direccion.ID_SUB_REGION);
             return View(direccion);
         }

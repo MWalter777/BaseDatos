@@ -10,84 +10,88 @@
             <h2 class="text-center alert-danger">@ViewBag.error</h2>
         }
         <p>
-            @Html.ActionLink("Nueva Direccion", "Create")
+            @Html.ActionLink("Nueva Direccion", "Create", null, new { @class = "btn btn-success" })
         </p>
-        <table class="table" id="sampleTable">
-            <tr>
-                <th>
-                    SUB REGIÓN
-                </th>
-                <th>
-                    BARRIO
-                </th>
-                <th>
-                    COLONIA
-                </th>
-                <th>
-                    CANTÓN
-                </th>
-                <th>
-                    CASERÍO
-                </th>
-                <th>
-                    CALLE
-                </th>
-                <th>
-                    AVENIDA
-                </th>
-                <th>
-                    PASAJE
-                </th>
-                <th>
-                    RESIDENCIAL
-                </th>
-                <th>
-                    NUMERO DE CASA
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        <div class="table-responsive">
+            <table class="table" id="sampleTable">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SUB_REGION.NOMBRE_SUB_REGION)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BARRIO)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.COLONIA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CANTON)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CASERIO)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CALLE)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AVENIDA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PASAJE)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RESIDENCIAL)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NUMERO_CASA)
-                    </td>
-
-
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_DIRECCION }, htmlAttributes: new { @class = "btn btn-primary" }) ||
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_DIRECCION }, htmlAttributes: new { @class = "btn btn-danger" })
-                    </td>
+                    <th>
+                        SUB REGIÓN
+                    </th>
+                    <th>
+                        BARRIO
+                    </th>
+                    <th>
+                        COLONIA
+                    </th>
+                    <th>
+                        CANTÓN
+                    </th>
+                    <th>
+                        CASERÍO
+                    </th>
+                    <th>
+                        CALLE
+                    </th>
+                    <th>
+                        AVENIDA
+                    </th>
+                    <th>
+                        PASAJE
+                    </th>
+                    <th>
+                        RESIDENCIAL
+                    </th>
+                    <th>
+                        NUMERO DE CASA
+                    </th>
+                    <th>
+                        ACCIONES
+                    </th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SUB_REGION.NOMBRE_SUB_REGION)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BARRIO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.COLONIA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CANTON)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CASERIO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CALLE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AVENIDA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PASAJE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RESIDENCIAL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NUMERO_CASA)
+                        </td>
+
+
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.ID_DIRECCION }, htmlAttributes: new { @class = "btn btn-sm btn-warning" })
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_DIRECCION }, htmlAttributes: new { @class = "btn btn-sm btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
     </div>
