@@ -1,161 +1,73 @@
 ﻿@model IEnumerable<SAP.Models.EMPLEADO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Empleados";
 }
+<div class="tile">
+    <h2 class="text-center">Gestion de Empleados</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
 
-    <div class="tile">
-
-        <h2>Index</h2>
-
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <div class="table-responsive">
-            <table class="tablw">
+    <p>
+        <a href="/empleadoes/create" class="btn btn-success">
+            Nuevo empleado
+        </a>
+    </p>
+    <div class="table-responsive">
+        <table class="table" id="sampleTable">
+            <thead class="thead-light">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.direccion.BARRIO)
+                        Apellido
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.estado_civil.NOMBRE_ESTADO_CIVIL)
+                        Nombre
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.genero.NOMBRE_GENERO)
+                        Direccion
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.jefe.CODIGO_EMPLEADO)
+                        Puesto
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.profesion.NOMBRE_PROFESION)
+                        Correo personal
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.puesto.CODIGO_PUESTO)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CODIGO_EMPLEADO)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.APELLIDO_MATERNO)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.APELLIDO_PATERNO)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PRIMER_NOMBRE)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SEGUNDO_NOMBRE)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FECHA_NACIMIENTO)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DUI)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PASAPORTE)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.NIT)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ISSS)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.NUP)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SALARIO_BASE)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CORREO_PERSONAL)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CORREO_INSTITUCIONAL)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.COMISION)
-                    </th>
-                    <th></th>
+                    <th>Acciones</th>
                 </tr>
+            </thead>
+
+            <tbody>
 
                 @foreach (var item in Model)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.direccion.BARRIO)
+                            @item.APELLIDO_PATERNO @item.APELLIDO_MATERNO
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.estado_civil.NOMBRE_ESTADO_CIVIL)
+                            @item.PRIMER_NOMBRE @item.SEGUNDO_NOMBRE
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.genero.NOMBRE_GENERO)
+                            @item.direccion.NUMERO_CASA  @item.direccion.AVENIDA @item.direccion.CALLE @item.direccion.PASAJE @item.direccion.RESIDENCIAL @item.direccion.COLONIA @item.direccion.CASERIO @item.direccion.CANTON @item.direccion.BARRIO
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.jefe.CODIGO_EMPLEADO)
+                            @item.puesto.NOMBRE_PUESTO
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.profesion.NOMBRE_PROFESION)
+                            @item.CORREO_PERSONAL
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.puesto.CODIGO_PUESTO)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CODIGO_EMPLEADO)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.APELLIDO_MATERNO)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.APELLIDO_PATERNO)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PRIMER_NOMBRE)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SEGUNDO_NOMBRE)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FECHA_NACIMIENTO)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DUI)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PASAPORTE)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NIT)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ISSS)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NUP)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SALARIO_BASE)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CORREO_PERSONAL)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CORREO_INSTITUCIONAL)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.COMISION)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID_EMPLEADO }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ID_EMPLEADO }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID_EMPLEADO })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-sm btn-warning" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-sm btn-info" })
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-sm btn-danger" })
                         </td>
                     </tr>
                 }
+            </tbody>
 
-            </table>
-        </div>
-        
-        
+        </table>
     </div>
+
+</div>

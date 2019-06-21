@@ -56,23 +56,32 @@ namespace SAP.Models
         public string CODIGO_EMPLEADO { get; set; }
 
         [StringLength(60)]
+        //[DataType(DataType.Text)]
+        //[RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Solo se admiten letras")]
         public string APELLIDO_MATERNO { get; set; }
 
         [Required]
         [StringLength(60)]
+        //[DataType(DataType.Text)]
+        //[RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Solo se admiten letras")]
         public string APELLIDO_PATERNO { get; set; }
 
         [Required]
         [StringLength(60)]
+        //[DataType(DataType.Text)]
+        //[RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Solo se admiten letras")]
         public string PRIMER_NOMBRE { get; set; }
 
         [StringLength(60)]
+        //[DataType(DataType.Text)]
+       // [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Solo se admiten letras")]
         public string SEGUNDO_NOMBRE { get; set; }
 
         public DateTime FECHA_NACIMIENTO { get; set; }
 
         [Required]
         [StringLength(10)]
+        //[RegularExpression(@"^[0-9]{8}-[0-9]$", ErrorMessage = "El formato de DUI es incorrecto: XXXXXXXX-X ")]
         public string DUI { get; set; }
 
         [StringLength(20)]
@@ -80,23 +89,30 @@ namespace SAP.Models
 
         [Required]
         [StringLength(17)]
+        //[RegularExpression(@"^[0-9]{4}-[0-9]{6}-[0-9]{3}-[0-9]$", ErrorMessage = "El formato de NIT es incorrecto: XXXX-XXXXXX-XXX-X ")]
         public string NIT { get; set; }
 
         [Required]
         [StringLength(9)]
+        //[RegularExpression(@"^[0-9]{9}$", ErrorMessage = "El formato de ISSS es incorrecto: XXXXXXXXX ")]
         public string ISSS { get; set; }
 
         [Required]
         [StringLength(12)]
+        //[RegularExpression(@"^[0-9]{12}$", ErrorMessage = "El formato de NUP es incorrecto: XXXXXXXXXXXX ")]
         public string NUP { get; set; }
 
         public decimal SALARIO_BASE { get; set; }
 
         [Required]
+        //[DataType(DataType.EmailAddress)]
         [StringLength(60)]
+        //[RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "El formato de correo no es valido")]
         public string CORREO_PERSONAL { get; set; }
 
         [Required]
+        //[DataType(DataType.EmailAddress)]
+        //[RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "El formato de correo no es valido")]
         [StringLength(60)]
         public string CORREO_INSTITUCIONAL { get; set; }
 

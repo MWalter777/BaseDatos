@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -39,16 +40,24 @@ namespace SAP.Controllers
             return View(eMPLEADO);
         }
 
+        // Metodo Ajax para recuperar Posibles jefes
+        public JsonResult getJefes(int idPuesto = 0)
+        {
+            var idPuestoParameter = new SqlParameter("@idPuesto", idPuesto);
+            var listaJefes = db.Database.SqlQuery<EMPLEADO>("getJefes @idPuesto", idPuestoParameter);
+            return Json(listaJefes, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: EMPLEADOes/Create
         [MyAuthorize(Roles = "crear_empleado")]
         public ActionResult Create()
         {
-            ViewBag.ID_DIRECCION = new SelectList(db.DIRECCION, "ID_DIRECCION", "BARRIO");
+            ViewBag.DIRECCIONES = db.DIRECCION.ToList();
             ViewBag.ID_ESTADO_CIVIL = new SelectList(db.ESTADO_CIVIL, "ID_ESTADO_CIVIL", "NOMBRE_ESTADO_CIVIL");
             ViewBag.ID_GENERO = new SelectList(db.GENERO, "ID_GENERO", "NOMBRE_GENERO");
             ViewBag.EMP_ID_EMPLEADO = new SelectList(db.EMPLEADO, "ID_EMPLEADO", "CODIGO_EMPLEADO");
             ViewBag.ID_PROFESION = new SelectList(db.PROFESION, "ID_PROFESION", "NOMBRE_PROFESION");
-            ViewBag.ID_PUESTO = new SelectList(db.PUESTO, "ID_PUESTO", "CODIGO_PUESTO");
+            ViewBag.PUESTOS = db.PUESTO.ToList();
             return View();
         }
 
@@ -60,19 +69,31 @@ namespace SAP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_EMPLEADO,ID_DIRECCION,EMP_ID_EMPLEADO,ID_GENERO,ID_PROFESION,ID_ESTADO_CIVIL,ID_PUESTO,CODIGO_EMPLEADO,APELLIDO_MATERNO,APELLIDO_PATERNO,PRIMER_NOMBRE,SEGUNDO_NOMBRE,FECHA_NACIMIENTO,DUI,PASAPORTE,NIT,ISSS,NUP,SALARIO_BASE,CORREO_PERSONAL,CORREO_INSTITUCIONAL,COMISION")] EMPLEADO eMPLEADO)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.EMPLEADO.Add(eMPLEADO);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.EMPLEADO.Add(eMPLEADO);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }catch(System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                ViewBag.error = "No se puede ingresar el usuario. Puede ser que los email, DUI, NUP, NIT ya existan en la BD. Puede que el salario base está fuera del rango permitido";
             }
+            catch(Exception ex)
+            {
+                ViewBag.error =  "No se puede ingresar el usuario. Puede ser que los email, DUI, NUP, NIT ya existan en la BD. Puede que el salario base está fuera del rango permitido";
+            }
+            
+            if (eMPLEADO.ID_DIRECCION == 0) ViewBag.ERROR_DIRECCION = "La dirección es obligatoria";
 
-            ViewBag.ID_DIRECCION = new SelectList(db.DIRECCION, "ID_DIRECCION", "BARRIO", eMPLEADO.ID_DIRECCION);
+            ViewBag.DIRECCIONES = db.DIRECCION.ToList();
             ViewBag.ID_ESTADO_CIVIL = new SelectList(db.ESTADO_CIVIL, "ID_ESTADO_CIVIL", "NOMBRE_ESTADO_CIVIL", eMPLEADO.ID_ESTADO_CIVIL);
             ViewBag.ID_GENERO = new SelectList(db.GENERO, "ID_GENERO", "NOMBRE_GENERO", eMPLEADO.ID_GENERO);
             ViewBag.EMP_ID_EMPLEADO = new SelectList(db.EMPLEADO, "ID_EMPLEADO", "CODIGO_EMPLEADO", eMPLEADO.EMP_ID_EMPLEADO);
             ViewBag.ID_PROFESION = new SelectList(db.PROFESION, "ID_PROFESION", "NOMBRE_PROFESION", eMPLEADO.ID_PROFESION);
-            ViewBag.ID_PUESTO = new SelectList(db.PUESTO, "ID_PUESTO", "CODIGO_PUESTO", eMPLEADO.ID_PUESTO);
+            ViewBag.PUESTOS = db.PUESTO.ToList();
             return View(eMPLEADO);
         }
 
