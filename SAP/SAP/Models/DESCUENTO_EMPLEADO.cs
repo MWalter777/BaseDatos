@@ -8,6 +8,7 @@ namespace SAP.Models
 
     public partial class DESCUENTO_EMPLEADO
     {
+
         public bool HABILITAR_DESCUENTO { get; set; }
 
         [Key]

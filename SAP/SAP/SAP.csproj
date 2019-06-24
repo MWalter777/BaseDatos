@@ -193,6 +193,7 @@
     <Compile Include="Controllers\CATALOGO_DESCUENTOController.cs" />
     <Compile Include="Controllers\CENTRO_COSTOController.cs" />
     <Compile Include="Controllers\DEPARTAMENTOController.cs" />
+    <Compile Include="Controllers\DESCUENTO_EMPLEADOController.cs" />
     <Compile Include="Controllers\DIRECCIONController.cs" />
     <Compile Include="Controllers\DESCUENTO_RENTAController.cs" />
     <Compile Include="Controllers\EMPLEADOesController.cs" />
@@ -480,6 +481,7 @@
     <Content Include="Views\EMPLEADOes\Details.cshtml" />
     <Content Include="Views\EMPLEADOes\Edit.cshtml" />
     <Content Include="Views\EMPLEADOes\Index.cshtml" />
+    <Content Include="Views\DESCUENTO_EMPLEADO\Asignar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -62,6 +62,7 @@
                             @Html.ActionLink("Editar", "Edit", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-sm btn-warning" })
                             @Html.ActionLink("Detalles", "Details", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-sm btn-info" })
                             @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_EMPLEADO }, htmlAttributes: new { @class = "btn btn-sm btn-danger" })
+                            <a href="/DESCUENTO_EMPLEADO/Asignar/@item.ID_EMPLEADO" class="btn btn-warning">Asignar descuento</a>
                         </td>
                     </tr>
                 }

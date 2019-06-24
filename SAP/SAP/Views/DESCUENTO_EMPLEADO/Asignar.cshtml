@@ -1,0 +1,161 @@
+﻿@model IEnumerable<SAP.Models.CATALOGO_DESCUENTO>
+
+@{
+    ViewBag.Title = "Asignar descuentos";
+}
+
+<div class="tile">
+    <h2 class="text-center">Descuentos</h2>
+    @if (ViewBag.error != null)
+    {
+        <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    }
+
+    <p>
+    </p>
+    <table class="table" id="sampleTable">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    descuento
+                </th>
+                <th>
+                    fecha de inicio
+                </th>
+                <th>
+                    fecha finalizacion
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tbody>
+            <td>@item.NOMBRE_DESCUENTO</td>
+            <td>@item.DESCUENTO</td>
+            <td>@item.FECHA_INICIO</td>
+            <td>@item.FECHA_FIN</td>
+            <td> <a href="#" onclick="mostrar(@item.ID_DESCUENTO)" class="btn btn-info">Asignar descuento</a> </td>
+            </tbody>
+        }
+
+    </table>
+
+
+    <table class="table" id="sampleTable">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    descuento
+                </th>
+                <th>
+                    fecha de inicio
+                </th>
+                <th>
+                    fecha finalizacion
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in ViewBag.empleado.descuento_empleados)
+        {
+            if (@item.HABILITAR_DESCUENTO==true && @item.descuento.ACTIVO == true && @item.descuento.DELEY_DESCUENTO==false)
+            {
+                <tbody>
+                    <td>@item.descuento.NOMBRE_DESCUENTO</td>
+                    <td>@item.descuento.DESCUENTO</td>
+                    <td>@item.descuento.FECHA_INICIO</td>
+                    <td>@item.descuento.FECHA_FIN</td>
+                    <td> <a href="#" onclick="Quitar(@item.ID_DESCUENTO_EMPLEADO)" class="btn btn-danger">Quitar descuento</a> </td>
+                </tbody>
+            }
+        }
+
+    </table>
+
+</div>
+
+<div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo estado civil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("Save", "DESCUENTO_EMPLEADO", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Estado">Seguro desea asignar el descuento?</label>
+                            <input type="text" class="form-control" id="empleado" name="empleado" aria-describedby="empleado" placeholder="empleado" value="@ViewBag.empleado.ID_EMPLEADO" readonly="" hidden="">
+                            <input type="text" class="form-control" id="estado" name="estado" aria-describedby="Estado_civil" placeholder="Estado civil" readonly="" hidden="">
+                            <small id="Estado_civil" class="form-text text-muted">Asignar un nuevo descuento.</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" value="Save">Guardar</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Quitar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo estado civil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("Quitar", "DESCUENTO_EMPLEADO", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Estado">Seguro desea Quitar el descuento?</label>
+                            <input type="text" class="form-control" id="empleado" name="empleado" aria-describedby="empleado" placeholder="empleado" value="@ViewBag.empleado.ID_EMPLEADO" readonly="" hidden="">
+                            <input type="text" class="form-control" id="estado1" name="estado1" aria-describedby="Estado_civil" placeholder="Estado civil" readonly="" hidden="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-danger" value="Save">Guardar</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function mostrar(valor) {
+        var est = document.getElementById('estado');
+        est.value = valor;
+        $("#crear").modal();
+    }
+
+    function Quitar(valor) {
+        var est = document.getElementById('estado1');
+        est.value = valor;
+        $("#Quitar").modal();
+    }
+</script>
+
