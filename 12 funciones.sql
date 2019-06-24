@@ -1,32 +1,31 @@
-
-
-CREATE FUNCTION getLimMin(
-)
-RETURNS DECIMAL
+CREATE or alter FUNCTION getLimMin(@id_puesto integer) RETURNS DECIMAL
 AS
 BEGIN 
-	RETURN (SELECT SALARIO_MINIMO FROM PUESTO)
+	RETURN (SELECT SALARIO_MINIMO FROM PUESTO where id_puesto = @id_puesto)
 END
 GO
 
-CREATE FUNCTION getLimMax(
-)
-RETURNS DECIMAL
+
+
+CREATE or alter FUNCTION getLimMax(@id_puesto integer) RETURNS DECIMAL
 AS
 BEGIN 
-	RETURN (SELECT SALARIO_MAXIMO FROM PUESTO)
+	RETURN (SELECT SALARIO_MAXIMO FROM PUESTO where id_puesto = @id_puesto)
 END
 GO
+
 
 alter table EMPLEADO
 ADD CONSTRAINT check_salario_puesto_min
-CHECK (SALARIO_BASE >= [dbo].getLimMin())
+CHECK (SALARIO_BASE >= [dbo].getLimMin(id_puesto))
 GO
 
 alter table EMPLEADO
 ADD CONSTRAINT check_salario_puesto_max
-CHECK (SALARIO_BASE <= [dbo].getLimMax())
+CHECK (SALARIO_BASE <= [dbo].getLimMax(id_puesto))
 GO
+
+
 
 SET ANSI_NULLS ON
 GO
