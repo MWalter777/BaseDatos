@@ -87,13 +87,13 @@ insert into empleado (id_empleado,id_direccion,emp_id_empleado,id_genero,id_prof
 values(1,1,null,1,1,1,1,'EMP001','Martinez','Hernandez','Gabriela','Lisset','1995-05-06','8756984-3',null,'78459632-5','784526-4','7856425-54',563,'correo@gmail.com','correo@empresa.com',0);
 
 insert into empleado (id_empleado,id_direccion,emp_id_empleado,id_genero,id_profesion,id_estado_civil,id_puesto,codigo_empleado,apellido_materno,apellido_paterno,primer_nombre,segundo_nombre,fecha_nacimiento,dui,pasaporte,nit,isss,nup,salario_base,correo_personal,correo_institucional,comision) 
-values(2,1,null,1,1,1,1,'EMP002','Sanchez','Barrios','Mercedes','Emelina','1995-05-06','8756984-3',null,'78459632-5','784526-4','7856425-54',450,'correo@gmail.com','correo@empresa.com',1);
+values(2,1,null,1,1,1,1,'EMP002','Sanchez','Barrios','Mercedes','Emelina','1995-05-06','8756984-2',null,'78459632-2','784526-2','7856425-52',450,'correo2@gmail.com','correo2@empresa.com',1);
 
 insert into empleado (id_empleado,id_direccion,emp_id_empleado,id_genero,id_profesion,id_estado_civil,id_puesto,codigo_empleado,apellido_materno,apellido_paterno,primer_nombre,segundo_nombre,fecha_nacimiento,dui,pasaporte,nit,isss,nup,salario_base,correo_personal,correo_institucional,comision) 
-values(3,1,null,1,1,1,1,'EMP003','Ascencio','Muños','Ana','Ruth','1995-05-06','8756984-3',null,'78459632-5','784526-4','7856425-54',350,'correo@gmail.com','correo@empresa.com',1);
+values(3,1,null,1,1,1,1,'EMP003','Ascencio','Muños','Ana','Ruth','1995-05-06','8756984-5',null,'78459632-3','784526-3','7856425-53',350,'correo3@gmail.com','correo3@empresa.com',1);
 
 insert into empleado (id_empleado,id_direccion,emp_id_empleado,id_genero,id_profesion,id_estado_civil,id_puesto,codigo_empleado,apellido_materno,apellido_paterno,primer_nombre,segundo_nombre,fecha_nacimiento,dui,pasaporte,nit,isss,nup,salario_base,correo_personal,correo_institucional,comision) 
-values(4,1,null,1,1,1,1,'EMP004','Torres','Martinez','Claudia','Beatriz','1995-05-06','8756984-3',null,'78459632-5','784526-4','7856425-54',670,'correo@gmail.com','correo@empresa.com',1);
+values(4,1,null,1,1,1,1,'EMP004','Torres','Martinez','Claudia','Beatriz','1995-05-06','8756984-4',null,'78459632-4','784526-5','7856425-55',670,'correo4@gmail.com','correo4@empresa.com',1);
 
 SET IDENTITY_INSERT empleado off
 

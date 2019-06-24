@@ -1,6 +1,6 @@
 CREATE or alter TRIGGER insert_catalogo
 ON INGRESO_EMPLEADO
-AFTER INSERT
+AFTER INSERT, update
 AS
 --SET NOCOUNT ON agregado para evitar conjuntos de resultados adicionales
 -- interferir con las instrucciones SELECT.
