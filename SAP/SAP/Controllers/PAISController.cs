@@ -117,10 +117,19 @@ namespace SAP.Controllers
             try
             {
                 PAIS pais = db.PAIS.Find(id);
-                db.PAIS.Remove(pais);
-                db.SaveChanges();
+                IEnumerable<REGION> borrar = db.REGION.Where(p => p.ID_PAIS == pais.ID_PAIS).ToList();
+                if (borrar.Count() == 0)
+                {
+                    db.PAIS.Remove(pais);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.error = "No se pudo eliminar, el país contiene regiones";
+                    return View("Index", db.PAIS.ToList());
+                }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 ViewBag.error = "No se puede eliminar, hace referencia a otra clase";
 

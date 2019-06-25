@@ -144,8 +144,19 @@ namespace SAP.Controllers
             try
             {
                 SUB_REGION sub_region = db.SUB_REGION.Find(id);
-                db.SUB_REGION.Remove(sub_region);
-                db.SaveChanges();
+                IEnumerable<DIRECCION> borrar = db.DIRECCION.Where(p => p.ID_SUB_REGION == sub_region.ID_SUB_REGION).ToList();
+                if (borrar.Count() == 0)
+                {
+                    db.SUB_REGION.Remove(sub_region);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.error = "No se pudo eliminar, la sub región contiene direcciones";
+                    return View("Index", db.SUB_REGION.ToList());
+                }
+                
+                
             }
             catch(Exception)
             {

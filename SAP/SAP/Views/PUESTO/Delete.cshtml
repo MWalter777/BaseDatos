@@ -4,42 +4,44 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar</h2>
-@if (ViewBag.error != null)
-{
-    <h2 class="text-center alert-danger">@ViewBag.error</h2>
-}
-<h3>Está seguro de eliminar el puesto?</h3>
-<div>
-    <h4>PUESTO</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            NOMBRE DEL PUESTO
-        </dt>
+    <div class="tile">
+        <h2>Eliminar</h2>
+        @if (ViewBag.error != null)
+        {
+            <h2 class="text-center alert-danger">@ViewBag.error</h2>
+        }
+        <h3>Está seguro de eliminar el puesto?</h3>
+        <div>
+            <h4>PUESTO</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    NOMBRE DEL PUESTO
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE_PUESTO)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.NOMBRE_PUESTO)
+                </dd>
 
-        <dt>
-            CÓDIGO DEL PUESTO
-        </dt>
+                <dt>
+                    CÓDIGO DEL PUESTO
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CODIGO_PUESTO)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.CODIGO_PUESTO)
+                </dd>
 
-    </dl>
+            </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            @Html.ActionLink("Regresar", "Index")
+                <div class="form-actions no-color">
+                    <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
         </div>
-    }
-</div>
+    </div>
 

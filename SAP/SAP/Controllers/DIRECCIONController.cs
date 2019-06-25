@@ -164,8 +164,19 @@ namespace SAP.Controllers
             try
             {
                 DIRECCION direccion = db.DIRECCION.Find(id);
-                db.DIRECCION.Remove(direccion);
-                db.SaveChanges();
+                IEnumerable<EMPLEADO> borrar = db.EMPLEADO.Where(p => p.ID_DIRECCION == direccion.ID_DIRECCION).ToList();
+                if (borrar.Count() == 0)
+                {
+                    db.DIRECCION.Remove(direccion);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.error = "No se pudo eliminar, la direccion corresponde a un empleado";
+                    return View("Index", db.DIRECCION.ToList());
+                }
+                
+                
             }
             catch (Exception)
             {

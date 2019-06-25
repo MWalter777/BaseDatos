@@ -112,9 +112,22 @@ namespace SAP.Controllers
             {
                 try
                 {
-                    db.SaveChanges();
-
+                    if (puestoToUpdate.SALARIO_MAXIMO < puestoToUpdate.SALARIO_MINIMO)
+                    {
+                        ViewBag.error = "El valor del salario máximo no puede ser menor al salario mínimo";
+                        return RedirectToAction("Index");
+                    }
+                    if (puestoToUpdate.SALARIO_MAXIMO < 0 || puestoToUpdate.SALARIO_MINIMO < 0)
+                    {
+                        ViewBag.error = "El valor del salario máximo o mínimo no pueden ser negativos";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        db.SaveChanges();
+                    
                     return RedirectToAction("Index");
+                    }
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
@@ -158,8 +171,19 @@ namespace SAP.Controllers
             try
             {
                 PUESTO puesto = db.PUESTO.Find(id);
-                db.PUESTO.Remove(puesto);
-                db.SaveChanges();
+                IEnumerable<EMPLEADO> borrar = db.EMPLEADO.Where(p => p.ID_PUESTO == puesto.ID_PUESTO).ToList();
+                if (borrar.Count() == 0)
+                {
+                    db.PUESTO.Remove(puesto);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.error = "No se pudo eliminar, el puesto está asignado a uno o mas empleados";
+                    return View("Index", db.PUESTO.ToList());
+                }
+                
+                
             }
 
             catch (Exception)

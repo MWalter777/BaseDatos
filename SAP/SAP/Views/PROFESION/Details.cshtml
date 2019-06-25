@@ -4,32 +4,34 @@
     ViewBag.Title = "Details";
 }
 
-<h2>DETALLES DE</h2>
+    <div class="tile">
+        <h2>DETALLES DE</h2>
 
-<div>
-    <h4>PROFESION</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            NOMBRE
-        </dt>
+        <div>
+            <h4>PROFESION</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    NOMBRE
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE_PROFESION)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.NOMBRE_PROFESION)
+                </dd>
 
-        <dt>
-            CÓDIGO
-        </dt>
+                <dt>
+                    CÓDIGO
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ID_PROFESION)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.ID_PROFESION)
+                </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_PROFESION }) |
-    @Html.ActionLink("Regresar", "Index")
-</p>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.ID_PROFESION }, new { @class = "btn btn-warning"}) |
+            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-secondary"})
+        </p>
+    </div>
 

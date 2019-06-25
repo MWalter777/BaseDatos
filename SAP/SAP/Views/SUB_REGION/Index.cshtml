@@ -4,50 +4,55 @@
     ViewBag.Title = "Index";
 }
 
-<h2>SUB REGIONES</h2>
+    <div class="tile">
+        <h2>SUB REGIONES</h2>
+        @if (ViewBag.error != null)
+        {
+            <h2 class="text-center alert-danger">@ViewBag.error</h2>
+        }
+        <p>
+            @Html.ActionLink("Nueva Sub Región", "Create", null, new { @class = "btn btn-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    NOMBRE DE SUB REGIÓN
+                </th>
+                <th>
+                    CÓDIGO DE SUB REGIÓN
+                </th>
+                <th>
+                    REGIÓN
+                </th>
+                <th>
+                    CÓDIGO DE REGIÓN
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Nueva Sub Región", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            NOMBRE DE SUB REGIÓN
-        </th>
-        <th>
-            CÓDIGO DE SUB REGIÓN
-        </th>
-        <th>
-            REGIÓN
-        </th>
-        <th>
-            CÓDIGO DE REGIÓN
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NOMBRE_SUB_REGION)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CODIGO_SUB_REGION)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.REGION.NOMBRE_REGION)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.REGION.CODIGO_REGION)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_SUB_REGION }, new { @class = "btn btn-warning" }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_SUB_REGION }, new { @class = "btn btn-info" }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_SUB_REGION }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NOMBRE_SUB_REGION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CODIGO_SUB_REGION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.REGION.NOMBRE_REGION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.REGION.CODIGO_REGION)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.ID_SUB_REGION }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.ID_SUB_REGION }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_SUB_REGION })
-            </td>
-        </tr>
-    }
-
-</table>
+        </table>
+    </div>
 

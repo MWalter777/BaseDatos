@@ -4,79 +4,81 @@
     ViewBag.Title = "Editar";
 }
 
-<h2>Editar</h2>
+    <div class="tile">
+        <h2>Editar</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>INGRESO EMPLEADO</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ID_INGRESO_EMPLEADO)
+            <div class="form-horizontal">
+                <h4>INGRESO EMPLEADO</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID_INGRESO_EMPLEADO)
 
-    <div class="form-group">
-        EMPLEADO
-            <div class="col-md-8">
-                <select name="ID_EMPLEADO" class="form-control">
-                    @foreach (var item in ViewBag.EMPLEADOS)
-                    {
-                        if (Model.ID_EMPLEADO == item.ID_EMPLEADO)
-                        {
-                            <option value="@item.ID_EMPLEADO" selected>
-                                @item.CODIGO_EMPLEADO - @item.APELLIDO_PATERNO @item.APELLIDO_MATERNO , @item.PRIMER_NOMBRE @item.SEGUNDO_NOMBRE
-                            </option>
-                        }
-                        else
-                        {
-                            <option value="@item.ID_EMPLEADO">
-                                @item.CODIGO_EMPLEADO - @item.APELLIDO_PATERNO @item.APELLIDO_MATERNO , @item.PRIMER_NOMBRE @item.SEGUNDO_NOMBRE
-                            </option>
-                         }
+                <div class="form-group">
+                    EMPLEADO
+                    <div class="col-md-8">
+                        <select name="ID_EMPLEADO" class="form-control">
+                            @foreach (var item in ViewBag.EMPLEADOS)
+                            {
+                                if (Model.ID_EMPLEADO == item.ID_EMPLEADO)
+                                {
+                                    <option value="@item.ID_EMPLEADO" selected>
+                                        @item.CODIGO_EMPLEADO - @item.APELLIDO_PATERNO @item.APELLIDO_MATERNO , @item.PRIMER_NOMBRE @item.SEGUNDO_NOMBRE
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ID_EMPLEADO">
+                                        @item.CODIGO_EMPLEADO - @item.APELLIDO_PATERNO @item.APELLIDO_MATERNO , @item.PRIMER_NOMBRE @item.SEGUNDO_NOMBRE
+                                    </option>
+                                }
 
-                                
-                        }
-                    </select>
+
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    CATALOGO INGRESO
+                    <div class="col-md-8">
+                        <select name="ID_INGRESO" class="form-control">
+                            @foreach (var item in ViewBag.CATALOGO_INGRESO)
+                            {
+                                if (Model.ID_INGRESO == item.ID_INGRESO)
+                                {
+                                    <option value="@item.ID_INGRESO" selected>
+                                        @item.NOMBRE_INGRESO ( @item.INGRESO )
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@item.INGRESO">
+                                        @item.NOMBRE_INGRESO ( @item.INGRESO )
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(model => model.HABILITAR_INGRESO)
+                    @Html.ValidationMessageFor(model => model.HABILITAR_INGRESO, "", new { @class = "text-danger" })
+                    Habilitar ingreso
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Crear" class="btn btn-primary" />
+                    </div>
+                </div>
             </div>
-    </div>
-    <div class="form-group">
-        CATALOGO INGRESO
-        <div class="col-md-8">
-            <select name="ID_INGRESO" class="form-control">
-                @foreach (var item in ViewBag.CATALOGO_INGRESO)
-                {
-                    if (Model.ID_INGRESO == item.ID_INGRESO)
-                    {
-                        <option value="@item.ID_INGRESO" selected>
-                            @item.NOMBRE_INGRESO ( @item.INGRESO )
-                        </option>
-                    }
-                    else
-                    {
-                        <option value="@item.INGRESO">
-                            @item.NOMBRE_INGRESO ( @item.INGRESO )
-                        </option>
-                    }
-                }
-            </select>
+        }
+
+        <div>
+            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-secondary" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.EditorFor(model => model.HABILITAR_INGRESO)
-        @Html.ValidationMessageFor(model => model.HABILITAR_INGRESO, "", new { @class = "text-danger" })
-        Habilitar ingreso
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Crear" class="btn btn-primary" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Regresar", "Index")
-</div>
 

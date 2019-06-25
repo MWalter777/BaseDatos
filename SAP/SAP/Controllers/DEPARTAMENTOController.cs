@@ -155,8 +155,20 @@ namespace SAP.Controllers
             try
             {
                 DEPARTAMENTO dEPARTAMENTO = db.DEPARTAMENTO.Find(id);
-                db.DEPARTAMENTO.Remove(dEPARTAMENTO);
-                db.SaveChanges();
+                IEnumerable<PUESTO> borrar = db.PUESTO.Where(p => p.ID_DEPARTAMENTO == dEPARTAMENTO.ID_DEPARTAMENTO).ToList();
+                IEnumerable<CENTRO_COSTO> borrar2 = db.CENTRO_COSTO.Where(p => p.ID_DEPARTAMENTO == dEPARTAMENTO.ID_DEPARTAMENTO).ToList();
+                if (borrar.Count() == 0 && borrar2.Count() == 0)
+                {
+                    db.DEPARTAMENTO.Remove(dEPARTAMENTO);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.error = "No se pudo eliminar, el departamento contiene puestos o centro de costos";
+                    return View("Index", db.DEPARTAMENTO.ToList());
+                }
+                
+                
             }
             catch (Exception e)
             {

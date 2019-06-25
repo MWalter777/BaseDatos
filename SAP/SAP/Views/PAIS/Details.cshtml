@@ -4,32 +4,34 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Detalles</h2>
+    <div class="tile">
+        <h2>Detalles</h2>
 
-<div>
-    <h4>PAÍS</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            NOMBRE DE PAÍS
-        </dt>
+        <div>
+            <h4>PAÍS</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    NOMBRE DE PAÍS
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE_PAIS)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.NOMBRE_PAIS)
+                </dd>
 
-        <dt>
-            CÓDIGO DE PAÍS
-        </dt>
+                <dt>
+                    CÓDIGO DE PAÍS
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CODIGO_PAIS)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.CODIGO_PAIS)
+                </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_PAIS }) |
-    @Html.ActionLink("Regresar", "Index")
-</p>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.ID_PAIS }, new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-secondary" })
+        </p>
+    </div>
 

@@ -1,42 +1,44 @@
 ﻿@model SAP.Models.SUB_REGION
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar Sub region";
 }
 
-<h2>Eliminar</h2>
+    <div class="tile">
+        <h2>Eliminar</h2>
 
-<h3>Está seguro de eliminar la sub región?</h3>
-<div>
-    <h4>SUB REGIÓN</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            NOMBRE DE SUB REGIÓN
-        </dt>
+        <h3>Está seguro de eliminar la sub región?</h3>
+        <div>
+            <h4>SUB REGIÓN</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    NOMBRE DE SUB REGIÓN
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE_SUB_REGION)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.NOMBRE_SUB_REGION)
+                </dd>
 
-        <dt>
-            CÓDIGO DE SUB REGIÓN
-        </dt>
+                <dt>
+                    CÓDIGO DE SUB REGIÓN
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CODIGO_SUB_REGION)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.CODIGO_SUB_REGION)
+                </dd>
 
-    </dl>
+            </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Regresar", "Index")
+                <div class="form-actions no-color">
+                    <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
         </div>
-    }
-</div>
+    </div>
 

@@ -303,7 +303,7 @@ insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU, URL) values (21,2,'Puestos', 
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU, URL) values (22,2,'Direcciones', '/Direccion');
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU, URL) values (23,2,'Empleados', '/Empleadoes');
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU, URL) values (24,14,'Centro de costos', '/Centro_costo');
-insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU, URL) values (25,14,'Empresas', '/Empresa');
+insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU, URL) values (25,14,'Empresa', '/Empresa');
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU, URL) values (26,14,'Ingreso de empleados', '/ingreso_empleado');
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU, URL) values (27,14,'Periodicidad Anual', '/periodicidad_anual');
 insert into MENU (ID_MENU,MEN_ID_MENU,NOMBRE_MENU, URL) values (28,14,'Rango de comisiones', '/rango_comision');

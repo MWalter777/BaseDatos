@@ -47,7 +47,7 @@ namespace SAP.Controllers
         }
 
         // GET: CENTRO_COSTO/Create
-        [MyAuthorize(Roles = "create_centro_costo")]
+        [MyAuthorize(Roles = "crear_centro_costo")]
         public ActionResult Create()
         {
             PopulateDEPARTAMENTODropDownList();
@@ -55,7 +55,7 @@ namespace SAP.Controllers
         }
 
         // POST: CENTRO_COSTO/Create
-        [MyAuthorize(Roles = "create_centro_costo")]
+        [MyAuthorize(Roles = "crear_centro_costo")]
         [HttpPost]
         public ActionResult Create([Bind(Include = "ID_CENTRO_COSTO,ID_DEPARTAMENTO,ANIO,MONTO_ASIGNADO,SALDO")] CENTRO_COSTO centro_costo)
         {
@@ -64,17 +64,18 @@ namespace SAP.Controllers
             {
                 centro_costo.ANIO = anio;
                 centro_costo.SALDO = 0;
-                IEnumerable<CENTRO_COSTO> planillas = db.CENTRO_COSTO.Where(CENTRO_COSTO => CENTRO_COSTO.ID_DEPARTAMENTO==centro_costo.ID_DEPARTAMENTO);
-                    if (planillas.Count() > 0)
-                    {
-                        ViewBag.error = "Ya existe un centro de costos de este año para este departamento";
-                        return View("Index", db.CENTRO_COSTO.ToList());
-                    }
+                IEnumerable<CENTRO_COSTO> planillas = db.CENTRO_COSTO.Where(CENTRO_COSTO => CENTRO_COSTO.ID_DEPARTAMENTO==centro_costo.ID_DEPARTAMENTO && CENTRO_COSTO.ANIO==centro_costo.ANIO);
                     if (centro_costo.MONTO_ASIGNADO < 0)
                     {
                         ViewBag.error = "El presupuesto no puede ser negativo";
                         return View("Index", db.CENTRO_COSTO.ToList());
                     }
+                    if (planillas.Count() > 0)
+                        {
+                            ViewBag.error = "Ya existe un centro de costos de este año para este departamento";
+                            return View("Index", db.CENTRO_COSTO.ToList());
+                        }
+                    
                 else
                     {
                     db.CENTRO_COSTO.Add(centro_costo);

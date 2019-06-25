@@ -4,10 +4,11 @@
     ViewBag.Title = "Ingreso empleado";
 }
 
+
 <h2>Catálogo de ingresos</h2>
 
 <p>
-    @Html.ActionLink("Crear nuevo", "Create")
+    @Html.ActionLink("Crear nuevo", "Create", null, new { @class = "btn btn-success" })
 </p>
 <div class="tile">
     <table class="table">
@@ -49,9 +50,9 @@
                 }
 
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.ID_INGRESO_EMPLEADO }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.ID_INGRESO_EMPLEADO }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_INGRESO_EMPLEADO })
+                    @Html.ActionLink("Editar", "Edit", new { id = item.ID_INGRESO_EMPLEADO }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.ID_INGRESO_EMPLEADO }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_INGRESO_EMPLEADO }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
             }
