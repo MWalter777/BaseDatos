@@ -133,6 +133,9 @@ insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (94,'
 insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (95,'index_salario_minimo','Index del rango de comisiones');
 insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (96,'editar_salario_minimo','Editar rango de comision');
 
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (97,'asignar_descuento','Asignar un descuento a un empleado');
+insert into permiso (ID_PERMISO,NOMBRE_PERMISO,DESCRIPCION_PERMISO) values (98,'quitar_descuento','Quitar un descuento a un empleado');
+
 
 SET IDENTITY_INSERT permiso off
 
@@ -263,6 +266,9 @@ insert into permite (id_rol,id_permiso) values(1,95);
 insert into permite (id_rol,id_permiso) values(1,96);
 insert into permite (id_rol,id_permiso) values(1,95);
 insert into permite (id_rol,id_permiso) values(1,96);
+
+insert into permite (id_rol,id_permiso) values(1,97);
+insert into permite (id_rol,id_permiso) values(1,98);
 
 SET IDENTITY_INSERT usuario ON
 

@@ -56,32 +56,33 @@ namespace SAP.Models
         public string CODIGO_EMPLEADO { get; set; }
 
         [StringLength(60)]
-        //[DataType(DataType.Text)]
-        //[RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Solo se admiten letras")]
+        [DataType(DataType.Text)]
+        [RegularExpression(@"^[a-zA-ZÒ—·ÈÌÛ˙¡…Õ”⁄]*$", ErrorMessage = "Solo se admiten letras")]
         public string APELLIDO_MATERNO { get; set; }
 
         [Required]
         [StringLength(60)]
-        //[DataType(DataType.Text)]
-        //[RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Solo se admiten letras")]
+        [DataType(DataType.Text)]
+        [RegularExpression(@"^[a-zA-ZÒ—·ÈÌÛ˙¡…Õ”⁄]*$", ErrorMessage = "Solo se admiten letras")]
         public string APELLIDO_PATERNO { get; set; }
 
         [Required]
         [StringLength(60)]
-        //[DataType(DataType.Text)]
-        //[RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Solo se admiten letras")]
+        [DataType(DataType.Text)]
+        [RegularExpression(@"^[a-zA-ZÒ—·ÈÌÛ˙¡…Õ”⁄]*$", ErrorMessage = "Solo se admiten letras")]
         public string PRIMER_NOMBRE { get; set; }
 
         [StringLength(60)]
-        //[DataType(DataType.Text)]
-       // [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Solo se admiten letras")]
+        [DataType(DataType.Text)]
+        [RegularExpression(@"^[a-zA-ZÒ—·ÈÌÛ˙¡…Õ”⁄]*$", ErrorMessage = "Solo se admiten letras")]
         public string SEGUNDO_NOMBRE { get; set; }
 
+        [Range(typeof(DateTime), "1/1/1950", "26/6/2001", ErrorMessage = "Debe de ser mayor de 18 aÒos y menor a 69 aÒos")]
         public DateTime FECHA_NACIMIENTO { get; set; }
 
         [Required]
         [StringLength(10)]
-        //[RegularExpression(@"^[0-9]{8}-[0-9]$", ErrorMessage = "El formato de DUI es incorrecto: XXXXXXXX-X ")]
+        [RegularExpression(@"^[0-9]{8}-[0-9]$", ErrorMessage = "El formato de DUI es incorrecto. Formato correcto: 99999999-9")]
         public string DUI { get; set; }
 
         [StringLength(20)]
@@ -89,30 +90,31 @@ namespace SAP.Models
 
         [Required]
         [StringLength(17)]
-        //[RegularExpression(@"^[0-9]{4}-[0-9]{6}-[0-9]{3}-[0-9]$", ErrorMessage = "El formato de NIT es incorrecto: XXXX-XXXXXX-XXX-X ")]
+        [RegularExpression(@"^[0-9]{4}-[0-9]{6}-[0-9]{3}-[0-9]$", ErrorMessage = "El formato de NIT es incorrecto. Formato correcto 9999-999999-999-9")]
         public string NIT { get; set; }
 
         [Required]
         [StringLength(9)]
-        //[RegularExpression(@"^[0-9]{9}$", ErrorMessage = "El formato de ISSS es incorrecto: XXXXXXXXX ")]
+        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "El formato de ISSS es incorrecto. El formato correcto es: 999999999")]
         public string ISSS { get; set; }
 
         [Required]
         [StringLength(12)]
-        //[RegularExpression(@"^[0-9]{12}$", ErrorMessage = "El formato de NUP es incorrecto: XXXXXXXXXXXX ")]
+        [RegularExpression(@"^[0-9]{12}$", ErrorMessage = "El formato de NUP es incorrecto. El formato correcto es: 999999999999")]
         public string NUP { get; set; }
-
+        
+        [Range(0.0, Double.MaxValue, ErrorMessage = "Debe de ser un valor positivo")]
         public decimal SALARIO_BASE { get; set; }
 
         [Required]
-        //[DataType(DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress)]
         [StringLength(60)]
-        //[RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "El formato de correo no es valido")]
+        [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "El formato de correo no es valido")]
         public string CORREO_PERSONAL { get; set; }
 
         [Required]
-        //[DataType(DataType.EmailAddress)]
-        //[RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "El formato de correo no es valido")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "El formato de correo no es valido")]
         [StringLength(60)]
         public string CORREO_INSTITUCIONAL { get; set; }
 
