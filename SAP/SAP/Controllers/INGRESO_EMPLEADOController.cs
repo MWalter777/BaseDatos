@@ -77,9 +77,19 @@ namespace SAP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.INGRESO_EMPLEADO.Add(iNGRESO_EMPLEADO);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.INGRESO_EMPLEADO.Add(iNGRESO_EMPLEADO);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    ViewBag.EMPLEADOS = db.EMPLEADO.ToList();
+                    ViewBag.CATALOGO_INGRESO = db.CATALOGO_INGRESO.ToList();
+                    ViewBag.error = "Ya tienes una comision para este empleado, asignele el valor a ese empleado, no puede tener dos comisiones";
+                    return View();
+                }
             }
 
             return View(iNGRESO_EMPLEADO);

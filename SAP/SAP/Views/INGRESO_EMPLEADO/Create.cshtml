@@ -6,6 +6,15 @@
 
     <div class="tile">
         <h2>Nuevo</h2>
+        @if (ViewBag.error != null)
+        {
+            <h2 class="text-center alert-danger">@ViewBag.error</h2>
+        }
+
+        @if (ViewBag.exito != null)
+        {
+            <h2 class="text-center alert-success">@ViewBag.exito</h2>
+        }
 
         @using (Html.BeginForm())
         {
