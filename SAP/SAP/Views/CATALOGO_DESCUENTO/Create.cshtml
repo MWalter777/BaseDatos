@@ -6,6 +6,11 @@
 
 <h2>Crear Descuento</h2>
 
+@if (ViewBag.error != null)
+{
+	<h4 class="text-center alert-danger">@ViewBag.error</h4>
+}
+
 @using (Html.BeginForm())
 {
 	@Html.AntiForgeryToken()
@@ -54,7 +59,8 @@
 				   new
 					   {
 						   @type = "text",
-						   @class = "form-control datepicker2"
+						   @class = "form-control datepicker2",
+						   @readonly = "readonly"
 					   }
 				   )
 				@*@Html.EditorFor(model => model.FECHA_INICIO, new { htmlAttributes = new { @class = "form-control" } })*@
@@ -69,7 +75,8 @@
 				   new
 					   {
 						   @type = "text",
-						   @class = "form-control datepicker2"
+						   @class = "form-control datepicker2",
+						   @readonly = "readonly"
 					   }
 				   )
 				@*@Html.EditorFor(model => model.FECHA_FIN, new { htmlAttributes = new { @class = "form-control" } })*@

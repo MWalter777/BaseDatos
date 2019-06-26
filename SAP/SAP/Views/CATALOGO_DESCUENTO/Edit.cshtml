@@ -100,7 +100,8 @@
 					   {
 						   @type = "text",
 						   @class = "form-control datepicker2",
-						   @Value = Model.FECHA_INICIO.HasValue ? Model.FECHA_INICIO.Value.ToString("dd/MM/yyyy") : string.Empty
+						   @Value = Model.FECHA_INICIO.HasValue ? Model.FECHA_INICIO.Value.ToString("dd/MM/yyyy") : string.Empty,
+						   @readonly = "readonly"
 					   }
 				   )
 					@*@Html.EditorFor(model => model.FECHA_INICIO, new { htmlAttributes = new { @class = "form-control" } })*@
@@ -116,7 +117,8 @@
 					   {
 						   @type = "text",
 						   @class = "form-control datepicker2",
-						   @Value = Model.FECHA_FIN.HasValue ? Model.FECHA_FIN.Value.ToString("dd/MM/yyyy") : string.Empty
+						   @Value = Model.FECHA_FIN.HasValue ? Model.FECHA_FIN.Value.ToString("dd/MM/yyyy") : string.Empty,
+						   @readonly = "readonly"
 					   }
 				   )
 					@*@Html.EditorFor(model => model.FECHA_FIN, new { htmlAttributes = new { @class = "form-control" } })*@
