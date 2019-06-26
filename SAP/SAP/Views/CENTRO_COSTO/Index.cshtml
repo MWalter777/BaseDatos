@@ -76,10 +76,11 @@
 
             }
 
-            <td>
+        <td>
 
-                @Html.ActionLink("Detalles", "Details", new { id = item.ID_CENTRO_COSTO }, htmlAttributes: new { @class = "btn btn-primary" })
-            </td>
+            @Html.ActionLink("Detalles", "Details", new { id = item.ID_CENTRO_COSTO }, htmlAttributes: new { @class = "btn btn-primary" })|
+            @Html.ActionLink("Aumentar Presupuesto", "Edit", new { id = item.ID_CENTRO_COSTO }, htmlAttributes: new { @class = "btn btn-warning" })
+        </td>
         </tr>
             }
 

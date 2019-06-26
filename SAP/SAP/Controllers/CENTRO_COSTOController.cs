@@ -92,24 +92,32 @@ namespace SAP.Controllers
         [MyAuthorize(Roles = "editar_centro_costo")]
         public ActionResult Edit(int id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CENTRO_COSTO centro_costo = db.CENTRO_COSTO.Find(id);
+            if (centro_costo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(centro_costo);
         }
 
         // POST: CENTRO_COSTO/Edit/5
         [HttpPost]
         [MyAuthorize(Roles = "editar_centro_costo")]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID_CENTRO_COSTO,ID_DEPARTAMENTO,ANIO,MONTO_ASIGNADO,SALDO")] CENTRO_COSTO centro_costo, decimal valor)
         {
-            try
+            centro_costo.MONTO_ASIGNADO = centro_costo.MONTO_ASIGNADO+valor;
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(centro_costo).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(centro_costo);
         }
 
         // GET: CENTRO_COSTO/Delete/5

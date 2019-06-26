@@ -1,56 +1,40 @@
-﻿@model SAP.Models.PUESTO
+﻿@model SAP.Models.CENTRO_COSTO
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Actualizar</h2>
+<h2>Aumentar Presupuesto</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
 <div class="tile">
-    <h4>PUESTO</h4>
+    <h4>PRESUPUESTO</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ID_PUESTO)
+    @Html.HiddenFor(model => model.ID_CENTRO_COSTO)
+    @Html.HiddenFor(model => model.MONTO_ASIGNADO)
+    @Html.HiddenFor(model => model.ANIO)
+    @Html.HiddenFor(model => model.SALDO)
+    @Html.HiddenFor(model => model.ID_DEPARTAMENTO)
 
     <div class="form-group">
         <div class="form-inline">
-            <label class="col-md-3">Nombre del puesto</label>
-            @Html.EditorFor(model => model.NOMBRE_PUESTO, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NOMBRE_PUESTO, "", new { @class = "text-danger" })
+            <label class="col-md-3">Departamento:</label>
+            @Html.DisplayFor(model => model.DEPARTAMENTO.NOMBRE_DEPARTAMENTO)
         </div>
     </div>
     <div class="form-group">
         <div class="form-inline">
-            <label class="col-md-3">Código</label>
-            @Html.EditorFor(model => model.CODIGO_PUESTO, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CODIGO_PUESTO, "", new { @class = "text-danger" })
+            <label class="col-md-3">Aumento:</label>
+
+            <input type="number" name="valor" />
+
         </div>
     </div>
-    <div class="form-group">
-        <div class="form-inline">
-            <label class="col-md-3">Salario mínimo</label>
-            @Html.EditorFor(model => model.SALARIO_MINIMO, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SALARIO_MINIMO, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="form-inline">
-            <label class="col-md-3">Salario máximo</label>
-            @Html.EditorFor(model => model.SALARIO_MAXIMO, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SALARIO_MAXIMO, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="form-inline">
-            <label class="col-md-3">Departamento</label>
-            @Html.DropDownList("ID_DEPARTAMENTO", "Seleccione el Pais")
-            @Html.ValidationMessageFor(model => model.ID_DEPARTAMENTO, "", new { @class = "text-danger" })
-        </div>
-    </div>
+
 
     <div class="form-inline">
         <div class="col-md-offset-2 col-md-8">
