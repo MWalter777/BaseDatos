@@ -99,7 +99,7 @@
                                         {
                                             if (valor.ingreso.DELEY_INGRESO)
                                             {
-                                                if (detalle.COMISION)
+                                                if (detalle.COMISION != null && detalle.COMISION)
                                                 {
                                                     decimal com = valor.ingreso.INGRESO * valor.ingreso.COMISION;
                                                     total = total + (double)com;
