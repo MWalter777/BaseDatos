@@ -87,6 +87,7 @@ namespace SAP.Controllers
             }
             
             if (eMPLEADO.ID_DIRECCION == 0) ViewBag.ERROR_DIRECCION = "La dirección es obligatoria";
+            if (eMPLEADO.ID_PUESTO == 0) ViewBag.ERROR_PUESTO = "El puesto a asignar es obligatorio";
 
             ViewBag.DIRECCIONES = db.DIRECCION.ToList();
             ViewBag.ID_ESTADO_CIVIL = new SelectList(db.ESTADO_CIVIL, "ID_ESTADO_CIVIL", "NOMBRE_ESTADO_CIVIL", eMPLEADO.ID_ESTADO_CIVIL);

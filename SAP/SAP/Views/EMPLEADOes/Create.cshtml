@@ -165,6 +165,10 @@
                     </option>
                 }
             </select>
+            @if (ViewBag.ERROR_PUESTO != null)
+            {
+                <span class="field-validation-error text-danger" data-valmsg-for="ID_PUESTO" data-valmsg-replace="true">@ViewBag.ERROR_PUESTO</span>
+            }
         </div>
     </div>
 
